@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 17:34:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/04 20:16:00 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/05 12:05:23 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	case_ants_number_negative(t_lemin *l)
 	if (l->nb_ants <= 0)
 	{
 		ft_free_tab_char(&l->file);
-		ft_putendl(l->file[0]); // remove
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,
 			"\033[091mErreur : Veuillez indiquer un nombre de fourmis correct\
