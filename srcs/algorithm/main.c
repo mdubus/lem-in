@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 17:17:45 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/06 21:48:46 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_struct_lemin(t_lemin *l)
 	l->file = NULL;
 	l->room = NULL;
 	l->begin = NULL;
+	l->sum = NULL;
 }
 
 
@@ -61,7 +62,41 @@ void	make_tab_equivalence(t_lemin *l)
 	l->room = l->begin;
 	l->eq[l->nb_rooms + 1] = NULL;
 }
+/*
+static int	count_sum_start(t_lemin *l)
+{
+	int	i;
+	int	sum;
+	
+	i = 1;
+	sum = 0;
+	while (i <= l->nb_rooms)
+		sum += l->pipes[l->room_start][i++];
+	return (sum);
+}
+*/
 
+int	count_all_pipes(t_lemin *l);
+int	count_all_pipes(t_lemin *l)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 1;
+	j = 1;
+	count = 0;
+	while (i <= l->nb_rooms)
+	{
+		while (j <= l->nb_rooms)
+		{
+			count += l->pipes[i][j++];
+		}
+		j = 1;
+		i++;
+	}
+	return (count);
+}
 
 
 int	main(void)
@@ -72,6 +107,7 @@ int	main(void)
 	get_file(&l);
 	ft_putendl(l.string_file);
 
+	//parsing
 	parsing_ants_number(&l);
 	if (parsing_room_and_stock(&l) == 2)
 			free_check_if_room(&l,
@@ -80,22 +116,24 @@ int	main(void)
 	parsing_pipes_and_stock(&l);
 	check_end_and_start(&l);
 
+	// resolve
+	create_sum_tab(&l);
+	int	i = 1;
 
-
-
+	while (i <= l.nb_rooms)
+		printf("%d\n", l.sum[i++]);
+	ft_putchar('\n');
 	check_for_isolated_rooms(&l);
+
+
+
+
+
+
+
 	ft_print_tab_int(l.pipes, l.nb_rooms);
 ft_putchar('\n');
 
-	ft_putchar('\n');
-	l.room = l.begin;
-	printf("id | nom\n");
-	while (l.room)
-	{
-		printf(" %d | %s\n", l.room->id, l.room->name);
-		l.room = l.room->next;
-	}
-	l.room = l.begin;
 
 	printf("\nid start = %d, id end = %d\n", l.room_start, l.room_end);
 

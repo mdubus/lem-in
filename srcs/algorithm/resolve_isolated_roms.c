@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 17:22:16 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/06 21:58:20 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,52 +29,57 @@ void		free_all(t_lemin *l)
 			STDERR_FILENO);
 }
 
-static int	*create_sum_tab(t_lemin *l)
+void		update_sum_tab(t_lemin *l)
 {
-	int	*sum;
-	int	i;
 	int	total;
+	int	i;
 	int	j;
 
-	sum = NULL;
-	i = 1;
 	total = 0;
+	i = 1;
 	j = 1;
-	sum = (int *)malloc(sizeof(int) * (unsigned int)(l->nb_rooms + 1));
-	if (sum == NULL)
-		free_all(l);
 	while (i <= l->nb_rooms)
 	{
 		while (j <= l->nb_rooms)
 			total += l->pipes[i][j++];
-		sum[i] = total;
+		l->sum[i] = total;
 		total = 0;
 		j = 1;
 		i++;
 	}
-	return (sum);
 }
+
+void	create_sum_tab(t_lemin *l)
+{
+	l->sum = (int *)malloc(sizeof(int) * (unsigned int)(l->nb_rooms + 1));
+	if (l->sum == NULL)
+		free_all(l);
+	update_sum_tab(l);
+}
+
+// J'ai mis une recursive. 
+// Verifier avec une map avec deux salles partant vers rien que
+// c'est fonctionnel
 
 void		check_for_isolated_rooms(t_lemin *l)
 {
-	int	*sum;
 	int	i;
 	int j;
 
 	i = 1;
 	j = 1;
-	sum = create_sum_tab(l);
 	while (i <= l->nb_rooms)
 	{
-		if (i != l->room_start && i != l->room_end && sum[i] == 1)
+		if (i != l->room_start && i != l->room_end && l->sum[i] == 1)
 		{
 			while (j <= l->nb_rooms && l->pipes[i][j] != 1)
 				j++;
 			l->pipes[i][j] = 0;
 			l->pipes[j][i] = 0;
+			update_sum_tab(l);
+			check_for_isolated_rooms(l);
 		}
 		j = 1;
 		i++;
 	}
-	free(sum);
 }

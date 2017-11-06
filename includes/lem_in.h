@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 17:15:36 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/06 21:45:29 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_lemin
 	int			padding1;
 	int			room_start;
 	int			room_end;
+	int			*sum;
 	int			**pipes; //stock les relations entre les pipes
 	char		*string_file; // contient tout le fichier dans une string
 	char		**eq; // equivalence nom / id
@@ -95,5 +96,7 @@ int			parsing_pipes_and_stock(t_lemin *l);
 */
 
 void	check_for_isolated_rooms(t_lemin *l);
+void		update_sum_tab(t_lemin *l);
+void	create_sum_tab(t_lemin *l);
 
 #endif
