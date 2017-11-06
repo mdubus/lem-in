@@ -6,14 +6,14 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/04 20:03:40 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/06 17:17:52 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	clang
 NAME		=	lem-in
-#FLAGS		=	-Wall -Wextra -Werror -Weverything -g -fsanitize=address
-FLAGS		=	-Wall -Wextra -Werror -Weverything -g
+FLAGS		=	-Wall -Wextra -Werror -Weverything -g -fsanitize=address
+#FLAGS		=	-Wall -Wextra -Werror -Weverything -g
 LIBDIR		=	libft
 LIBLINK		=	-L $(LIBDIR) -lft
 LIB 		=	$(LIBDIR)/libft.a
@@ -29,7 +29,8 @@ SRCDIR_ALGO	=	srcs/algorithm
 
 SRC_ALGO	=	main.c  get_file.c parsing_ants_number.c useful.c\
 				parsing_start_end_exists.c parsing_check_if_room.c free.c\
-				parsing_room_and_stock.c parsing_pipes_and_stock.c
+				parsing_room_and_stock.c parsing_pipes_and_stock.c\
+				resolve_isolated_roms.c
 
 OBJ_ALGO	=	$(SRC_ALGO:.c=.o)
 

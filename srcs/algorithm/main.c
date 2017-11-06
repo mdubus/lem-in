@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/04 20:06:59 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/06 17:17:45 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	init_struct_lemin(t_lemin *l)
 	l->start = 0;
 	l->pipes = NULL;
 	l->string_file = NULL;
-	l->room_start = NULL;
-	l->room_end = NULL;
+	l->room_start = 0;
+	l->room_end = 0;
 	l->file = NULL;
 	l->room = NULL;
 	l->begin = NULL;
@@ -44,6 +44,24 @@ void	free_check_if_room(t_lemin *l, char *str)
 
 
 
+void	make_tab_equivalence(t_lemin *l);
+void	make_tab_equivalence(t_lemin *l)
+{
+	l->eq = (char **)malloc(sizeof(char*) * (unsigned long)(l->nb_rooms + 2));
+	if (l->eq == NULL)
+		free_check_if_room(l,
+			"\033[091mErreur lors d'une allocation memoire\033[0m");
+	l->room = l->begin;
+	l->eq[0] = ft_strdup("Name");
+	while (l->room != NULL)
+	{
+		l->eq[l->room->id] = ft_strdup(l->room->name);
+		l->room = l->room->next;
+	}
+	l->room = l->begin;
+	l->eq[l->nb_rooms + 1] = NULL;
+}
+
 
 
 int	main(void)
@@ -56,18 +74,19 @@ int	main(void)
 
 	parsing_ants_number(&l);
 	if (parsing_room_and_stock(&l) == 2)
-	{
 			free_check_if_room(&l,
 			"\033[091mErreur : La map est mal formatee\033[0m");
-	}
+	make_tab_equivalence(&l);
 	parsing_pipes_and_stock(&l);
 	check_end_and_start(&l);
 
 
 
 
-//	ft_print_tab_int(l.pipes, l.nb_rooms);
-/*
+	check_for_isolated_rooms(&l);
+	ft_print_tab_int(l.pipes, l.nb_rooms);
+ft_putchar('\n');
+
 	ft_putchar('\n');
 	l.room = l.begin;
 	printf("id | nom\n");
@@ -78,13 +97,13 @@ int	main(void)
 	}
 	l.room = l.begin;
 
-	printf("\nstart = %s, end = %s\n", l.room_start, l.room_end);
-*/
+	printf("\nid start = %d, id end = %d\n", l.room_start, l.room_end);
+
 	ft_memdel((void**)&l.string_file);
 	ft_free_tab_char(&l.file);
+	ft_free_tab_char(&l.eq);
 	free_lst_name(&l);
 	ft_free_tab_int(&l.pipes);
-
 
 
 	return (0);

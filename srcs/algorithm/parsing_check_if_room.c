@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 19:03:01 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/04 15:46:02 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/06 15:14:17 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ static void	stock_room_name(t_lemin *l, char **tab)
 	l->room->next = NULL;
 	if (l->flag_start == 1)
 	{
-		l->room_start = l->room->name;
+		l->room_start = l->room->id;
 		l->flag_start = 0;
 	}
 	if (l->flag_end == 1)
 	{
-		l->room_end = l->room->name;
+		l->room_end = l->room->id;
 		l->flag_end = 0;
 	}
 	l->nb_rooms++;

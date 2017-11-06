@@ -15,6 +15,12 @@ get_error()
 		echo -e "\033[091m[ BUS ]\033[0m"
 	elif (( $RET == $((128 + 11)) )); then
 		echo -e "\033[091m[ SEGV ]\033[0m"
+	elif (( $RET == $((128 + 4)) )); then
+		echo -e "\033[091m[ ILL ]\033[0m"
+	elif (( $RET == $((128 + 8)) )); then
+		echo -e "\033[091m[ FPE ]\033[0m"
+	elif (( $RET == $((128 + 13)) )); then
+		echo -e "\033[091m[ PIPE ]\033[0m"
 	else
 		echo -e $KO
 	fi
