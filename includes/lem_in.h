@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 21:45:29 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/07 19:09:18 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_lemin
 	int			comments;
 	int			commands;
 	int			start;
-	int			padding1;
+	int			nb_path;
 	int			room_start;
 	int			room_end;
 	int			*sum;

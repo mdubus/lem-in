@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 21:48:46 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/07 19:55:41 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_struct_lemin(t_lemin *l)
 	l->room = NULL;
 	l->begin = NULL;
 	l->sum = NULL;
+	l->nb_path = 0;
 }
 
 
@@ -51,7 +52,7 @@ void	make_tab_equivalence(t_lemin *l)
 	l->eq = (char **)malloc(sizeof(char*) * (unsigned long)(l->nb_rooms + 2));
 	if (l->eq == NULL)
 		free_check_if_room(l,
-			"\033[091mErreur lors d'une allocation memoire\033[0m");
+				"\033[091mErreur lors d'une allocation memoire\033[0m");
 	l->room = l->begin;
 	l->eq[0] = ft_strdup("Name");
 	while (l->room != NULL)
@@ -62,40 +63,41 @@ void	make_tab_equivalence(t_lemin *l)
 	l->room = l->begin;
 	l->eq[l->nb_rooms + 1] = NULL;
 }
-/*
-static int	count_sum_start(t_lemin *l)
+
+
+int	count_nb_paths(t_lemin *l, int *nb, int room);
+int	count_nb_paths(t_lemin *l, int *nb, int room)
 {
 	int	i;
-	int	sum;
-	
-	i = 1;
-	sum = 0;
-	while (i <= l->nb_rooms)
-		sum += l->pipes[l->room_start][i++];
-	return (sum);
-}
-*/
-
-int	count_all_pipes(t_lemin *l);
-int	count_all_pipes(t_lemin *l)
-{
-	int	i;
-	int	j;
-	int	count;
 
 	i = 1;
-	j = 1;
-	count = 0;
 	while (i <= l->nb_rooms)
 	{
-		while (j <= l->nb_rooms)
+		if (l->pipes[room][i] == 1)
 		{
-			count += l->pipes[i][j++];
+						if (i == l->room_end)
+			{
+				l->pipes[room][i] = 1;
+				l->pipes[i][room] = 1;
+				(*nb)++;
+				return (0);
+			}
+			else if (i == l->room_start || l->sum[i] == 0)
+			{
+				l->pipes[room][i] = 1;
+				l->pipes[i][room] = 1;
+				return (1);
+			}
+			l->pipes[room][i] = 0;
+			l->pipes[i][room] = 0;
+			update_sum_tab(l);
+			count_nb_paths(l, nb, i);
+			l->pipes[room][i] = 1;
+			l->pipes[i][room] = 1;
 		}
-		j = 1;
 		i++;
 	}
-	return (count);
+	return (0);
 }
 
 
@@ -110,33 +112,35 @@ int	main(void)
 	//parsing
 	parsing_ants_number(&l);
 	if (parsing_room_and_stock(&l) == 2)
-			free_check_if_room(&l,
-			"\033[091mErreur : La map est mal formatee\033[0m");
+		free_check_if_room(&l,
+				"\033[091mErreur : La map est mal formatee\033[0m");
 	make_tab_equivalence(&l);
 	parsing_pipes_and_stock(&l);
 	check_end_and_start(&l);
 
 	// resolve
 	create_sum_tab(&l);
-	int	i = 1;
-
-	while (i <= l.nb_rooms)
-		printf("%d\n", l.sum[i++]);
-	ft_putchar('\n');
 	check_for_isolated_rooms(&l);
 
 
+//	ft_print_tab_int(l.pipes, l.nb_rooms);
+//	ft_putchar('\n');
 
+
+
+	count_nb_paths(&l, &l.nb_path, l.room_start);
+	printf("nombre de chemins = %d\n\n", l.nb_path);
 
 
 
 
 	ft_print_tab_int(l.pipes, l.nb_rooms);
-ft_putchar('\n');
+	ft_putchar('\n');
 
 
 	printf("\nid start = %d, id end = %d\n", l.room_start, l.room_end);
 
+	free(l.sum);
 	ft_memdel((void**)&l.string_file);
 	ft_free_tab_char(&l.file);
 	ft_free_tab_char(&l.eq);

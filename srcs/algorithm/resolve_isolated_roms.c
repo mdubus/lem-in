@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 21:58:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/07 11:54:37 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ void	create_sum_tab(t_lemin *l)
 		free_all(l);
 	update_sum_tab(l);
 }
-
-// J'ai mis une recursive. 
-// Verifier avec une map avec deux salles partant vers rien que
-// c'est fonctionnel
 
 void		check_for_isolated_rooms(t_lemin *l)
 {
