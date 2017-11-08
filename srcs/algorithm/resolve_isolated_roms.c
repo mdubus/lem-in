@@ -6,15 +6,15 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/07 11:54:37 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/08 18:31:12 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
 
 /*
-** Search for isolated rooms and suppress their pipes
-*/
+ ** Search for isolated rooms and suppress their pipes
+ */
 
 void		free_all(t_lemin *l)__attribute__((noreturn));
 void		free_all(t_lemin *l)
@@ -68,12 +68,17 @@ void		check_for_isolated_rooms(t_lemin *l)
 	{
 		if (i != l->room_start && i != l->room_end && l->sum[i] == 1)
 		{
-			while (j <= l->nb_rooms && l->pipes[i][j] != 1)
+			while (j <= l->nb_rooms)
+			{
+				if (l->pipes[i][j] == 1)
+				{
+					l->pipes[i][j] = 0;
+					l->pipes[j][i] = 0;
+					update_sum_tab(l);
+					check_for_isolated_rooms(l);
+				}
 				j++;
-			l->pipes[i][j] = 0;
-			l->pipes[j][i] = 0;
-			update_sum_tab(l);
-			check_for_isolated_rooms(l);
+			}
 		}
 		j = 1;
 		i++;

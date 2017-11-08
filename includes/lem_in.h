@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/07 19:09:18 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/08 20:42:22 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_lemin
 
 
 
+void	export_graph(int **pipes, t_lemin *l);
 
 
 void	get_file(t_lemin *l);
@@ -98,5 +99,6 @@ int			parsing_pipes_and_stock(t_lemin *l);
 void	check_for_isolated_rooms(t_lemin *l);
 void		update_sum_tab(t_lemin *l);
 void	create_sum_tab(t_lemin *l);
+void	count_nb_paths(t_lemin *l);
 
 #endif

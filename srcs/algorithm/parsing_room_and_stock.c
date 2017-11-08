@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/06 15:15:15 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/08 19:12:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ static void	case_no_end_start(t_lemin *l)
 	}
 }
 
+#ifdef GRAPH
+
+void	check_end_and_start(t_lemin *l)
+{
+	case_no_rooms(l);
+	case_no_pipes(l);
+	case_no_end_start(l);
+	case_start_end_identical(l);
+	export_graph(l->pipes, l);
+}
+
+#else
+
 void	check_end_and_start(t_lemin *l)
 {
 	case_no_rooms(l);
@@ -90,6 +103,10 @@ void	check_end_and_start(t_lemin *l)
 	case_no_end_start(l);
 	case_start_end_identical(l);
 }
+
+#endif
+
+
 
 int		parsing_room_and_stock(t_lemin *l)
 {
