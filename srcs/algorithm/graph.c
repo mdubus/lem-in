@@ -6,22 +6,22 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:29:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/08 20:47:58 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 20:16:46 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
 
-static void print_links(t_lemin *l, int **pipes)
+static void print_links(t_lemin *l, bool **pipes)
 {
 	int i;
 	int	j;
 
-	i = 1;
-	j = 1;
-	while (i <= l->nb_rooms)
+	i = 0;
+	j = 0;
+	while (i < l->nb_rooms)
 	{
-		while (j <= l->nb_rooms)
+		while (j < l->nb_rooms)
 		{
 			if (pipes[i][j] == 1)
 			{
@@ -33,7 +33,7 @@ static void print_links(t_lemin *l, int **pipes)
 			}
 			j++;
 		}
-		j = 1;
+		j = 0;
 		i++;
 	}
 }
@@ -42,8 +42,8 @@ static void	print_rooms(t_lemin *l)
 {
 	int i;
 
-	i = 1;
-	while (i <= l->nb_rooms)
+	i = 0;
+	while (i < l->nb_rooms)
 	{
 		if (i != l->room_start && i != l->room_end)
 		{
@@ -55,7 +55,7 @@ static void	print_rooms(t_lemin *l)
 	}
 }
 
-void	export_graph(int **pipes, t_lemin *l)
+void	export_graph(bool **pipes, t_lemin *l)
 {
 	ft_putendl_fd("digraph callgraph {", STDERR_FILENO);
 	ft_putendl_fd("concentrate=true", STDERR_FILENO);

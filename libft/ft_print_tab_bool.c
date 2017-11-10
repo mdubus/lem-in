@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab_char.c                                 :+:      :+:    :+:   */
+/*   ft_print_tab_bool.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/28 14:18:03 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/01 11:08:54 by mdubus           ###   ########.fr       */
+/*   Created: 2017/11/10 18:47:06 by mdubus            #+#    #+#             */
+/*   Updated: 2017/11/10 18:48:31 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void		ft_free_tab_char(char ***tab)
+void	ft_print_tab_bool(bool **tab, int x)
 {
-	int i;
+	int	i;
+	int	j;
 
 	i = 0;
-	while ((*tab)[i] != NULL)
-		ft_memdel((void**)&(*tab)[i++]);
-	ft_memdel((void**)tab);
+	j = 0;
+	while (i < x)
+	{
+		while (j < x)
+		{
+			ft_putnbr(tab[i][j++]);
+			ft_putchar(' ');
+		}
+		ft_putchar('\n');
+		j = 0;
+		i++;
+	}
 }

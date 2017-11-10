@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   useful.c                                           :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/01 18:36:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 18:30:47 by mdubus           ###   ########.fr       */
+/*   Created: 2017/11/08 20:58:23 by mdubus            #+#    #+#             */
+/*   Updated: 2017/11/09 10:55:56 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
 
-#ifdef DEBUG
-
-void	error_lem_in(void (*function)(const char *, int fd),
-		const char *str, int fd)
+void	print_equivalence_tab(t_lemin *l)
 {
-	(*function)(str, fd);
-	exit(1);
+	printf("id | name\n");
+	int i = 0;
+	while (i < l->nb_rooms)
+	{
+		printf("%-3d| %-3s\n", i, l->eq[i]);
+		i++;
+	}
 }
-
-#else
-
-void	error_lem_in(void (*function)(const char *, int fd),
-		const char *str, int fd)
-{
-	(void)function;
-	(void)str;
-	(void)fd;
-	ft_putendl_fd("ERROR", STDOUT_FILENO);
-	exit(1);
-}
-
-#endif

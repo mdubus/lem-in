@@ -6,18 +6,18 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 17:34:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/03 18:16:03 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:21:28 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	ft_free_tab_int(int ***tab)
+void	ft_free_double_tab(void **tab)
 {
 	int	i;
 
 	i = 0;
-	while ((*tab)[i] != NULL)
-		ft_memdel((void**)&(*tab)[i++]);
-	ft_memdel((void**)tab);
+	while (tab[i] != NULL)
+		free(tab[i++]);
+	free(tab);
 }

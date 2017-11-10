@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 19:03:01 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/08 18:33:48 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:24:33 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	check_coordonates(char **tab, t_lemin *l)
 		ret = ft_check_if_num(tab[1]);
 	if (ret != 0)
 	{
-		ft_free_tab_char(&tab);
+		ft_free_double_tab((void**)tab);
 		free_check_if_room(l,
 			"\033[091mErreur : Une ou plusieurs coordonnees X sont incorrectes\
 			\033[0m");
@@ -35,7 +35,7 @@ static void	check_coordonates(char **tab, t_lemin *l)
 		ret = ft_check_if_num(tab[2]);
 	if (ret != 0)
 	{
-		ft_free_tab_char(&tab);
+		ft_free_double_tab((void**)tab);
 		free_check_if_room(l,
 			"\033[091mErreur : Une ou plusieurs coordonnees Y sont incorrectes\
 			\033[0m");
@@ -46,7 +46,7 @@ static void	check_for_hyphen(char **tab, t_lemin *l)
 {
 	if (ft_strchr(tab[0], '-') != 0)
 	{
-		ft_free_tab_char(&tab);
+		ft_free_double_tab((void**)tab);
 		free_check_if_room(l,
 			"\033[091mErreur : Un nom de salle ne peut pas contenir de tiret\
 			\033[0m");
@@ -62,7 +62,7 @@ static void	check_if_name_already_exists(char **tab, t_lemin *l)
 	{
 		if (ft_strcmp(temp->name, tab[0]) == 0)
 		{
-			ft_free_tab_char(&tab);
+			ft_free_double_tab((void**)tab);
 			free_check_if_room(l,
 			"\033[091mErreur : Un nom de salle doit etre unique\033[0m");
 		}
@@ -83,8 +83,8 @@ static void	stock_room_name(t_lemin *l, char **tab)
 		l->room = l->room->next;
 	}
 	l->room->name = ft_strdup(tab[0]);
-	l->id++;
 	l->room->id = l->id;
+	l->id++;
 	l->room->next = NULL;
 	if (l->flag_start == 1)
 	{
@@ -143,6 +143,6 @@ int			check_if_room(char *str, t_lemin *l)
 	check_for_hyphen(tab, l);
 	check_if_name_already_exists(tab, l);
 	stock_room_name(l, tab);
-	ft_free_tab_char(&tab);
+	ft_free_double_tab((void**)tab);
 	return (0);
 }

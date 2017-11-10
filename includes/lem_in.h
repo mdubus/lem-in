@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/08 20:42:22 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 20:16:42 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/includes/libft.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct		s_room
 {
@@ -40,7 +41,8 @@ typedef struct	s_lemin
 	int			room_start;
 	int			room_end;
 	int			*sum;
-	int			**pipes; //stock les relations entre les pipes
+	bool		**pipes; //stock les relations entre les pipes
+	int			*lookup; // permet de savoir si on est deja passe par ce chemin
 	char		*string_file; // contient tout le fichier dans une string
 	char		**eq; // equivalence nom / id
 	char		**file; // contient tout le fichier dans un tableau
@@ -50,7 +52,7 @@ typedef struct	s_lemin
 
 
 
-void	export_graph(int **pipes, t_lemin *l);
+void	export_graph(bool **pipes, t_lemin *l);
 
 
 void	get_file(t_lemin *l);
@@ -100,5 +102,14 @@ void	check_for_isolated_rooms(t_lemin *l);
 void		update_sum_tab(t_lemin *l);
 void	create_sum_tab(t_lemin *l);
 void	count_nb_paths(t_lemin *l);
+
+
+
+
+/*
+***************************** Print *****************************************
+*/
+
+void	print_equivalence_tab(t_lemin *l);
 
 #endif

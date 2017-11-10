@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 17:37:54 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/03 17:38:46 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 18:46:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	ft_print_tab_int(int **tab, int x)
 
 	i = 0;
 	j = 0;
-	while (i <= x)
+	while (i < x)
 	{
-		while (j <= x)
+		while (j < x)
 		{
 			ft_putnbr(tab[i][j++]);
 			ft_putchar(' ');

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 13:36:56 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/03 21:08:55 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 20:00:51 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdarg.h>
+#include <stdbool.h>
 
 # define FD_MAX 50
 
@@ -130,7 +131,6 @@ void					ft_print_error_exit(void (*function)(const char *),
 int						ft_nb_occur_char_in_str(char *str, char *search);
 void					ft_print_error_fd_exit(void (*function)(const char *,
 						int fd), const char *str, int fd);
-void					ft_free_tab_char(char ***tab);
 char					*ft_strnstartcpy(char *s, size_t i);
 char					*ft_read_all_file(int fd);
 char					*ft_strdup_plus_char(const char *s1, char c);
@@ -171,8 +171,9 @@ int						ft_absolute(int nb);
 double					ft_absolute_double(double nb);
 int						ft_check_if_num(char	*str);
 int						**ft_create_tab(unsigned long x, unsigned long y);
-void					ft_free_tab_int(int ***tab);
+void					ft_free_double_tab(void **tab);
 void					ft_print_tab_int(int **tab, int x);
+void					ft_print_tab_bool(bool **tab, int x);
 
 /*
 ******************************** GET_NEXT_LINE ********************************

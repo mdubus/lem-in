@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/08 19:12:58 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/10 21:08:30 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	case_start_end_identical(t_lemin *l)
 {
 	if (l->room_start == l->room_end)
 	{
-		ft_free_tab_char(&l->eq);
-		ft_free_tab_int(&l->pipes);
+		ft_free_double_tab((void**)l->eq);
+		ft_free_double_tab((void**)l->pipes);
+		ft_free_double_tab((void**)l->file);
 		free(l->string_file);
-		ft_free_tab_char(&l->file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Les salles start et end sont identiques\033[0m",
@@ -31,10 +31,10 @@ static void	case_no_rooms(t_lemin *l)
 {
 	if (l->nb_rooms == 0)
 	{
-		ft_free_tab_char(&l->eq);
-		ft_free_tab_int(&l->pipes);
+		ft_free_double_tab((void**)l->eq);
+		ft_free_double_tab((void**)l->pipes);
+		ft_free_double_tab((void**)l->file);
 		free(l->string_file);
-		ft_free_tab_char(&l->file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucune salle n'est presente\033[0m",
@@ -46,10 +46,10 @@ static void	case_no_pipes(t_lemin *l)
 {
 	if (l->nb_pipes == 0)
 	{
-		ft_free_tab_char(&l->eq);
-		ft_free_tab_int(&l->pipes);
+		ft_free_double_tab((void**)l->eq);
+		ft_free_double_tab((void**)l->pipes);
+		ft_free_double_tab((void**)l->file);
 		free(l->string_file);
-		ft_free_tab_char(&l->file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucun tube n'est present\033[0m",
@@ -59,23 +59,23 @@ static void	case_no_pipes(t_lemin *l)
 
 static void	case_no_end_start(t_lemin *l)
 {
-	if (l->room_start == 0)
+	if (l->room_start == -1)
 	{
-		ft_free_tab_char(&l->eq);
-		ft_free_tab_int(&l->pipes);
+		ft_free_double_tab((void**)l->eq);
+		ft_free_double_tab((void**)l->pipes);
+		ft_free_double_tab((void**)l->file);
 		free(l->string_file);
-		ft_free_tab_char(&l->file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucune salle de depart\033[0m",
 				STDERR_FILENO);
 	}
-	if (l->room_end == 0)
+	if (l->room_end == -1)
 	{
-		ft_free_tab_char(&l->eq);
-		ft_free_tab_int(&l->pipes);
+		ft_free_double_tab((void**)l->eq);
+		ft_free_double_tab((void**)l->pipes);
+		ft_free_double_tab((void**)l->file);
 		free(l->string_file);
-		ft_free_tab_char(&l->file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucune salle de fin\033[0m",
