@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:58:23 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/09 10:55:56 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 12:32:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,107 @@
 
 void	print_equivalence_tab(t_lemin *l)
 {
-	printf("id | name\n");
+	ft_putendl("\033[94m---------- Relations id | nom de room ----------\n\033[0m");
 	int i = 0;
 	while (i < l->nb_rooms)
 	{
 		printf("%-3d| %-3s\n", i, l->eq[i]);
 		i++;
 	}
+	ft_putchar('\n');
+}
+
+static void	print_head(int x)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	ft_putstr("     ");
+	while (i < x)
+	{
+		ft_putnbr(i++);
+		ft_putchar(' ');
+		if (i < 10)
+			ft_putchar(' ');
+	}
+	ft_putstr(" Somme\n     ");
+	i = 0;
+	while (i++ < x)
+	{
+		if (i < 9)
+			ft_putstr("-  ");
+		else if (i == 9)
+			ft_putstr("- ");
+		else
+			ft_putstr("-- ");
+	}
+	ft_putendl(" -----");
+}
+
+static void	print_body(t_lemin *l, int i)
+{
+	int j;
+
+	j = 0;
+		while (j < l->nb_rooms)
+		{
+			if (l->pipes[i][j] == 0)
+			{
+				ft_putstr("\033[090m");
+				ft_putnbr(l->pipes[i][j++]);
+				ft_putstr("  \033[0m");
+			}
+			else if (l->pipes[i][j] == 1)
+			{
+				ft_putstr("\033[092m");
+				ft_putnbr(l->pipes[i][j++]);
+				ft_putstr("  \033[0m");
+			}
+
+		}
+			ft_putstr(" ");
+			ft_putnbr(l->sum[i]);
+}
+
+void	ft_print_tab_pipes(t_lemin *l)
+{
+	ft_putendl("\033[94m---------- Relations entre les pipes ----------\n\033[0m");
+	print_head(l->nb_rooms);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < l->nb_rooms)
+	{
+		ft_putnbr(i);
+		if (i < 10)
+			ft_putstr("  ");
+		else
+			ft_putchar(' ');
+		ft_putstr("| ");
+		print_body(l, i);
+		ft_putchar('\n');
+		j = 0;
+		i++;
+	}
+	ft_putchar('\n');
+}
+
+void	print_resume(t_lemin *l)
+{
+	ft_putendl("\033[94m---------- Resume ----------\n\033[0m");
+	ft_putstr("\033[095mNombre de fourmis : \033[0m");
+	ft_putnbr(l->nb_ants);
+	ft_putstr("\n\033[095mNombre de rooms : \033[0m");
+	ft_putnbr(l->nb_rooms);
+	ft_putstr("\n\033[095mNombre de pipes : \033[0m");
+	ft_putnbr(l->nb_pipes);
+	ft_putstr("\n\033[095mRoom de debut : \033[0m");
+	ft_putstr(l->eq[l->room_start]);
+	ft_putstr("\n\033[095mRoom de fin : \033[0m");
+	ft_putstr(l->eq[l->room_end]);
+	ft_putendl("\n");
 }

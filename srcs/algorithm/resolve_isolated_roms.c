@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 21:06:18 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 11:15:40 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		free_all(t_lemin *l)
 	free_lst_name(l);
 	error_lem_in(&ft_putendl_fd,
 			"\033[091mErreur lors d'une allocation memoire\033[0m",
-			STDERR_FILENO);
+			STDERR_FILENO, l);
 }
 
 void		update_sum_tab(t_lemin *l)

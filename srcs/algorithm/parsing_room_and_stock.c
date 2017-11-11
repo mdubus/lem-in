@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 21:08:30 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 11:24:20 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	case_start_end_identical(t_lemin *l)
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Les salles start et end sont identiques\033[0m",
-				STDERR_FILENO);
+				STDERR_FILENO, l);
 	}
 }
 
@@ -38,7 +38,7 @@ static void	case_no_rooms(t_lemin *l)
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucune salle n'est presente\033[0m",
-				STDERR_FILENO);
+				STDERR_FILENO, l);
 	}
 }
 
@@ -53,7 +53,7 @@ static void	case_no_pipes(t_lemin *l)
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucun tube n'est present\033[0m",
-				STDERR_FILENO);
+				STDERR_FILENO, l);
 	}
 }
 
@@ -68,7 +68,7 @@ static void	case_no_end_start(t_lemin *l)
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucune salle de depart\033[0m",
-				STDERR_FILENO);
+				STDERR_FILENO, l);
 	}
 	if (l->room_end == -1)
 	{
@@ -79,34 +79,19 @@ static void	case_no_end_start(t_lemin *l)
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
 				"\033[091mErreur : Aucune salle de fin\033[0m",
-				STDERR_FILENO);
+				STDERR_FILENO, l);
 	}
 }
 
-#ifdef GRAPH
-
 void	check_end_and_start(t_lemin *l)
 {
 	case_no_rooms(l);
 	case_no_pipes(l);
 	case_no_end_start(l);
 	case_start_end_identical(l);
-	export_graph(l->pipes, l);
+	if (l->graph == 1)
+		export_graph(l->pipes, l);
 }
-
-#else
-
-void	check_end_and_start(t_lemin *l)
-{
-	case_no_rooms(l);
-	case_no_pipes(l);
-	case_no_end_start(l);
-	case_start_end_identical(l);
-}
-
-#endif
-
-
 
 int		parsing_room_and_stock(t_lemin *l)
 {

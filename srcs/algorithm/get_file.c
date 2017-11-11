@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 17:43:06 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 21:24:12 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 11:14:20 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	get_string_file(t_lemin *l)
 	if (l->string_file == NULL)
 		error_lem_in(&ft_putendl_fd,
 				"\033[091mErreur lors de la lecture du fichier\033[0m",
-				STDERR_FILENO);
+				STDERR_FILENO, l);
 }
 
 static void	get_tab_file(t_lemin *l)
@@ -28,7 +28,7 @@ static void	get_tab_file(t_lemin *l)
 	{
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,
-			"\033[091mErreur : Fichier invalide\033[0m", STDERR_FILENO);
+			"\033[091mErreur : Fichier invalide\033[0m", STDERR_FILENO, l);
 	}
 }
 

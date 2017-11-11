@@ -6,16 +6,14 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/10 20:29:15 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/11 19:34:00 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	clang
-GRAPH		=
-DEBUG		=
 NAME		=	lem-in
-#FLAGS		=	-Wall -Wextra -Werror -Weverything -g -fsanitize=address
 FLAGS		=	-Wall -Wextra -Werror -Weverything -g
+#FLAGS		=	-Wall -Wextra -Werror -Weverything -g
 LIBDIR		=	libft
 LIBLINK		=	-L $(LIBDIR) -lft
 LIB 		=	$(LIBDIR)/libft.a
@@ -31,7 +29,7 @@ SRCDIR_ALGO	=	srcs/algorithm
 
 SRC_ALGO	=	main.c  get_file.c parsing_ants_number.c useful.c\
 				parsing_start_end_exists.c parsing_check_if_room.c free.c\
-				parsing_room_and_stock.c parsing_pipes_and_stock.c\
+				parsing_room_and_stock.c parsing_pipes_and_stock.c init.c\
 				resolve_isolated_roms.c resolve_count_nb_paths.c graph.c\
 				print.c
 
@@ -49,13 +47,8 @@ $(NAME): $(OBJDIR_ALGO) $(LIB) $(OBJS_ALGO) $(INCLUDE)
 $(LIB):
 	@make -C $(LIBDIR)
 
-ifeq ($(GRAPH), yes)
 $(OBJDIR_ALGO)/%.o: $(SRCDIR_ALGO)/%.c
-	@$(CC) -D GRAPH $(FLAGS) -c $^ -o $@ $(INCLUDES)
-else
-$(OBJDIR_ALGO)/%.o: $(SRCDIR_ALGO)/%.c
-	@$(CC) -D DEBUG $(FLAGS) -c $^ -o $@ $(INCLUDES)
-endif
+	@$(CC) $(FLAGS) -c $^ -o $@ $(INCLUDES)
 
 directory: $(OBJDIR) $(OBJDIR_ALGO)
 

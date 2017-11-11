@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 12:22:55 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 21:40:04 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 10:24:53 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,5 @@
 
 char	*ft_strcpy(char *dst, const char *src)
 {
-	int i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+	return (ft_memcpy(dst, src, ft_strlen(src) + 1));
 }

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 20:16:42 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 16:50:16 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ typedef struct		s_room
 	char			*name;
 	struct s_room	*next;
 }					t_room;
+
+typedef struct		s_path
+{
+	struct s_path	*next;
+	int				*path;
+	int				nbr_coups;
+	char		padding2[4];
+}					t_path;
 
 
 typedef struct	s_lemin
@@ -43,11 +51,17 @@ typedef struct	s_lemin
 	int			*sum;
 	bool		**pipes; //stock les relations entre les pipes
 	int			*lookup; // permet de savoir si on est deja passe par ce chemin
+	int			*sorted;
 	char		*string_file; // contient tout le fichier dans une string
 	char		**eq; // equivalence nom / id
 	char		**file; // contient tout le fichier dans un tableau
+	char		debug;
+	char		graph;
+	char		padding1[6];
 	struct s_room	*room;
 	struct s_room	*begin;
+	struct s_path	*path;
+	struct s_path	*path_begin;
 }				t_lemin;
 
 
@@ -55,9 +69,11 @@ typedef struct	s_lemin
 void	export_graph(bool **pipes, t_lemin *l);
 
 
+void	init_struct_lemin(t_lemin *l);
+void	init_arguments(int argc, char **argv, t_lemin *l);
 void	get_file(t_lemin *l);
 void	error_lem_in(void (*function)(const char *, int fd),
-		const char *str, int fd)__attribute__ ((noreturn));
+		const char *str, int fd, t_lemin *l)__attribute__ ((noreturn));
 
 
 
@@ -111,5 +127,7 @@ void	count_nb_paths(t_lemin *l);
 */
 
 void	print_equivalence_tab(t_lemin *l);
+void	ft_print_tab_pipes(t_lemin *l);
+void	print_resume(t_lemin *l);
 
 #endif

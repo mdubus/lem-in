@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 17:34:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 18:23:33 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/11 11:14:45 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	case_ants_number_negative(t_lemin *l)
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,
 			"\033[091mErreur : Veuillez indiquer un nombre de fourmis correct\
-			\033[0m", STDERR_FILENO);
+			\033[0m", STDERR_FILENO, l);
 	}
 }
 
@@ -34,7 +34,7 @@ void		parsing_ants_number(t_lemin *l)
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,
 			"\033[091mErreur : Veuillez indiquer un nombre de fourmis correct\
-			\033[0m", STDERR_FILENO);
+			\033[0m", STDERR_FILENO, l);
 	}
 	else if (ft_strlen(l->file[l->start]) > 10)
 	{
@@ -42,7 +42,7 @@ void		parsing_ants_number(t_lemin *l)
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,
 		"\033[091mErreur : Il y a trop de fourmis dans la fourmilliere\
-		\033[0m", STDERR_FILENO);
+		\033[0m", STDERR_FILENO, l);
 	}
 	else
 		l->nb_ants = ft_atoi(l->file[l->start]);
