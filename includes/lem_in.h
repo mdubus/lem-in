@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/11 16:50:16 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/12 19:24:56 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ typedef struct		s_path
 	int				nbr_coups;
 	char		padding2[4];
 }					t_path;
+
+typedef struct		s_queue
+{
+	int				id;
+	int				padding[3];
+	struct s_queue	*next;
+}					t_queue;
 
 
 typedef struct	s_lemin

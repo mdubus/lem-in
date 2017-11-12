@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/11 11:15:40 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/12 14:30:15 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	create_sum_tab(t_lemin *l)
 	l->sum = (int *)malloc(sizeof(int) * (unsigned int)(l->nb_rooms));
 	if (l->sum == NULL)
 		free_all(l);
-	update_sum_tab(l);
 }
 
 void		check_for_isolated_rooms(t_lemin *l)

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/11 19:03:23 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/12 21:54:56 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,87 @@ void	print_sum_table(t_lemin *l)
 		printf("%d\n", l->sum[i++]);
 }
 
+static void	cut_paths(t_lemin *l, int room)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < l->nb_rooms)
+	{
+		if (l->pipes[room][i] == 1)
+		{
+			j = i + 1;
+			while (j < l->nb_rooms)
+			{
+				if (l->pipes[room][j] == 1)
+				{
+					if (l->pipes[i][j] == 1)
+					{
+						l->pipes[i][j] = 0;
+						l->pipes[j][i] = 0;
+					}
+				}
+				j++;
+			}
+		}
+		i++;
+	}
+}
+
+static void	bfs(t_lemin *l)
+{
+	bool	*visited;
+	int		i;
+	t_queue	*queue;
+	t_queue	*begin;
+
+	visited = NULL;
+	i = 0;
+	queue = NULL;
+	visited = (bool*)malloc(sizeof(bool) * (unsigned long)l->nb_rooms);
+	while (i < l->nb_rooms)
+		visited[i++] = 0;
+
+	if (queue == NULL)
+		queue = (t_queue*)malloc(sizeof(t_queue));
+	queue->id = l->room_start;
+	queue->next = NULL;
+	begin = queue;
+
+	while (begin && begin->id != 5)
+	{
+		visited[begin->id] = 1;
+		cut_paths(l, begin->id);
+		int	j;
+		t_queue	*temp;
+
+		j = 0;
+		temp = NULL;
+		while (j < l->nb_rooms)
+		{
+			if (l->pipes[begin->id][j] == 1 && visited[j] == 0)
+			{
+	//			printf("begin id  = %d\n", begin->id);
+				queue->next = (t_queue*)malloc(sizeof(t_queue));
+				queue = queue->next;
+				queue->next = NULL;
+				queue->id = j;
+				visited[queue->id] = 1;
+			}
+			j++;
+		}
+		temp = begin;
+		if (begin->next)
+		{
+			begin = begin->next;
+		}
+		free(temp);
+	}
+	free(visited);
+	free(begin);
+}
 
 int	main(int argc, char **argv)
 {
@@ -65,22 +146,26 @@ int	main(int argc, char **argv)
 		free_check_if_room(&l,
 				"\033[091mErreur : La map est mal formatee\033[0m");
 	make_tab_equivalence(&l);
-
-
 	parsing_pipes_and_stock(&l);
-
-
 	check_end_and_start(&l);
 
 	// resolve
+	
 	create_sum_tab(&l);
+	update_sum_tab(&l);
+
 	if (l.debug == 1)
 	{
 		print_resume(&l);
 		print_equivalence_tab(&l);
 		ft_print_tab_pipes(&l);
 	}
+
+
+	cut_paths(&l, l.room_end);
+	bfs(&l);
 	check_for_isolated_rooms(&l);
+
 
 	count_nb_paths(&l);
 
