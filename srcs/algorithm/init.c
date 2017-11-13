@@ -39,6 +39,7 @@ void	init_struct_lemin(t_lemin *l)
 	l->path = NULL;
 	l->visited = NULL;
 	l->level = NULL;
+	l->flag_start_to_end = 0;
 }
 
 void	init_arguments(int argc, char **argv, t_lemin *l)

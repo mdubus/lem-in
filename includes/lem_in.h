@@ -60,6 +60,8 @@ typedef struct	s_lemin
 	int			*lookup; // permet de savoir si on est deja passe par ce chemin
 	int			*level;
 	bool		*visited;
+	bool		flag_start_to_end;
+	bool		padding4[7];
 	int			*sorted;
 	char		*string_file; // contient tout le fichier dans une string
 	char		**eq; // equivalence nom / id

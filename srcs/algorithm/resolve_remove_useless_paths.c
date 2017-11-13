@@ -64,6 +64,7 @@ void	bfs(t_lemin *l, int room_start)
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
 		free_lst_name(l);
+		exit(1);
 	}
 	l->level = (int*)malloc(sizeof(int) * (unsigned long)l->nb_rooms);
 	if (!l->level)
@@ -74,7 +75,7 @@ void	bfs(t_lemin *l, int room_start)
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
 		free_lst_name(l);
-
+		exit(1);
 	}
 	while (i < l->nb_rooms)
 	{
@@ -91,7 +92,7 @@ void	bfs(t_lemin *l, int room_start)
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
 		free_lst_name(l);
-
+		exit(1);
 	}
 	queue->id = room_start;
 	queue->next = NULL;
