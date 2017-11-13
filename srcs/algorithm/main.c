@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/12 21:54:56 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/13 13:27:00 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	print_sum_table(t_lemin *l)
 		printf("%d\n", l->sum[i++]);
 }
 
-static void	cut_paths(t_lemin *l, int room)
+static void	cut_paths(t_lemin *l, int room, int *level)
 {
 	int	i;
 	int	j;
@@ -64,7 +64,7 @@ static void	cut_paths(t_lemin *l, int room)
 			{
 				if (l->pipes[room][j] == 1)
 				{
-					if (l->pipes[i][j] == 1)
+					if (l->pipes[i][j] == 1 && level[room] != level[i])
 					{
 						l->pipes[i][j] = 0;
 						l->pipes[j][i] = 0;
@@ -77,30 +77,37 @@ static void	cut_paths(t_lemin *l, int room)
 	}
 }
 
-static void	bfs(t_lemin *l)
+static void	bfs(t_lemin *l, int room_start)
 {
 	bool	*visited;
+	int		*level;
+	int		k;
 	int		i;
 	t_queue	*queue;
 	t_queue	*begin;
 
 	visited = NULL;
 	i = 0;
+	k = 0;
 	queue = NULL;
 	visited = (bool*)malloc(sizeof(bool) * (unsigned long)l->nb_rooms);
+	level = (int*)malloc(sizeof(int) * (unsigned long)l->nb_rooms);
 	while (i < l->nb_rooms)
+	{
+		level[i] = -1;
 		visited[i++] = 0;
-
+	}
 	if (queue == NULL)
 		queue = (t_queue*)malloc(sizeof(t_queue));
-	queue->id = l->room_start;
+	queue->id = room_start;
 	queue->next = NULL;
+	level[room_start] = k++;
 	begin = queue;
 
 	while (begin && begin->id != 5)
 	{
 		visited[begin->id] = 1;
-		cut_paths(l, begin->id);
+		cut_paths(l, begin->id, level);
 		int	j;
 		t_queue	*temp;
 
@@ -108,25 +115,33 @@ static void	bfs(t_lemin *l)
 		temp = NULL;
 		while (j < l->nb_rooms)
 		{
+
+
 			if (l->pipes[begin->id][j] == 1 && visited[j] == 0)
 			{
+	
 	//			printf("begin id  = %d\n", begin->id);
 				queue->next = (t_queue*)malloc(sizeof(t_queue));
 				queue = queue->next;
 				queue->next = NULL;
 				queue->id = j;
 				visited[queue->id] = 1;
+				level[queue->id] = k;
+				printf("queue id  = %d, level = %d\n", queue->id, level[queue->id]);
 			}
 			j++;
 		}
-		temp = begin;
+			temp = begin;
 		if (begin->next)
 		{
 			begin = begin->next;
 		}
 		free(temp);
+		if (level[begin->id] == k)
+			k++;
 	}
 	free(visited);
+	free(level);
 	free(begin);
 }
 
@@ -162,8 +177,9 @@ int	main(int argc, char **argv)
 	}
 
 
-	cut_paths(&l, l.room_end);
-	bfs(&l);
+//	cut_paths(&l, l.room_end);
+//	bfs(&l, l.room_start);
+	bfs(&l, l.room_end);
 	check_for_isolated_rooms(&l);
 
 
