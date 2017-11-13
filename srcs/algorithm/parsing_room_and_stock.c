@@ -89,8 +89,8 @@ void	check_end_and_start(t_lemin *l)
 	case_no_pipes(l);
 	case_no_end_start(l);
 	case_start_end_identical(l);
-	if (l->graph == 1)
-		export_graph(l->pipes, l);
+//	if (l->graph == 1)
+//		export_graph(l->pipes, l);
 }
 
 int		parsing_room_and_stock(t_lemin *l)

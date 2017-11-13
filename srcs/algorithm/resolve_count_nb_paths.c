@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
-
+/*
 static void	print_possible_paths(t_lemin *l)
 {
 	int j = 0;
@@ -20,6 +20,33 @@ static void	print_possible_paths(t_lemin *l)
 		ft_putnbr(l->sorted[j++]);
 		ft_putchar(' ');
 	}
+}
+*/
+static void	stock_path(t_lemin *l)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < l->nb_rooms && l->sorted[i] != l->room_end)
+		i++;
+	if (!l->path)
+	{
+		l->path = (t_path*)malloc(sizeof(t_path));
+		l->path_begin = l->path;
+	}
+	else
+	{
+		l->path->next = (t_path*)malloc(sizeof(t_path));
+		l->path = l->path->next;
+	}
+	l->path->next = NULL;
+	l->path->path = (int *)malloc(sizeof(int) * (unsigned long)i);
+	i = 1;
+	while (i < l->nb_rooms && l->sorted[i] != l->room_end)
+		l->path->path[j++] = l->sorted[i++];
+	l->path->path[j] = l->room_end;
 }
 
 static int	resolve_nb_paths(t_lemin *l, int room, int *j)
@@ -34,21 +61,20 @@ static int	resolve_nb_paths(t_lemin *l, int room, int *j)
 			(*j)++;
 			if (room != l->room_start)
 			{
-				l->sorted[*j - 1] = room;
 				l->lookup[room] = (*j - 1);
 			}
+				l->sorted[*j - 1] = room;
 			l->pipes[room][i] = 0;
 			l->pipes[i][room] = 0;
 			if (i == l->room_end)
 			{
-				print_possible_paths(l);
-				ft_putchar('\n');
+				l->sorted[*j] = i;
+				stock_path(l);
 				(l->nb_path)++;
 				l->pipes[room][i] = 1;
 				l->pipes[i][room] = 1;
 				(*j)--;
 				l->lookup[room] = -1;
-				l->sorted[*j] = -1;
 			}
 			else if (l->lookup[i] > 0 || i == l->room_start)
 			{
@@ -89,7 +115,6 @@ void	count_nb_paths(t_lemin *l)
 	while (i < l->nb_rooms)
 		l->sorted[i++] = -1;
 	resolve_nb_paths(l, l->room_start, &j);
-	printf("\n\nnombre de chemins = %d\n\n", l->nb_path);
 	if (l->nb_path == 0)
 	{
 		free(l->sum);

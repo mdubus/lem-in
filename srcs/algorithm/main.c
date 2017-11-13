@@ -20,8 +20,6 @@ void	free_check_if_room(t_lemin *l, char *str)
 	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
 }
 
-
-
 void	make_tab_equivalence(t_lemin *l);
 void	make_tab_equivalence(t_lemin *l)
 {
@@ -39,111 +37,6 @@ void	make_tab_equivalence(t_lemin *l)
 	l->eq[l->nb_rooms] = NULL;
 }
 
-void	print_sum_table(t_lemin *l);
-void	print_sum_table(t_lemin *l)
-{
-	ft_putchar('\n');
-	int i = 0;
-	while (i < l->nb_rooms)
-		printf("%d\n", l->sum[i++]);
-}
-
-static void	cut_paths(t_lemin *l, int room, int *level)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < l->nb_rooms)
-	{
-		if (l->pipes[room][i] == 1)
-		{
-			j = i + 1;
-			while (j < l->nb_rooms)
-			{
-				if (l->pipes[room][j] == 1)
-				{
-					if (l->pipes[i][j] == 1 && level[room] != level[i])
-					{
-						l->pipes[i][j] = 0;
-						l->pipes[j][i] = 0;
-					}
-				}
-				j++;
-			}
-		}
-		i++;
-	}
-}
-
-static void	bfs(t_lemin *l, int room_start)
-{
-	bool	*visited;
-	int		*level;
-	int		k;
-	int		i;
-	t_queue	*queue;
-	t_queue	*begin;
-
-	visited = NULL;
-	i = 0;
-	k = 0;
-	queue = NULL;
-	visited = (bool*)malloc(sizeof(bool) * (unsigned long)l->nb_rooms);
-	level = (int*)malloc(sizeof(int) * (unsigned long)l->nb_rooms);
-	while (i < l->nb_rooms)
-	{
-		level[i] = -1;
-		visited[i++] = 0;
-	}
-	if (queue == NULL)
-		queue = (t_queue*)malloc(sizeof(t_queue));
-	queue->id = room_start;
-	queue->next = NULL;
-	level[room_start] = k++;
-	begin = queue;
-
-	while (begin && begin->id != 5)
-	{
-		visited[begin->id] = 1;
-		cut_paths(l, begin->id, level);
-		int	j;
-		t_queue	*temp;
-
-		j = 0;
-		temp = NULL;
-		while (j < l->nb_rooms)
-		{
-
-
-			if (l->pipes[begin->id][j] == 1 && visited[j] == 0)
-			{
-	
-	//			printf("begin id  = %d\n", begin->id);
-				queue->next = (t_queue*)malloc(sizeof(t_queue));
-				queue = queue->next;
-				queue->next = NULL;
-				queue->id = j;
-				visited[queue->id] = 1;
-				level[queue->id] = k;
-				printf("queue id  = %d, level = %d\n", queue->id, level[queue->id]);
-			}
-			j++;
-		}
-			temp = begin;
-		if (begin->next)
-		{
-			begin = begin->next;
-		}
-		free(temp);
-		if (level[begin->id] == k)
-			k++;
-	}
-	free(visited);
-	free(level);
-	free(begin);
-}
 
 int	main(int argc, char **argv)
 {
@@ -165,10 +58,17 @@ int	main(int argc, char **argv)
 	check_end_and_start(&l);
 
 	// resolve
-	
+
 	create_sum_tab(&l);
 	update_sum_tab(&l);
 
+
+	bfs(&l, l.room_start);
+	bfs(&l, l.room_end);
+	update_sum_tab(&l);
+	check_for_isolated_rooms(&l);
+	if (l.graph == 1)
+		export_graph(l.pipes, &l);
 	if (l.debug == 1)
 	{
 		print_resume(&l);
@@ -177,13 +77,11 @@ int	main(int argc, char **argv)
 	}
 
 
-//	cut_paths(&l, l.room_end);
-//	bfs(&l, l.room_start);
-	bfs(&l, l.room_end);
-	check_for_isolated_rooms(&l);
 
 
 	count_nb_paths(&l);
+	if (l.debug == 1)
+		print_possible_paths(&l);
 
 
 	free(l.sum);

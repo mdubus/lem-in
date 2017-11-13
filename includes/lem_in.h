@@ -58,6 +58,8 @@ typedef struct	s_lemin
 	int			*sum;
 	bool		**pipes; //stock les relations entre les pipes
 	int			*lookup; // permet de savoir si on est deja passe par ce chemin
+	int			*level;
+	bool		*visited;
 	int			*sorted;
 	char		*string_file; // contient tout le fichier dans une string
 	char		**eq; // equivalence nom / id
@@ -125,6 +127,7 @@ void	check_for_isolated_rooms(t_lemin *l);
 void		update_sum_tab(t_lemin *l);
 void	create_sum_tab(t_lemin *l);
 void	count_nb_paths(t_lemin *l);
+void	bfs(t_lemin *l, int room_start);
 
 
 
@@ -136,5 +139,6 @@ void	count_nb_paths(t_lemin *l);
 void	print_equivalence_tab(t_lemin *l);
 void	ft_print_tab_pipes(t_lemin *l);
 void	print_resume(t_lemin *l);
+void	print_possible_paths(t_lemin *l);
 
 #endif
