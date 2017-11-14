@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/13 11:51:32 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/14 12:00:52 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_path
 	struct s_path	*next;
 	int				*path;
 	int				nbr_coups;
-	char		padding2[4];
+	int				different_path;
 }					t_path;
 
 typedef struct		s_queue
@@ -126,10 +126,11 @@ int			parsing_pipes_and_stock(t_lemin *l);
 */
 
 void	check_for_isolated_rooms(t_lemin *l);
-void		update_sum_tab(t_lemin *l);
+void	update_sum_tab(t_lemin *l);
 void	create_sum_tab(t_lemin *l);
 void	count_nb_paths(t_lemin *l);
 void	bfs(t_lemin *l, int room_start);
+void	check_if_solution_exists(t_lemin *l);
 
 
 

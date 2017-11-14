@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:12:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/12 21:32:58 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/14 12:45:17 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ static void	stock_path(t_lemin *l)
 		l->path = l->path->next;
 	}
 	l->path->next = NULL;
-	l->path->path = (int *)malloc(sizeof(int) * (unsigned long)i);
+	l->path->different_path = 0;
+	l->path->path = (int *)malloc(sizeof(int) * (unsigned long)(i + 1));
 	i = 1;
 	while (i < l->nb_rooms && l->sorted[i] != l->room_end)
 		l->path->path[j++] = l->sorted[i++];
-	l->path->path[j] = l->room_end;
+	l->path->path[j++] = l->room_end;
+	l->path->path[j] = -1;
 }
 
 static int	resolve_nb_paths(t_lemin *l, int room, int *j)

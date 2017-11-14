@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:58:23 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/11 12:32:58 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/14 11:50:23 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ void	print_resume(t_lemin *l)
 
 void	print_equivalence_tab(t_lemin *l)
 {
+	int	i;
+
+	i = 0;
+	// enlever le printf
 	ft_putendl("\033[94m---------- Relations id | nom de room ----------\n\033[0m");
-	int i = 0;
 	while (i < l->nb_rooms)
 	{
 		printf("%-3d| %-3s\n", i, l->eq[i]);
@@ -137,10 +140,11 @@ void	print_possible_paths(t_lemin *l)
 		while (l->path->path[j] != l->room_end)
 		{
 			ft_putstr(l->eq[l->path->path[j++]]);
-		ft_putstr("\033[090m -> \033[0m");
+			ft_putstr("\033[090m -> \033[0m");
 		}
 		ft_putstr(l->eq[l->room_end]);
 		ft_putchar('\n');
 		l->path = l->path->next;
 	}
+	ft_putchar('\n');
 }
