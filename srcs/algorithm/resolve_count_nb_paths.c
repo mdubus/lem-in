@@ -6,10 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:12:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/14 12:45:17 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/15 15:23:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 /*
 static void	print_possible_paths(t_lemin *l)
@@ -43,6 +44,7 @@ static void	stock_path(t_lemin *l)
 	}
 	l->path->next = NULL;
 	l->path->different_path = 0;
+	l->path->nbr_coups = i;
 	l->path->path = (int *)malloc(sizeof(int) * (unsigned long)(i + 1));
 	i = 1;
 	while (i < l->nb_rooms && l->sorted[i] != l->room_end)

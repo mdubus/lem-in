@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 10:30:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/04 12:18:47 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/15 18:32:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int			get_next_line(const int fd, char **line)
 	free(gnl.buffer);
 	gnl.buffer = NULL;
 	gnl.mew->reste = NULL;
-	printf("%p\n", &*line);
 	if (gnl.length == 0 && *line && (*line)[0] != '\0')
 		return (1);
 	return (0);

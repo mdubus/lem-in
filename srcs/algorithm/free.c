@@ -6,10 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 14:33:37 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 18:08:12 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/15 15:23:05 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 void	free_lst_name(t_lemin *l)

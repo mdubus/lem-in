@@ -6,10 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 17:34:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/11 11:14:45 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/15 15:23:26 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	case_ants_number_negative(t_lemin *l)

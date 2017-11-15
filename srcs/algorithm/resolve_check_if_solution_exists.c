@@ -6,10 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:27:30 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/14 11:39:57 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/15 15:23:54 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static int	start_related_to_end(t_lemin *l, int room, int *j)

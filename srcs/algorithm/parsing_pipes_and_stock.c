@@ -6,10 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 21:18:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/11 11:14:55 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/15 15:23:36 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static bool	**ft_create_tab_bool(unsigned long x, unsigned long y)
