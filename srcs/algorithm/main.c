@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:23:22 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/16 17:36:41 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	check_sum_end_start(t_lemin *l)
 	}
 }
 
-static void	find_best_paths(t_lemin *l)
+static void calculate_different_paths(t_lemin *l)
 {
 	int	i;
 	int	j;
@@ -73,27 +73,21 @@ static void	find_best_paths(t_lemin *l)
 
 	i = 0;
 	j = 0;
-	int k = 0;
-	int m = 0;
 	flag = 0;
 	next = NULL;
 	l->path = l->path_begin;
 	next = l->path;
-	while (l->path->next)
+	while (l->path)
 	{
-		k++;
 		while (next->next)
 		{
-			m++;
 			next = next->next;
 			i = 0;
 			while (l->path->path[i] != l->room_end && flag == 0)
 			{
-		//		printf("i = %s\n", l->eq[l->path->path[i]]);
 				j = 0;
 				while (next->path[j] != l->room_end && flag == 0)
 				{
-		//			printf("j = %s\n", l->eq[next->path[j]]);
 					if (l->path->path[i] == next->path[j])
 						flag = 1;
 					j++;
@@ -102,14 +96,133 @@ static void	find_best_paths(t_lemin *l)
 			}
 			if (flag == 0)
 			{
-				printf("k = %d, l = %d\n", k, m);
 				l->path->different_path += 1;
+				int nbr_coups_min = l->path->nbr_coups + next->nbr_coups;
+				if (l->path->nbr_coups_min == 0 || l->path->nbr_coups_min < nbr_coups_min)
+					l->path->nbr_coups_min = nbr_coups_min;
+				printf("coups min = %d\n", nbr_coups_min);
 			}
 			flag = 0;
 		}
-		m = k+ 1;
 		l->path = l->path->next;
-		next = l->path_begin;
+		next = l->path;
+	}
+}
+
+static void	find_best_path(t_lemin *l)
+{
+	l->path = l->path_begin;
+	int	nb_path;
+	int	nbr_coups;
+
+	nb_path = l->path->different_path;
+	nbr_coups = l->path->nbr_coups;
+	l->best_path = l->path;
+	while (l->path)
+	{
+		if (l->path->different_path > nb_path)
+		{
+			nb_path = l->path->different_path;
+			l->best_path = l->path;
+		}
+		else if (l->path->different_path == nb_path)
+		{
+			if (l->path->nbr_coups < nbr_coups)
+			{
+				nbr_coups = l->path->nbr_coups;
+				l->best_path = l->path;
+			}
+		}
+		l->path = l->path->next;
+	}
+}
+
+static void	delete_other_paths(t_lemin *l)
+{
+	t_path	*prev;
+	int	i;
+	int	j;
+	int	flag;
+
+	i = 0;
+	j = 0;
+	flag = 0;
+	l->path = l->path_begin;
+	prev = l->path_begin;
+	while (l->path)
+	{
+		if (l->path != l->best_path)
+		{
+			i = 0;
+			while (l->best_path->path[i] != l->room_end && flag == 0)
+			{
+				j = 0;
+				while (l->path->path[j] != l->room_end && flag == 0)
+				{
+					if (l->best_path->path[i] == l->path->path[j])
+						flag = 1;
+					j++;
+				}
+				i++;
+			}
+		}
+		if (flag == 1)
+		{
+			if (l->path == l->path_begin)
+			{
+				l->path = l->path->next;
+				free(prev->path);
+				free(prev);
+				prev = l->path;
+				l->path_begin = l->path;
+				prev = l->path;
+			}
+			else
+			{
+				prev->next = l->path->next;
+				free(l->path->path);
+				free(l->path);
+				l->path = prev;
+				prev = l->path;
+				l->path = l->path->next;
+			}
+			flag = 0;
+		}
+		else
+		{
+			prev = l->path;
+			l->path = l->path->next;
+		}
+	}
+}
+
+static void	put_best_path_in_result(t_lemin *l)
+{
+	t_path	*temp;
+
+	l->path = l->path_begin;
+	temp = l->path;
+	while (l->path && l->path != l->best_path)
+	{
+		temp = l->path;
+		l->path = l->path->next;
+	}
+	if (l->path == l->best_path)
+	{
+		if (l->solution == NULL)
+		{
+			l->solution = l->path;
+			l->solution_begin = l->solution;
+		}
+		else
+		{
+			l->solution->next = l->path;
+			l->solution = l->solution->next;
+		}
+		temp->next = l->path->next;
+		if (l->path == l->path_begin)
+			l->path_begin = l->path->next;
+		l->solution->next = NULL;
 	}
 }
 
@@ -154,25 +267,50 @@ int	main(int argc, char **argv)
 		print_possible_paths(&l);
 	}
 
-	find_best_paths(&l);
+	print_possible_paths(&l);
 
-	l.path = l.path_begin;
-	while (l.path)
+	while (l.path_begin)
 	{
-		printf("nombre de chemins differents : %d\n", l.path->different_path);
-		l.path = l.path->next;
+		l.path = l.path_begin;
+		while (l.path)
+		{
+			l.path->nbr_coups_min = 0;
+			l.path->different_path = 0;
+			l.path = l.path->next;
+		}
+		calculate_different_paths(&l);
+		find_best_path(&l);
+		delete_other_paths(&l);
+		put_best_path_in_result(&l);
 	}
 
 
+	print_result(&l);
 
-
+	//	print_possible_paths(&l);
+	//	while (l.path)
+	//	{
+	//		printf("nombre de chemins differents : %d\n", l.path->different_path);
+	//		l.path = l.path->next;
+	//	}
 
 	free(l.sum);
 	ft_memdel((void**)&l.string_file);
 	ft_free_double_tab((void**)l.file);
 	ft_free_double_tab((void**)l.eq);
 	ft_free_double_tab((void**)l.pipes);
-	free_lst_name(&l);
+	t_path	*temp;
 
+	temp = NULL;
+	l.solution = l.solution_begin;
+	while (l.solution)
+	{
+		temp = l.solution;
+		l.solution = l.solution->next;
+		ft_memdel((void**)&temp->path);
+		ft_memdel((void**)&temp);
+	}
+	free(l.sorted);
+	free_lst_name(&l);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:58:23 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:23:49 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/16 17:19:15 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,30 @@ void	ft_print_tab_pipes(t_lemin *l)
 		ft_putchar('\n');
 		j = 0;
 		i++;
+	}
+	ft_putchar('\n');
+}
+
+void	print_result(t_lemin *l)
+{
+	int j;
+
+	j = 0;
+	ft_putendl("\033[94m---------- Chemins a emprunter ----------\n\033[0m");
+	l->path = l->solution_begin;
+	while (l->path)
+	{
+		j = 0;
+		ft_putstr(l->eq[l->room_start]);
+		ft_putstr("\033[090m -> \033[0m");
+		while (l->path->path[j] != l->room_end)
+		{
+			ft_putstr(l->eq[l->path->path[j++]]);
+			ft_putstr("\033[090m -> \033[0m");
+		}
+		ft_putstr(l->eq[l->room_end]);
+		ft_putchar('\n');
+		l->path = l->path->next;
 	}
 	ft_putchar('\n');
 }

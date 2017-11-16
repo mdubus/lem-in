@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:24:07 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/16 17:42:59 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,33 @@ static void	cut_paths(t_lemin *l, int room, int *level)
 	}
 }
 
+static void	free_queue(t_queue *lst)
+{
+	t_queue	*temp;
+
+	temp = NULL;
+	while (lst)
+	{
+		temp = lst;
+		lst = lst->next;
+		free(temp);
+	}
+}
+
+void	error_in_bfs(t_lemin *l)__attribute__((noreturn));
+void	error_in_bfs(t_lemin *l)
+{
+	free(l->sum);
+	ft_memdel((void**)&l->string_file);
+	ft_free_double_tab((void**)l->file);
+	ft_free_double_tab((void**)l->eq);
+	ft_free_double_tab((void**)l->pipes);
+	free_lst_name(l);
+	error_lem_in(ft_putendl_fd,
+			"\033[091mErreur lors d'une allocation\033[0m",
+			STDERR_FILENO, l);
+}
+
 void	bfs(t_lemin *l, int room_start)
 {
 	int		k;
@@ -58,26 +85,10 @@ void	bfs(t_lemin *l, int room_start)
 	queue = NULL;
 	l->visited = (bool*)malloc(sizeof(bool) * (unsigned long)l->nb_rooms);
 	if (!l->visited)
-	{
-		free(l->sum);
-		ft_memdel((void**)&l->string_file);
-		ft_free_double_tab((void**)l->file);
-		ft_free_double_tab((void**)l->eq);
-		ft_free_double_tab((void**)l->pipes);
-		free_lst_name(l);
-		exit(1);
-	}
+		error_in_bfs(l);
 	l->level = (int*)malloc(sizeof(int) * (unsigned long)l->nb_rooms);
 	if (!l->level)
-	{
-		free(l->sum);
-		ft_memdel((void**)&l->string_file);
-		ft_free_double_tab((void**)l->file);
-		ft_free_double_tab((void**)l->eq);
-		ft_free_double_tab((void**)l->pipes);
-		free_lst_name(l);
-		exit(1);
-	}
+		error_in_bfs(l);
 	while (i < l->nb_rooms)
 	{
 		l->level[i] = -1;
@@ -86,15 +97,7 @@ void	bfs(t_lemin *l, int room_start)
 	if (queue == NULL)
 		queue = (t_queue*)malloc(sizeof(t_queue));
 	if (!queue)
-	{
-		free(l->sum);
-		ft_memdel((void**)&l->string_file);
-		ft_free_double_tab((void**)l->file);
-		ft_free_double_tab((void**)l->eq);
-		ft_free_double_tab((void**)l->pipes);
-		free_lst_name(l);
-		exit(1);
-	}
+		error_in_bfs(l);
 	queue->id = room_start;
 	queue->next = NULL;
 	l->level[room_start] = k++;
@@ -105,10 +108,8 @@ void	bfs(t_lemin *l, int room_start)
 		l->visited[begin->id] = 1;
 		cut_paths(l, begin->id, l->level);
 		int	j;
-		t_queue	*temp;
 
 		j = 0;
-		temp = NULL;
 		while (j < l->nb_rooms)
 		{
 			if (l->pipes[begin->id][j] == 1 && l->visited[j] == 0)
@@ -122,16 +123,14 @@ void	bfs(t_lemin *l, int room_start)
 			}
 			j++;
 		}
-		temp = begin;
 		if (begin->next)
 		{
 			begin = begin->next;
 		}
-		free(temp);
 		if (l->level[begin->id] == k)
 			k++;
 	}
 	free(l->visited);
 	free(l->level);
-	free(begin);
+	free_queue(begin);
 }

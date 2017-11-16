@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 11:31:45 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:23:18 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/16 16:37:56 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	init_struct_lemin(t_lemin *l)
 	l->visited = NULL;
 	l->level = NULL;
 	l->flag_start_to_end = 0;
+	l->best_path = NULL;
+	l->solution = NULL;
+	l->solution_begin = NULL;
 }
 
 void	init_arguments(int argc, char **argv, t_lemin *l)

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/14 12:00:52 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/16 16:40:35 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct		s_path
 	int				*path;
 	int				nbr_coups;
 	int				different_path;
+	int				nbr_coups_min;
+	int				padding[3];
 }					t_path;
 
 typedef struct		s_queue
@@ -73,6 +75,9 @@ typedef struct	s_lemin
 	struct s_room	*begin;
 	struct s_path	*path;
 	struct s_path	*path_begin;
+	struct s_path	*best_path;
+	struct s_path	*solution;
+	struct s_path	*solution_begin;
 }				t_lemin;
 
 
@@ -143,5 +148,6 @@ void	print_equivalence_tab(t_lemin *l);
 void	ft_print_tab_pipes(t_lemin *l);
 void	print_resume(t_lemin *l);
 void	print_possible_paths(t_lemin *l);
+void	print_result(t_lemin *l);
 
 #endif
