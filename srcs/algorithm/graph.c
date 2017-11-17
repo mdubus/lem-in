@@ -6,14 +6,14 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:29:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:23:13 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 14:02:07 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
-static void print_links(t_lemin *l, bool **pipes)
+static void	print_links(t_lemin *l, bool **pipes)
 {
 	int i;
 	int	j;
@@ -56,7 +56,7 @@ static void	print_rooms(t_lemin *l)
 	}
 }
 
-void	export_graph(bool **pipes, t_lemin *l)
+void		export_graph(bool **pipes, t_lemin *l)
 {
 	ft_putendl_fd("digraph callgraph {", STDERR_FILENO);
 	ft_putendl_fd("concentrate=true", STDERR_FILENO);

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 14:33:37 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/16 17:35:58 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 14:01:51 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_lst_name(t_lemin *l)
 	}
 }
 
-void	ft_free_tab_bool(bool **tab);
 void	ft_free_tab_bool(bool **tab)
 {
 	int	i;

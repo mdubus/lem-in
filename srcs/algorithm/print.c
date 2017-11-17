@@ -6,14 +6,14 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:58:23 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/16 17:19:15 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 14:19:19 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
-void	print_resume(t_lemin *l)
+void		print_resume(t_lemin *l)
 {
 	ft_putendl("\033[94m---------- Resume ----------\n\033[0m");
 	ft_putstr("\033[095mNombre de fourmis : \033[0m");
@@ -29,16 +29,22 @@ void	print_resume(t_lemin *l)
 	ft_putendl("\n");
 }
 
-void	print_equivalence_tab(t_lemin *l)
+void		print_equivalence_tab(t_lemin *l)
 {
 	int	i;
 
 	i = 0;
-	// enlever le printf
-	ft_putendl("\033[94m---------- Relations id | nom de room ----------\n\033[0m");
+	ft_putstr("\033[94m---------- Relations id |");
+	ft_putendl("nom de room ----------\n\033[0m");
 	while (i < l->nb_rooms)
 	{
-		printf("%-3d| %-3s\n", i, l->eq[i]);
+		ft_putnbr(i);
+		ft_putchar(' ');
+		if (i < 10)
+			ft_putchar(' ');
+		ft_putstr("| ");
+		ft_putstr(l->eq[i]);
+		ft_putchar('\n');
 		i++;
 	}
 	ft_putchar('\n');
@@ -92,21 +98,21 @@ static void	print_body(t_lemin *l, int i)
 			ft_putnbr(l->pipes[i][j++]);
 			ft_putstr("  \033[0m");
 		}
-
 	}
 	ft_putstr(" ");
 	ft_putnbr(l->sum[i]);
 }
 
-void	ft_print_tab_pipes(t_lemin *l)
+void		ft_print_tab_pipes(t_lemin *l)
 {
-	ft_putendl("\033[94m---------- Relations entre les pipes ----------\n\033[0m");
-	print_head(l->nb_rooms);
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
+	ft_putstr("\033[94m---------- Relations entre les pipes");
+	ft_putendl("----------\n\033[0m");
+	print_head(l->nb_rooms);
 	while (i < l->nb_rooms)
 	{
 		ft_putnbr(i);
@@ -123,12 +129,12 @@ void	ft_print_tab_pipes(t_lemin *l)
 	ft_putchar('\n');
 }
 
-void	print_result(t_lemin *l)
+void		print_result(t_lemin *l)
 {
 	int j;
 
 	j = 0;
-	ft_putendl("\033[94m---------- Chemins a emprunter ----------\n\033[0m");
+	ft_putendl("\033[94m---------- Chemins selectionnes ----------\n\033[0m");
 	l->path = l->solution_begin;
 	while (l->path)
 	{
@@ -147,7 +153,7 @@ void	print_result(t_lemin *l)
 	ft_putchar('\n');
 }
 
-void	print_possible_paths(t_lemin *l)
+void		print_possible_paths(t_lemin *l)
 {
 	int j;
 

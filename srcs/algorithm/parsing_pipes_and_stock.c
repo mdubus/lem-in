@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 21:18:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:23:36 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 13:56:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,12 @@ static void	check_if_rooms_exists(t_lemin *l, char **tab)
 		free_check_if_room(l,
 				"\033[091mErreur : Un ou plusieurs tubes sont lies a des salles inconnues\033[0m");
 	}
-	l->pipes[flag_room2][flag_room1] = 1;
-	l->pipes[flag_room1][flag_room2] = 1;
+	if (flag_room1 != l->room_lava && flag_room2 != l->room_lava &&
+			flag_room1 != l->room_snorlax && flag_room2 != l->room_snorlax)
+	{
+		l->pipes[flag_room2][flag_room1] = 1;
+		l->pipes[flag_room1][flag_room2] = 1;
+	}
 }
 
 static void	stock_pipes(char *str, t_lemin *l)

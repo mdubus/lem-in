@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/16 16:40:35 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 14:04:46 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ typedef struct		s_queue
 
 typedef struct	s_lemin
 {
+	struct s_path	*path;
+	struct s_path	*path_begin;
+	struct s_path	*best_path;
+	struct s_path	*solution;
+	struct s_path	*solution_begin;
+	struct s_room	*room;
+	struct s_room	*begin;
+	int			*sum;
+	int			*lookup; // permet de savoir si on est deja passe par ce chemin
+	int			*level;
+	int			*sorted;
+	char		**eq; // equivalence nom / id
+	char		**file; // contient tout le fichier dans un tableau
+	char		*string_file; // contient tout le fichier dans une string
+	bool		**pipes; //stock les relations entre les pipes
+	bool		*visited;
 	int			nb_ants;
 	int			nb_pipes;
 	int			nb_rooms;
@@ -57,27 +73,15 @@ typedef struct	s_lemin
 	int			nb_path;
 	int			room_start;
 	int			room_end;
-	int			*sum;
-	bool		**pipes; //stock les relations entre les pipes
-	int			*lookup; // permet de savoir si on est deja passe par ce chemin
-	int			*level;
-	bool		*visited;
-	bool		flag_start_to_end;
-	bool		padding4[7];
-	int			*sorted;
-	char		*string_file; // contient tout le fichier dans une string
-	char		**eq; // equivalence nom / id
-	char		**file; // contient tout le fichier dans un tableau
+	int			room_lava;
+	int			room_snorlax;
 	char		debug;
 	char		graph;
 	char		padding1[6];
-	struct s_room	*room;
-	struct s_room	*begin;
-	struct s_path	*path;
-	struct s_path	*path_begin;
-	struct s_path	*best_path;
-	struct s_path	*solution;
-	struct s_path	*solution_begin;
+	bool		flag_start_to_end;
+	bool		flag_lava;
+	bool		flag_snorlax;
+	bool		padding2[5];
 }				t_lemin;
 
 
@@ -107,6 +111,7 @@ void	free_parsing_start(t_lemin *l, char *str)__attribute__ ((noreturn));
 void	free_parsing_end(t_lemin *l, char *str)__attribute__ ((noreturn));
 void	free_check_if_room(t_lemin *l, char *str)__attribute__((noreturn));
 void	free_lst_name(t_lemin *l);
+void	ft_free_tab_bool(bool **tab);
 
 
 
@@ -117,6 +122,7 @@ void	free_lst_name(t_lemin *l);
 ***************************** Parsing *****************************************
 */
 
+void	parsing(t_lemin *l);
 void	parsing_ants_number(t_lemin *l);
 void	parsing_start_end_exists(t_lemin *l);
 void	parsing_rooms_error_cases(t_lemin *l);
@@ -124,7 +130,11 @@ void	parsing_room_name(t_lemin *l);
 int		check_if_room(char *str, t_lemin *l);
 int		parsing_room_and_stock(t_lemin *l);
 void	check_end_and_start(t_lemin *l);
-int			parsing_pipes_and_stock(t_lemin *l);
+int		parsing_pipes_and_stock(t_lemin *l);
+void	check_is_print(char *str, t_lemin *l);
+void	check_begin_with_l(char *str, t_lemin *l);
+void	check_for_hyphen(char **tab, t_lemin *l);
+void	check_if_name_already_exists(char **tab, t_lemin *l);
 
 /*
 ***************************** Resolve *****************************************
@@ -136,7 +146,8 @@ void	create_sum_tab(t_lemin *l);
 void	count_nb_paths(t_lemin *l);
 void	bfs(t_lemin *l, int room_start);
 void	check_if_solution_exists(t_lemin *l);
-
+void	resolve(t_lemin *l);
+void	remove_useless_paths(t_lemin *l);
 
 
 
