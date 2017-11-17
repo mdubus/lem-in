@@ -17,7 +17,7 @@ void	parsing_start_end_exists(t_lemin *l)
 {
 	if (ft_strstr(l->string_file, "##start") == 0)
 	{
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(&ft_putendl_fd,
 			"\033[091mErreur : Absence de la commande ##start\033[0m",
@@ -25,7 +25,7 @@ void	parsing_start_end_exists(t_lemin *l)
 	}
 	if (ft_strstr(l->string_file, "##end") == 0)
 	{
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(&ft_putendl_fd,
 			"\033[091mErreur : Absence de la commande ##end\033[0m",

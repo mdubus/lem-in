@@ -21,7 +21,7 @@ get_error()
 		echo -e "\033[091m[ FPE ]\033[0m"
 	elif (( $RET == $((128 + 13)) )); then
 		echo -e "\033[091m[ PIPE ]\033[0m"
-	elif (($RET == 1)); then
+	elif (( $RET == 1)); then
 		echo -e $OK
 	else
 		echo -e $KO

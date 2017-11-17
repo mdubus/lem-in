@@ -24,8 +24,8 @@ static void	get_string_file(t_lemin *l)
 
 static void	get_tab_file(t_lemin *l)
 {
-	l->file = ft_strsplit_strict(l->string_file, '\n');
-	if (l->file == NULL)
+	l->f = ft_strsplit_strict(l->string_file, '\n');
+	if (l->f == NULL)
 	{
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,

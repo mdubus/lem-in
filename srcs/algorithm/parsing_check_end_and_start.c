@@ -19,7 +19,7 @@ static void	case_start_end_identical(t_lemin *l)
 	{
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		free(l->string_file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
@@ -34,7 +34,7 @@ static void	case_no_rooms(t_lemin *l)
 	{
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		free(l->string_file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
@@ -49,7 +49,7 @@ static void	case_no_pipes(t_lemin *l)
 	{
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		free(l->string_file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
@@ -64,7 +64,7 @@ static void	case_no_end_start(t_lemin *l)
 	{
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		free(l->string_file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,
@@ -75,7 +75,7 @@ static void	case_no_end_start(t_lemin *l)
 	{
 		ft_free_double_tab((void**)l->eq);
 		ft_free_double_tab((void**)l->pipes);
-		ft_free_double_tab((void**)l->file);
+		ft_free_double_tab((void**)l->f);
 		free(l->string_file);
 		free_lst_name(l);
 		error_lem_in(ft_putendl_fd,

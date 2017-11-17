@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/17 14:21:33 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/17 15:07:13 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ SRC_ALGO	=	main.c  get_file.c parsing_ants_number.c useful.c\
 				resolve_isolated_roms.c resolve_count_nb_paths.c graph.c\
 				print.c resolve_remove_useless_paths.c parsing.c\
 				resolve_check_if_solution_exists.c resolve_bfs.c resolve.c\
-				parsing_check_room_name.c parsing_check_end_and_start.c
+				parsing_check_room_name.c parsing_check_end_and_start.c\
+				resolve_delete_other_paths.c\
+				resolve_calculate_different_paths.c
 
 SRC_VISU	=	main.c
 

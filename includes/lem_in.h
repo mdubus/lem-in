@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 14:04:46 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 17:58:05 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct	s_lemin
 	int			*level;
 	int			*sorted;
 	char		**eq; // equivalence nom / id
-	char		**file; // contient tout le fichier dans un tableau
+	char		**f; // contient tout le fichier dans un tableau
 	char		*string_file; // contient tout le fichier dans une string
 	bool		**pipes; //stock les relations entre les pipes
 	bool		*visited;
@@ -75,6 +75,8 @@ typedef struct	s_lemin
 	int			room_end;
 	int			room_lava;
 	int			room_snorlax;
+	int			flag_room1;
+	int			flag_room2;
 	char		debug;
 	char		graph;
 	char		padding1[6];
@@ -112,6 +114,9 @@ void	free_parsing_end(t_lemin *l, char *str)__attribute__ ((noreturn));
 void	free_check_if_room(t_lemin *l, char *str)__attribute__((noreturn));
 void	free_lst_name(t_lemin *l);
 void	ft_free_tab_bool(bool **tab);
+void	free_queue(t_queue *lst);
+void	free_pipes(t_lemin *l, char *str);
+void	free_pipes_and_sum(t_lemin *l, char *str);
 
 
 
@@ -148,6 +153,11 @@ void	bfs(t_lemin *l, int room_start);
 void	check_if_solution_exists(t_lemin *l);
 void	resolve(t_lemin *l);
 void	remove_useless_paths(t_lemin *l);
+void	error_in_bfs(t_lemin *l);
+void	delete_other_paths(t_lemin *l);
+void	calculate_different_paths(t_lemin *l);
+void	already_explored(t_lemin *l, int *j, int room, int i);
+void	back_in_stack(t_lemin *l, int *j, int room, int i);
 
 
 

@@ -6,22 +6,20 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:13:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 15:24:02 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/17 17:51:13 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 /*
- ** Search for isolated rooms and suppress their pipes
- */
+** Search for isolated rooms and suppress their pipes
+*/
 
-void		free_all(t_lemin *l)__attribute__((noreturn));
-void		free_all(t_lemin *l)
+static void	free_all(t_lemin *l)
 {
 	ft_memdel((void**)&l->string_file);
-	ft_free_double_tab((void**)l->file);
+	ft_free_double_tab((void**)l->f);
 	ft_free_double_tab((void**)l->eq);
 	ft_free_double_tab((void**)l->pipes);
 	free_lst_name(l);
@@ -50,7 +48,7 @@ void		update_sum_tab(t_lemin *l)
 	}
 }
 
-void	create_sum_tab(t_lemin *l)
+void		create_sum_tab(t_lemin *l)
 {
 	l->sum = (int *)malloc(sizeof(int) * (unsigned int)(l->nb_rooms));
 	if (l->sum == NULL)
