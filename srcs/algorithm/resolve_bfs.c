@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 11:02:00 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 16:58:18 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/18 17:19:13 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		bfs(t_lemin *l, int room_start)
 	int		end;
 	t_queue	*queue;
 	t_queue	*begin;
+	t_queue	*begin_begin;
 
 	k = 0;
 	end = 0;
@@ -102,6 +103,7 @@ void		bfs(t_lemin *l, int room_start)
 	init_bfs(l, &queue, room_start);
 	l->level[room_start] = k++;
 	begin = queue;
+	begin_begin = begin;
 	end = (room_start == l->room_start) ? l->room_end : l->room_start;
 	while (begin && begin->id != end)
 	{
@@ -111,5 +113,5 @@ void		bfs(t_lemin *l, int room_start)
 	}
 	free(l->visited);
 	free(l->level);
-	free_queue(begin);
+	free_queue(begin_begin);
 }

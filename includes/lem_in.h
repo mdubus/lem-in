@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:58:05 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/18 17:26:08 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct	s_lemin
 	int			commands;
 	int			start;
 	int			nb_path;
+	int			nb_path_final;
+	int			padding;
 	int			room_start;
 	int			room_end;
 	int			room_lava;
@@ -117,6 +119,7 @@ void	ft_free_tab_bool(bool **tab);
 void	free_queue(t_queue *lst);
 void	free_pipes(t_lemin *l, char *str);
 void	free_pipes_and_sum(t_lemin *l, char *str);
+void	free_at_end(t_lemin *l);
 
 
 
@@ -158,6 +161,7 @@ void	delete_other_paths(t_lemin *l);
 void	calculate_different_paths(t_lemin *l);
 void	already_explored(t_lemin *l, int *j, int room, int i);
 void	back_in_stack(t_lemin *l, int *j, int room, int i);
+int		resolve_nb_paths(t_lemin *l, int room, int *j);
 
 
 

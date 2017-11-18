@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 14:33:37 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:43:17 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/18 17:22:19 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_free_tab_bool(bool **tab)
 	free(tab);
 }
 
-void		error_in_bfs(t_lemin *l)
+void	error_in_bfs(t_lemin *l)
 {
 	free(l->sum);
 	ft_memdel((void**)&l->string_file);
@@ -89,4 +89,26 @@ void	free_pipes_and_sum(t_lemin *l, char *str)
 	ft_free_double_tab((void**)l->eq);
 	ft_free_double_tab((void**)l->pipes);
 	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
+}
+
+void	free_at_end(t_lemin *l)
+{
+	t_path	*temp;
+
+	temp = NULL;
+	free(l->sum);
+	ft_memdel((void**)&l->string_file);
+	ft_free_double_tab((void**)l->f);
+	ft_free_double_tab((void**)l->eq);
+	ft_free_double_tab((void**)l->pipes);
+	l->solution = l->solution_begin;
+	while (l->solution)
+	{
+		temp = l->solution;
+		l->solution = l->solution->next;
+		ft_memdel((void**)&temp->path);
+		ft_memdel((void**)&temp);
+	}
+	free(l->sorted);
+	free_lst_name(l);
 }

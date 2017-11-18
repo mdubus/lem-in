@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 18:42:37 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/18 19:15:06 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void	init_put_background(t_visu *v)
 	SDL_Surface	*image;
 	
 	image = NULL;
-	image = IMG_Load("srcs/visualizer/background.png");
+	image = IMG_Load("srcs/visualizer/img/background.png");
 	if (!image)
 		ft_putendl("impossible de load l'image");
 	put_on_screen_sdl(v, image, 0, 0);
@@ -138,8 +138,8 @@ int	main(void)
 	init_put_background(&v);
 
 	char	*line = NULL;
-
-	while (get_next_line_backslash(STDIN_FILENO, &line) > 0)
+	int ret = 0;
+	while ((ret = get_next_line_backslash(STDIN_FILENO, &line)) > 0)
 	{
 		ft_putstr(line);
 		free(line);

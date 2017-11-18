@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:27:30 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:58:00 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/18 16:50:48 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	end_found(t_lemin *l, int *j, int room, int i)
 	l->lookup[room] = -1;
 }
 
-void	back_in_stack(t_lemin *l, int *j, int room, int i)
+void		back_in_stack(t_lemin *l, int *j, int room, int i)
 {
 	l->pipes[room][i] = 1;
 	l->pipes[i][room] = 1;

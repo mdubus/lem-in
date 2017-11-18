@@ -6,12 +6,38 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:21:10 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/18 17:34:43 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
+
+static void	print_ants(t_lemin *l)
+{
+	int	i;
+
+	i = 0;
+	l->solution = l->solution_begin;
+	while (l->solution)
+	{
+		l->nb_path_final++;
+		l->solution = l->solution->next;
+	}
+	l->solution = l->solution_begin;
+	while (i < l->nb_ants)
+	{
+		ft_putchar('L');
+		ft_putchar('x');
+		ft_putchar('-');
+		ft_putchar('x');
+		ft_putchar(' ');
+		if ((i + 1) % l->nb_path_final == 0)
+			ft_putchar('\n');
+		i++;
+	}
+	ft_putchar('\n');
+}
 
 int	main(int argc, char **argv)
 {
@@ -20,13 +46,7 @@ int	main(int argc, char **argv)
 
 	init_struct_lemin(&l);
 	init_arguments(argc, argv, &l);
-
-	//parsing
 	parsing(&l);
-
-
-	// resolve
-
 	remove_useless_paths(&l);
 
 	if (l.debug == 1)
@@ -46,24 +66,9 @@ int	main(int argc, char **argv)
 	}
 	ft_putendl(l.string_file);
 
-	free(l.sum);
-	ft_memdel((void**)&l.string_file);
-	ft_free_double_tab((void**)l.f);
-	ft_free_double_tab((void**)l.eq);
-	ft_free_double_tab((void**)l.pipes);
-	t_path	*temp;
 
-	temp = NULL;
-	l.solution = l.solution_begin;
-	while (l.solution)
-	{
-		temp = l.solution;
-		l.solution = l.solution->next;
-		ft_memdel((void**)&temp->path);
-		ft_memdel((void**)&temp);
-	}
-	free(l.sorted);
-	free_lst_name(&l);
+	print_ants(&l);
 
+	free_at_end(&l);
 	return (0);
 }
