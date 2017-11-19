@@ -6,14 +6,14 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/18 16:56:00 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/19 14:56:46 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	clang
 NAME		=	lem-in
-#FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+#FLAGS		=	-Wall -Wextra -Werror -g
 VISU		=	visu
 LIBDIR		=	libft
 LIBLINK		=	-L $(LIBDIR) -lft
@@ -42,7 +42,7 @@ SRC_ALGO	=	main.c  get_file.c parsing_ants_number.c useful.c\
 				resolve_delete_other_paths.c resolve_nb_paths.c\
 				resolve_calculate_different_paths.c
 
-SRC_VISU	=	main.c
+SRC_VISU	=	main.c useful.c init.c
 
 OBJ_ALGO	=	$(SRC_ALGO:.c=.o)
 OBJ_VISU	=	$(SRC_VISU:.c=.o)

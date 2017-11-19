@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/15 16:52:27 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/19 15:39:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,29 @@ typedef struct	s_visu
 {
 	SDL_Window	*window;
 	SDL_Surface	*surf;
+	SDL_Surface	*background;
+	SDL_Surface	*ant;
 	TTF_Font	*police;
 	SDL_Event	event;
 	SDL_Color	white;
 	SDL_Color	purple;
 	SDL_Color	pink;
 	bool		loop;
+	bool		flag_move;
 	int			width_w;
 	int			height_w;
+	int			x;
 }				t_visu;
+
+
+SDL_Color	init_color(int r, int g, int b, int a);
+
+void	init_struct(t_visu *v);
+void	init_SDL(t_visu *v);
+void	init_window_and_surface(t_visu *v);
+
+
+void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
+void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
 
 #endif
