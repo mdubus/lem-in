@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/19 15:39:47 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/20 16:09:22 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define CLOSE 27
 # define LEFT 1073741904
 # define RIGHT 1073741903
+# define FPS 60
+# define SKIP_TICKS 1000 / FPS
 
 typedef struct	s_visu
 {
@@ -46,6 +48,10 @@ typedef struct	s_visu
 	int			width_w;
 	int			height_w;
 	int			x;
+	int			y;
+	Uint16		delay;
+	int			temps_actuel;
+	int			temps_precedent;
 }				t_visu;
 
 

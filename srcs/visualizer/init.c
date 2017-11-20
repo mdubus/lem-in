@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/19 15:33:48 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/20 16:09:34 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void init_struct(t_visu *v)
 	v->width_w = 1600;
 	v->height_w = 1000;
 	v->x = 450;
+	v->y = 400;
 	v->background = NULL;
 	v->ant = NULL;
 	v->flag_move = 0;
-	v->close = 0;
+	v->temps_actuel = 0;
+	v->temps_precedent = 0;
 }
 
 void	init_SDL(t_visu *v)

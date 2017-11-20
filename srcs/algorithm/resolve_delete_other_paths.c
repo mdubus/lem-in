@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 14:58:16 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:33:53 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/20 16:25:58 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	delete_path(t_lemin *l, int *flag, t_path *prev)
 {
 	if (l->path == l->path_begin)
 	{
+		prev = l->path;
 		l->path = l->path->next;
 		free(prev->path);
 		free(prev);
 		prev = l->path;
 		l->path_begin = l->path;
-		prev = l->path;
 	}
 	else
 	{

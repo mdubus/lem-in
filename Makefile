@@ -6,14 +6,14 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/19 14:56:46 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/20 16:25:21 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	clang
 NAME		=	lem-in
-FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
-#FLAGS		=	-Wall -Wextra -Werror -g
+#FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror -g
 VISU		=	visu
 LIBDIR		=	libft
 LIBLINK		=	-L $(LIBDIR) -lft
