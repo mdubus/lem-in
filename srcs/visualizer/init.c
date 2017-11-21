@@ -30,6 +30,7 @@ void init_struct(t_visu *v)
 	v->flag_move = 0;
 	v->temps_actuel = 0;
 	v->temps_precedent = 0;
+	v->ant_speed = 4;
 }
 
 void	init_SDL(t_visu *v)
@@ -56,9 +57,6 @@ void	init_SDL(t_visu *v)
 	v->background = IMG_Load("srcs/visualizer/img/background.png");
 	if (!v->background)
 		ft_putendl("impossible de load l'image");
-	put_all_on_screen_sdl(v, v->background);
-	SDL_UpdateWindowSurface(v->window);
-
 	v->ant = IMG_Load("srcs/visualizer/img/ant2.png");
 	if (!v->ant)
 		ft_putendl("Impossible de load l'image");

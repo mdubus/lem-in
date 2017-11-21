@@ -29,6 +29,9 @@
 # define CLOSE 27
 # define LEFT 1073741904
 # define RIGHT 1073741903
+# define PLUS 1073741911
+# define MINUS 1073741910
+
 # define FPS 60
 # define SKIP_TICKS 1000 / FPS
 
@@ -52,6 +55,7 @@ typedef struct	s_visu
 	Uint16		delay;
 	int			temps_actuel;
 	int			temps_precedent;
+	int			ant_speed;
 }				t_visu;
 
 
@@ -64,5 +68,12 @@ void	init_window_and_surface(t_visu *v);
 
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
+
+void event_loop(t_visu *v);
+
+void	move_ant(t_visu *v);
+
+
+
 
 #endif

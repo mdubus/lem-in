@@ -27,30 +27,30 @@ INCLUDES_VISU	=	-I ~/.brew/include/SDL2/ -D_THREAD_SAFE
 OBJDIR		= 	objs
 
 OBJDIR_ALGO	=	objs/algorithm
+OBJDIR_PARSING	=	objs/parsing
 OBJDIR_VISU	=	objs/visualizer
 
 SRCDIR_ALGO	=	srcs/algorithm
+SRCDIR_PARSING	=	srcs/parsing
 SRCDIR_VISU	=	srcs/visualizer
 
-SRC_ALGO	=	main.c  get_file.c parsing_ants_number.c useful.c\
-				parsing_start_end_exists.c parsing_check_if_room.c free.c\
-				parsing_room_and_stock.c parsing_pipes_and_stock.c init.c\
+SRC_ALGO	=	main.c  get_file.c useful.c free.c init.c\
 				resolve_isolated_roms.c resolve_count_nb_paths.c graph.c\
-				print.c resolve_remove_useless_paths.c parsing.c\
+				print.c resolve_remove_useless_paths.c\
 				resolve_check_if_solution_exists.c resolve_bfs.c resolve.c\
-				parsing_check_room_name.c parsing_check_end_and_start.c\
 				resolve_delete_other_paths.c resolve_nb_paths.c\
 				resolve_calculate_different_paths.c
 
-SRC_VISU	=	main.c useful.c init.c
+SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
+				parsing_check_if_room.c parsing_room_and_stock.c\
+				parsing_pipes_and_stock.c parsing_check_room_name.c\
+				parsing_check_end_and_start.c
 
-OBJ_ALGO	=	$(SRC_ALGO:.c=.o)
-OBJ_VISU	=	$(SRC_VISU:.c=.o)
+SRC_VISU	=	main.c useful.c init.c loop.c
 
-SRCS_ALGO	=	$(addprefix $(SRCDIR_ALGO)/, $(SRC_ALGO))
-OBJS_ALGO	=	$(addprefix $(OBJDIR_ALGO)/, $(SRC_ALGO:.c=.o))
+OBJS_ALGO	=	$(addprefix $(OBJDIR_ALGO)/, $(SRC_ALGO:.c=.o))\
+				$(addprefix $(OBJDIR_PARSING)/, $(SRC_PARSING:.c=.o))
 
-SRCS_VISU	=	$(addprefix $(SRCDIR_VISU)/, $(SRC_VISU))
 OBJS_VISU	=	$(addprefix $(OBJDIR_VISU)/, $(SRC_VISU:.c=.o))
 
 all: directory $(NAME) $(VISU) Makefile
@@ -67,10 +67,13 @@ $(LIB):
 $(OBJDIR_ALGO)/%.o: $(SRCDIR_ALGO)/%.c
 	@$(CC) $(FLAGS) -c $^ -o $@ $(INCLUDES)
 
+$(OBJDIR_PARSING)/%.o: $(SRCDIR_PARSING)/%.c
+	@$(CC) $(FLAGS) -c $^ -o $@ $(INCLUDES)
+
 $(OBJDIR_VISU)/%.o: $(SRCDIR_VISU)/%.c
 	@$(CC) $(FLAGS) -c $^ -o $@ $(INCLUDES) $(INCLUDES_VISU)
 
-directory: $(OBJDIR) $(OBJDIR_ALGO) $(OBJDIR_VISU)
+directory: $(OBJDIR) $(OBJDIR_ALGO) $(OBJDIR_VISU) $(OBJDIR_PARSING)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -78,14 +81,15 @@ $(OBJDIR):
 $(OBJDIR_ALGO):
 	@mkdir -p $(OBJDIR_ALGO)
 
+$(OBJDIR_PARSING):
+	@mkdir -p $(OBJDIR_PARSING)
+
 $(OBJDIR_VISU):
 	@mkdir -p $(OBJDIR_VISU)
 
 clean:
 	@rm -rf $(OBJDIR)
-	@rm -rf $(OBJS_ALGO)
 	@make -C $(LIBDIR) clean
-	@rm -rf $(OBJDIR_ALGO)
 
 fclean: clean
 	@rm -f $(NAME)
