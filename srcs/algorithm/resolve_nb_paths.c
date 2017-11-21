@@ -46,6 +46,7 @@ static void	stock_path(t_lemin *l)
 	l->path->nbr_coups = i;
 	l->path->nbr_coups_min = 0;
 	l->path->path = (int *)malloc(sizeof(int) * (unsigned long)(i + 1));
+	l->path->nbr = i;
 	if (!l->path->path)
 		free_pipes_and_sum(l, "\033[091mErreur d'allocation\033[0m");
 	i = 1;

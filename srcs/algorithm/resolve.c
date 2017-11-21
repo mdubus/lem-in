@@ -26,6 +26,7 @@ static void	put_it_in_solution(t_lemin *l, t_path *temp)
 		l->solution = l->solution->next;
 	}
 	temp->next = l->path->next;
+	l->nb_path_final++;
 	if (l->path == l->path_begin)
 		l->path_begin = l->path->next;
 	l->solution->next = NULL;

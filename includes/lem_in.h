@@ -20,7 +20,9 @@
 typedef struct		s_room
 {
 	int				id;
-	int				padding2;
+	int				ant;
+	int				length;
+	int				padding;
 	char			*name;
 	struct s_room	*next;
 }					t_room;
@@ -32,7 +34,8 @@ typedef struct		s_path
 	int				nbr_coups;
 	int				different_path;
 	int				nbr_coups_min;
-	int				padding[3];
+	int				nbr;
+	int				padding[2];
 }					t_path;
 
 typedef struct		s_queue
@@ -41,7 +44,6 @@ typedef struct		s_queue
 	int				padding[3];
 	struct s_queue	*next;
 }					t_queue;
-
 
 typedef struct	s_lemin
 {
@@ -52,6 +54,7 @@ typedef struct	s_lemin
 	struct s_path	*solution_begin;
 	struct s_room	*room;
 	struct s_room	*begin;
+	struct s_room	**result;
 	int			*sum;
 	int			*lookup; // permet de savoir si on est deja passe par ce chemin
 	int			*level;

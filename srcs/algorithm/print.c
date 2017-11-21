@@ -65,7 +65,7 @@ static void	print_head(int x)
 		if (i < 10)
 			ft_putchar(' ');
 	}
-	ft_putstr(" Somme\n     ");
+	ft_putstr(" \n     ");
 	i = 0;
 	while (i++ < x)
 	{
@@ -76,7 +76,7 @@ static void	print_head(int x)
 		else
 			ft_putstr("-- ");
 	}
-	ft_putendl(" -----");
+	ft_putchar('\n');
 }
 
 static void	print_body(t_lemin *l, int i)
@@ -100,7 +100,6 @@ static void	print_body(t_lemin *l, int i)
 		}
 	}
 	ft_putstr(" ");
-	ft_putnbr(l->sum[i]);
 }
 
 void		ft_print_tab_pipes(t_lemin *l)

@@ -93,22 +93,12 @@ void	free_pipes_and_sum(t_lemin *l, char *str)
 
 void	free_at_end(t_lemin *l)
 {
-	t_path	*temp;
-
-	temp = NULL;
 	free(l->sum);
 	ft_memdel((void**)&l->string_file);
 	ft_free_double_tab((void**)l->f);
 	ft_free_double_tab((void**)l->eq);
 	ft_free_double_tab((void**)l->pipes);
 	l->solution = l->solution_begin;
-	while (l->solution)
-	{
-		temp = l->solution;
-		l->solution = l->solution->next;
-		ft_memdel((void**)&temp->path);
-		ft_memdel((void**)&temp);
-	}
 	free(l->sorted);
 	free_lst_name(l);
 }
