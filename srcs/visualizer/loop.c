@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/20 16:09:34 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 18:43:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
 
-void event_loop(t_visu *v)
+void event_loop(t_visu *v, t_lemin *l)
 {
 	while (v->loop)
 	{
@@ -45,10 +45,12 @@ void event_loop(t_visu *v)
 			else
 				v->flag_move = 0;
 		}
-		SDL_Delay(10);
+		SDL_Delay(5);
 	}
 	if (v->loop == false)
 	{
+		free(l->string_file);
+		ft_free_double_tab((void**)l->f);
 		SDL_DestroyWindow(v->window);
 		SDL_FreeSurface(v->background);
 		SDL_FreeSurface(v->ant);

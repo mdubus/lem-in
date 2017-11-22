@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/22 16:02:58 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/22 18:46:05 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRCDIR_ALGO	=	srcs/algorithm
 SRCDIR_PARSING	=	srcs/parsing
 SRCDIR_VISU	=	srcs/visualizer
 
-SRC_ALGO	=	main.c  get_file.c useful.c free.c init.c debug_mode.c\
+SRC_ALGO	=	main.c debug_mode.c\
 				resolve_isolated_roms.c resolve_count_nb_paths.c graph.c\
 				print.c resolve_remove_useless_paths.c free2.c\
 				resolve_check_if_solution_exists.c resolve_bfs.c resolve.c\
@@ -45,14 +45,16 @@ SRC_ALGO	=	main.c  get_file.c useful.c free.c init.c debug_mode.c\
 SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
 				parsing_check_if_room.c parsing_room_and_stock.c\
 				parsing_pipes_and_stock.c parsing_check_room_name.c\
-				parsing_check_end_and_start.c
+				parsing_check_end_and_start.c get_file.c free.c useful.c\
+				init.c
 
 SRC_VISU	=	main.c useful.c init.c loop.c
 
 OBJS_ALGO	=	$(addprefix $(OBJDIR_ALGO)/, $(SRC_ALGO:.c=.o))\
 				$(addprefix $(OBJDIR_PARSING)/, $(SRC_PARSING:.c=.o))
 
-OBJS_VISU	=	$(addprefix $(OBJDIR_VISU)/, $(SRC_VISU:.c=.o))
+OBJS_VISU	=	$(addprefix $(OBJDIR_VISU)/, $(SRC_VISU:.c=.o))\
+				$(addprefix $(OBJDIR_PARSING)/, $(SRC_PARSING:.c=.o))
 
 all: directory $(NAME) $(VISU) Makefile
 

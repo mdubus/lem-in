@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/20 16:09:34 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 18:15:11 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void init_struct(t_visu *v)
 	v->temps_actuel = 0;
 	v->temps_precedent = 0;
 	v->ant_speed = 4;
+	v->string_file = NULL;
+	v->file = NULL;
 }
 
 void	init_SDL(t_visu *v)

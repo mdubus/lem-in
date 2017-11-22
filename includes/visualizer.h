@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/20 16:09:22 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 19:05:06 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,14 @@
 # define PLUS 1073741911
 # define MINUS 1073741910
 
+
 # define FPS 60
 # define SKIP_TICKS 1000 / FPS
+
+# define START 1
+# define END 2
+# define SNORLAX 3
+# define LAVA 4
 
 typedef struct	s_visu
 {
@@ -46,17 +52,39 @@ typedef struct	s_visu
 	SDL_Color	white;
 	SDL_Color	purple;
 	SDL_Color	pink;
-	bool		loop;
-	bool		flag_move;
+	char		*string_file;
+	char		**file;
 	int			width_w;
 	int			height_w;
-	int			x;
-	int			y;
-	Uint16		delay;
+	int			x; // enlever
+	int			y; // enlever
 	int			temps_actuel;
 	int			temps_precedent;
 	int			ant_speed;
+	bool		loop;
+	bool		flag_move;
 }				t_visu;
+
+typedef struct	s_room_visu
+{
+	int			coorx;
+	int			coory;
+	int			x;
+	int			y;
+	int			width;
+	int			height;
+	int			special;
+	char		*name;
+}				t_room_visu;
+
+typedef struct	s_ant
+{
+	int			id;
+	int			prevx;
+	int			prevy;
+	int			nextx;
+	int			nexty;
+}				t_ant;
 
 
 SDL_Color	init_color(int r, int g, int b, int a);
@@ -69,7 +97,7 @@ void	init_window_and_surface(t_visu *v);
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
 
-void event_loop(t_visu *v);
+void event_loop(t_visu *v, t_lemin *l);
 
 void	move_ant(t_visu *v);
 

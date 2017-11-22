@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/20 16:45:08 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 19:07:12 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,34 +74,37 @@ void	move_ant(t_visu *v)
 
 
 
-
 int	main(void)
 {
-	t_visu v;
+	t_visu	v;
+	t_lemin	l;
 
+	init_struct_lemin(&l);
+	get_file(l);
+	ft_putendl(l.string_file);
+	parsing_ants_number(l);
+	
+	
+	
+	
 	init_struct(&v);
 
 	init_SDL(&v);
 	init_window_and_surface(&v);
 
+
+
+
+
+
+
+
+
 	put_all_on_screen_sdl(&v, v.background);
 	put_on_screen_sdl(&v, v.ant, v.x, 400);
 	SDL_UpdateWindowSurface(v.window);
 
-	//	refresh_background(&v, v.background, v.x, 400);
-	//	SDL_UpdateWindowSurface(v.window);
 
-
-
-	/*	char	*line = NULL;
-		int ret = 0;
-		while ((ret = get_next_line_backslash(STDIN_FILENO, &line)) > 0)
-		{
-		ft_putstr(line);
-		free(line);
-		}
-		*/
-
-	event_loop(&v);
+	event_loop(&v, &l);
 
 }

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 14:33:37 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 15:33:25 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 18:35:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,21 @@ void	free_lst_name(t_lemin *l)
 	}
 }
 
-void	ft_free_tab_bool(bool **tab)
+void	free_pipes(t_lemin *l, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-		free(tab[i++]);
-	free(tab);
-}
-
-void	error_in_bfs(t_lemin *l)
-{
-	free(l->sum);
-	ft_memdel((void**)&l->string_file);
+	free(l->string_file);
 	ft_free_double_tab((void**)l->f);
+	free_lst_name(l);
 	ft_free_double_tab((void**)l->eq);
 	ft_free_double_tab((void**)l->pipes);
-	free_lst_name(l);
-	error_lem_in(ft_putendl_fd,
-			"\033[091mErreur lors d'une allocation\033[0m",
-			STDERR_FILENO, l);
+	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
 }
 
-void	free_queue(t_queue *lst)
+void	free_check_if_room(t_lemin *l, char *str)
 {
-	t_queue	*temp;
-
-	temp = NULL;
-	while (lst)
-	{
-		temp = lst;
-		lst = lst->next;
-		free(temp);
-	}
+	free(l->string_file);
+	ft_free_double_tab((void**)l->f);
+	free_lst_name(l);
+	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
 }
+
