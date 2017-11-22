@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   debug_mode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 18:24:26 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 16:03:21 by mdubus           ###   ########.fr       */
+/*   Created: 2017/11/22 15:28:02 by mdubus            #+#    #+#             */
+/*   Updated: 2017/11/22 15:29:07 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
-int	main(int argc, char **argv)
+void	print_debug(t_lemin *l)
 {
-	t_lemin	l;
-
-	init_struct_lemin(&l);
-	init_arguments(argc, argv, &l);
-	parsing(&l);
-	remove_useless_paths(&l);
-	if (l.debug == 1)
-		print_debug(&l);
-	else
-		resolve(&l);
-	ft_putendl(l.string_file);
-	create_ant_result(&l);
-	get_ants(&l);
-	free_at_end(&l);
-	free_result(&l);
-	return (0);
+	print_resume(l);
+	print_equivalence_tab(l);
+	ft_print_tab_pipes(l);
+	print_possible_paths(l);
+	resolve(l);
+	print_result(l);
+	ft_putendl("\033[94m---------- Resultat ----------\n\033[0m");
 }

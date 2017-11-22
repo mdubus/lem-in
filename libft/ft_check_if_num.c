@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 18:42:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/31 18:43:48 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 15:17:34 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int	ft_check_if_num(char	*str)
+int	ft_check_if_num(char *str)
 {
 	int	i;
 	int	isnum;

@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/20 16:25:21 by mdubus           ###   ########.fr        #
+#    Updated: 2017/11/22 16:02:58 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,13 @@ SRCDIR_ALGO	=	srcs/algorithm
 SRCDIR_PARSING	=	srcs/parsing
 SRCDIR_VISU	=	srcs/visualizer
 
-SRC_ALGO	=	main.c  get_file.c useful.c free.c init.c\
+SRC_ALGO	=	main.c  get_file.c useful.c free.c init.c debug_mode.c\
 				resolve_isolated_roms.c resolve_count_nb_paths.c graph.c\
-				print.c resolve_remove_useless_paths.c\
+				print.c resolve_remove_useless_paths.c free2.c\
 				resolve_check_if_solution_exists.c resolve_bfs.c resolve.c\
 				resolve_delete_other_paths.c resolve_nb_paths.c\
-				resolve_calculate_different_paths.c
+				resolve_calculate_different_paths.c print_tab_pipes.c\
+				resolve_get_ants.c resolve_create_ant_result.c
 
 SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
 				parsing_check_if_room.c parsing_room_and_stock.c\

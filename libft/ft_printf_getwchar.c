@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:16:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/08/26 18:59:44 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/01/23 10:16:55 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-static void	ft_getwchar_1(char *temp2, char **result2)
+void	ft_getwchar_1(char *temp2, char **result2)
 {
 	char	*mask;
 	int		result;
@@ -26,7 +26,7 @@ static void	ft_getwchar_1(char *temp2, char **result2)
 	free(mask);
 }
 
-static void	ft_getwchar_2(char *temp2, char **result2)
+void	ft_getwchar_2(char *temp2, char **result2)
 {
 	char	*mask;
 	int		result;
@@ -42,7 +42,7 @@ static void	ft_getwchar_2(char *temp2, char **result2)
 	free(mask);
 }
 
-static void	ft_getwchar_3(char *temp2, char **result2)
+void	ft_getwchar_3(char *temp2, char **result2)
 {
 	char	*mask;
 	int		result;
@@ -60,7 +60,7 @@ static void	ft_getwchar_3(char *temp2, char **result2)
 	free(mask);
 }
 
-static void	ft_getwchar_4(char *temp2, char **result2)
+void	ft_getwchar_4(char *temp2, char **result2)
 {
 	char	*mask;
 	int		result;
@@ -80,7 +80,7 @@ static void	ft_getwchar_4(char *temp2, char **result2)
 	free(mask);
 }
 
-char		*ft_getwchar(int c)
+char	*ft_getwchar(int c)
 {
 	int		length;
 	char	*temp2;

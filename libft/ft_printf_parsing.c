@@ -6,32 +6,33 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:17:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/10/30 16:55:51 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 15:24:32 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-static int		do_parsing2(char *str, t_f *cr, int i)
+static int	do_parsing2(char *str, t_f **cr, int i)
 {
 	int	j;
 
 	j = 0;
 	i++;
-	i = i + (do_parsing_flag(str, cr, i));
-	i = i + (do_parsing_width(str, cr, i));
-	i = i + (do_parsing_precision(str, cr, i, j));
-	i = i + (do_parsing_modifier(str, cr, i));
-	i = i + (do_parsing_type(str, cr, i));
+	i = i + (do_parsing_flag(str, &(*cr), i));
+	i = i + (do_parsing_width(str, &(*cr), i));
+	i = i + (do_parsing_precision(str, &(*cr), i, j));
+	i = i + (do_parsing_modifier(str, &(*cr), i));
+	i = i + (do_parsing_type(str, &(*cr), i));
 	return (i);
 }
 
-void			do_parsing(char *str, int nb_arg, t_f **cr, va_list ap)
+void		do_parsing(char *str, int nb_arg, t_f **cr, va_list ap)
 {
 	int		i;
 	t_f		*begin;
 
 	i = 0;
+	*cr = malloc(sizeof(t_f));
 	begin = *cr;
 	while (nb_arg > 0)
 	{
@@ -39,14 +40,17 @@ void			do_parsing(char *str, int nb_arg, t_f **cr, va_list ap)
 			i++;
 		if (str[i] == '%')
 		{
-			i = do_parsing2(str, *cr, i);
-			recup_argument(*cr);
-			put_result(*cr, ap);
+			i = do_parsing2(str, cr, i);
+			recup_argument(cr);
+			put_result(cr, ap);
 			if (nb_arg > 1)
+			{
+				(*cr)->next = malloc(sizeof(t_f));
 				*cr = (*cr)->next;
+			}
 			nb_arg--;
 		}
 	}
 	(*cr)->next = NULL;
-	*cr = begin;
+	(*cr) = begin;
 }

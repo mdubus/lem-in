@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:16:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/08/26 18:58:26 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/01/23 10:16:27 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-static void	ft_count_args_printf2(char *str, int *i, int *nb)
+void	ft_count_args_printf2(char *str, int *i, int *nb)
 {
 	if (is_flag(&(str)[*i]))
 		while (is_flag(&(str)[*i]))
@@ -37,7 +37,7 @@ static void	ft_count_args_printf2(char *str, int *i, int *nb)
 		(*i)++;
 }
 
-int			ft_count_args_printf(char *str, char c)
+int		ft_count_args_printf(char *str, char c)
 {
 	int	i;
 	int	nb;

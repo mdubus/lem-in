@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 10:16:16 by mdubus            #+#    #+#             */
-/*   Updated: 2017/08/26 18:59:01 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/01/23 10:16:18 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-static char	*ft_text_colors(char *str)
+char	*ft_text_colors(char *str)
 {
 	char	*temp;
 
@@ -41,7 +41,7 @@ static char	*ft_text_colors(char *str)
 	return (str);
 }
 
-static char	*ft_bg_colors(char *str)
+char	*ft_bg_colors(char *str)
 {
 	char	*temp;
 
@@ -68,7 +68,7 @@ static char	*ft_bg_colors(char *str)
 	return (str);
 }
 
-static char	*ft_effects(char *str)
+char	*ft_effects(char *str)
 {
 	char	*temp;
 
@@ -85,7 +85,7 @@ static char	*ft_effects(char *str)
 	return (str);
 }
 
-char		*ft_colors(char *str)
+char	*ft_colors(char *str)
 {
 	while (is_color(str))
 		str = ft_text_colors(str);

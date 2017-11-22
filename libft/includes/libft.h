@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 13:36:56 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/10 20:00:51 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 15:19:03 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdarg.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
 # define FD_MAX 50
 
@@ -217,7 +217,7 @@ typedef struct			s_f
 ** ------------------------------- call format -------------------------------**
 */
 
-void					put_result(t_f *cr, va_list ap);
+void					put_result(t_f **cr, va_list ap);
 void					replace_args(char **str, t_f *cr);
 
 /*
@@ -236,13 +236,13 @@ int						ft_count_args_printf(char *str, char c);
 ** ------------------------------- do parsing -------------------------------**
 */
 
-int						do_parsing_flag(char *str, t_f *cr, int i);
-int						do_parsing_width(char *str, t_f *cr, int i);
-int						do_parsing_precision(char *str, t_f *cr,
+int						do_parsing_flag(char *str, t_f **cr, int i);
+int						do_parsing_width(char *str, t_f **cr, int i);
+int						do_parsing_precision(char *str, t_f **cr,
 						int i, int j);
-int						do_parsing_modifier(char *str, t_f *cr,
+int						do_parsing_modifier(char *str, t_f **cr,
 						int i);
-int						do_parsing_type(char *str, t_f *cr, int i);
+int						do_parsing_type(char *str, t_f **cr, int i);
 
 /*
 ** -------------------------------- getwchar --------------------------------**
@@ -274,71 +274,71 @@ int						ft_printf(const char *format, ...);
 ** ----------------------------------- cs -----------------------------------**
 */
 
-void					ft_printf_c(t_f *cr, va_list ap);
-void					ft_printf_s(t_f *cr, va_list ap);
+void					ft_printf_c(t_f **cr, va_list ap);
+void					ft_printf_s(t_f **cr, va_list ap);
 
 /*
 ** ---------------------------------- dioux ----------------------------------**
 */
 
-void					ft_printf_di(t_f *cr, va_list ap);
-void					ft_printf_o(t_f *cr, va_list ap);
-void					ft_printf_u(t_f *cr, va_list ap);
-void					ft_printf_x(t_f *cr, va_list ap);
-void					ft_printf_x_upper(t_f *cr, va_list ap);
+void					ft_printf_di(t_f **cr, va_list ap);
+void					ft_printf_o(t_f **cr, va_list ap);
+void					ft_printf_u(t_f **cr, va_list ap);
+void					ft_printf_x(t_f **cr, va_list ap);
+void					ft_printf_x_upper(t_f **cr, va_list ap);
 
 /*
 ** ------------------------------ do flag hash ------------------------------**
 */
 
-void					do_flag_hash(t_f *cr);
+void					do_flag_hash(t_f **cr);
 
 /*
 ** ------------------------------ do flag zero ------------------------------**
 */
 
-void					do_flag_zero(t_f *cr);
+void					do_flag_zero(t_f **cr);
 
 /*
 ** -------------------------------- do flags --------------------------------**
 */
 
-void					do_flag_plus(t_f *cr);
-void					do_flag_space(t_f *cr);
-void					do_flag_minus(t_f *cr);
+void					do_flag_plus(t_f **cr);
+void					do_flag_space(t_f **cr);
+void					do_flag_minus(t_f **cr);
 
 /*
 ** ---------------------------------- flags ----------------------------------**
 */
 
-void					check_flags(t_f *cr);
-void					flag_minus(t_f *cr);
-void					flag_zero(t_f *cr);
-void					flag_zero2(t_f *cr);
-void					flag_hash(t_f *cr);
+void					check_flags(t_f **cr);
+void					flag_minus(t_f **cr);
+void					flag_zero(t_f **cr);
+void					flag_zero2(t_f **cr);
+void					flag_hash(t_f **cr);
 
 /*
 ** ------------------------------- pourcent p -------------------------------**
 */
 
-void					ft_printf_pourcent(t_f *cr);
-void					ft_printf_p(t_f *cr, va_list ap);
+void					ft_printf_pourcent(t_f **cr);
+void					ft_printf_p(t_f **cr, va_list ap);
 
 /*
 ** ------------------------------- precision -------------------------------**
 */
 
-void					preci2(t_f *cr, size_t precision,
+void					preci2(t_f **cr, size_t precision,
 						size_t size, char *temp);
-void					preci3(t_f *cr, char *temp);
+void					preci3(t_f **cr, char *temp);
 
 /*
 ** ----------------------------- precision width -----------------------------**
 */
 
-void					check_precision(t_f *cr);
-void					check_width(t_f *cr);
-void					check_width_sup_size(t_f *cr, size_t size,
+void					check_precision(t_f **cr);
+void					check_width(t_f **cr);
+void					check_width_sup_size(t_f **cr, size_t size,
 						size_t width);
 
 /*
@@ -366,6 +366,6 @@ void					do_parsing(char *str, int nb_arg, t_f **cr,
 ** ------------------------------- recup args -------------------------------**
 */
 
-void					recup_argument(t_f *cr);
+void					recup_argument(t_f **cr);
 
 #endif

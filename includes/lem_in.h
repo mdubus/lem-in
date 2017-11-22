@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/18 17:26:08 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 16:02:51 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct	s_lemin
 	int			start;
 	int			nb_path;
 	int			nb_path_final;
-	int			padding;
+	int			ant_finish;
 	int			room_start;
 	int			room_end;
 	int			room_lava;
@@ -123,6 +123,7 @@ void	free_queue(t_queue *lst);
 void	free_pipes(t_lemin *l, char *str);
 void	free_pipes_and_sum(t_lemin *l, char *str);
 void	free_at_end(t_lemin *l);
+void	free_result(t_lemin *l);
 
 
 
@@ -165,6 +166,8 @@ void	calculate_different_paths(t_lemin *l);
 void	already_explored(t_lemin *l, int *j, int room, int i);
 void	back_in_stack(t_lemin *l, int *j, int room, int i);
 int		resolve_nb_paths(t_lemin *l, int room, int *j);
+void	get_ants(t_lemin *l);
+void	create_ant_result(t_lemin *l);
 
 
 
@@ -177,5 +180,6 @@ void	ft_print_tab_pipes(t_lemin *l);
 void	print_resume(t_lemin *l);
 void	print_possible_paths(t_lemin *l);
 void	print_result(t_lemin *l);
+void	print_debug(t_lemin *l);
 
 #endif

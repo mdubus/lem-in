@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 16:55:06 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/18 16:55:40 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/22 15:47:53 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	init_resolve(int *j, t_lemin *l, int room, int i)
 	l->pipes[i][room] = 0;
 }
 
-int	resolve_nb_paths(t_lemin *l, int room, int *j)
+int			resolve_nb_paths(t_lemin *l, int room, int *j)
 {
 	int	i;
 
