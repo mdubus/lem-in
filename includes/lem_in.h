@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 16:02:51 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/23 15:10:33 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void	check_is_print(char *str, t_lemin *l);
 void	check_begin_with_l(char *str, t_lemin *l);
 void	check_for_hyphen(char **tab, t_lemin *l);
 void	check_if_name_already_exists(char **tab, t_lemin *l);
+void	which_command(t_lemin *l, int i);
+void	check_coordonates(char **tab, t_lemin *l);
 
 /*
 ***************************** Resolve *****************************************

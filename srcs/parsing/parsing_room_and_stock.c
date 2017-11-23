@@ -6,14 +6,14 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:18:35 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/23 14:55:13 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
-static void	which_command(t_lemin *l, int i)
+void	which_command(t_lemin *l, int i)
 {
 	l->commands++;
 	if (ft_strstr(l->f[i], "##start") != 0 && ft_strlen(l->f[i]) == 7)
@@ -34,7 +34,7 @@ static void	which_command(t_lemin *l, int i)
 	}
 }
 
-int			parsing_room_and_stock(t_lemin *l)
+int		parsing_room_and_stock(t_lemin *l)
 {
 	int	i;
 

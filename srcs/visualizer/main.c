@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 19:07:12 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/23 18:43:39 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,45 @@ void	move_ant(t_visu *v)
 	}
 }
 
-
-
-
-
 int	main(void)
 {
 	t_visu	v;
 	t_lemin	l;
+	t_room_visu	*room;
 
 	init_struct_lemin(&l);
-	get_file(l);
+	get_file(&l);
 	ft_putendl(l.string_file);
-	parsing_ants_number(l);
-	
-	
-	
-	
+	parsing_ants_number(&l);
+	if (visu_parsing_room_and_stock(&l, &room, &v) == 2)
+		free_check_if_room(&l,
+				"\033[091mErreur : La map est mal formatee\033[0m");
+	visu_parsing_pipes(&l, &v);
+
+	room = v.begin;
+	while (room)
+	{
+		printf("%d : %s\n", room->id, room->name);
+		printf("x = %d, y = %d\n", room->coorx, room->coory);
+		printf("special = %d\n\n", room->special);
+		room = room->next;
+	}
+
+	int	i;
+
+	i = l.start;
+	while (ft_strchr(l.f[i], '-') != 0)
+		i++;
+
+
+
+
+
+
+
+
+
+
 	init_struct(&v);
 
 	init_SDL(&v);

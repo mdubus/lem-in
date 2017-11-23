@@ -6,11 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 18:43:47 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/23 18:37:40 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
+
+
 
 void event_loop(t_visu *v, t_lemin *l)
 {
@@ -51,6 +53,7 @@ void event_loop(t_visu *v, t_lemin *l)
 	{
 		free(l->string_file);
 		ft_free_double_tab((void**)l->f);
+		free_rooms(v);
 		SDL_DestroyWindow(v->window);
 		SDL_FreeSurface(v->background);
 		SDL_FreeSurface(v->ant);

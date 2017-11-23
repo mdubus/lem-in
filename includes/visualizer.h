@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 19:05:06 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/23 18:39:11 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,50 +41,50 @@
 # define SNORLAX 3
 # define LAVA 4
 
-typedef struct	s_visu
-{
-	SDL_Window	*window;
-	SDL_Surface	*surf;
-	SDL_Surface	*background;
-	SDL_Surface	*ant;
-	TTF_Font	*police;
-	SDL_Event	event;
-	SDL_Color	white;
-	SDL_Color	purple;
-	SDL_Color	pink;
-	char		*string_file;
-	char		**file;
-	int			width_w;
-	int			height_w;
-	int			x; // enlever
-	int			y; // enlever
-	int			temps_actuel;
-	int			temps_precedent;
-	int			ant_speed;
-	bool		loop;
-	bool		flag_move;
-}				t_visu;
-
 typedef struct	s_room_visu
 {
-	int			coorx;
-	int			coory;
-	int			x;
-	int			y;
-	int			width;
-	int			height;
-	int			special;
-	char		*name;
-}				t_room_visu;
+	int					coorx;
+	int					coory;
+	int					x;
+	int					y;
+	int					width;
+	int					height;
+	int					special;
+	int					id;
+	char				*name;
+	struct s_room_visu	*next;
+}						t_room_visu;
 
-typedef struct	s_ant
+typedef struct	s_visu
 {
-	int			id;
-	int			prevx;
-	int			prevy;
-	int			nextx;
-	int			nexty;
-}				t_ant;
+	SDL_Window			*window;
+	SDL_Surface			*surf;
+	SDL_Surface			*background;
+	SDL_Surface			*ant;
+	TTF_Font			*police;
+	SDL_Event			event;
+	SDL_Color			white;
+	SDL_Color			purple;
+	SDL_Color			pink;
+	struct s_room_visu	*begin;
+	char				*string_file;
+	char				**file;
+	int					width_w;
+	int					height_w;
+	int					x; // enlever
+	int					y; // enlever
+	int					temps_actuel;
+	int					temps_precedent;
+	int					ant_speed;
+	bool				loop;
+	bool				flag_move;
+}						t_visu;
+
+typedef struct	s_turn
+{
+	int					*turn;
+	struct s_turn		*next;
+}						t_turn;
 
 
 SDL_Color	init_color(int r, int g, int b, int a);
@@ -92,12 +92,15 @@ SDL_Color	init_color(int r, int g, int b, int a);
 void	init_struct(t_visu *v);
 void	init_SDL(t_visu *v);
 void	init_window_and_surface(t_visu *v);
+void	free_rooms(t_visu *v);
 
 
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
 
 void event_loop(t_visu *v, t_lemin *l);
+int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v);
+int	visu_parsing_pipes(t_lemin *l, t_visu *v);
 
 void	move_ant(t_visu *v);
 
