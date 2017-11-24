@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/23 15:12:01 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/24 15:37:23 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void init_struct(t_visu *v)
 	v->string_file = NULL;
 	v->file = NULL;
 	v->begin = NULL;
+	v->turn_begin = NULL;
+	v->turn = NULL;
 }
 
 void	init_SDL(t_visu *v)

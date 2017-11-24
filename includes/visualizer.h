@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/23 18:39:11 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/24 11:46:02 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct	s_visu
 	SDL_Color			purple;
 	SDL_Color			pink;
 	struct s_room_visu	*begin;
+	struct s_turn		*turn_begin;
+	struct s_turn		*turn;
 	char				*string_file;
 	char				**file;
 	int					width_w;
@@ -103,6 +105,7 @@ int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v);
 int	visu_parsing_pipes(t_lemin *l, t_visu *v);
 
 void	move_ant(t_visu *v);
+void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
 
 
 

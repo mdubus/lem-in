@@ -6,19 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:38:29 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/23 18:39:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/24 11:46:10 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-
-static void	free_in_pipes(t_lemin *l, char *str, t_visu *v)
-{
-	free(l->string_file);
-	ft_free_double_tab((void**)l->f);
-	free_rooms(v);
-	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
-}
 
 int	visu_parsing_pipes(t_lemin *l, t_visu *v)
 {
@@ -43,7 +35,11 @@ int	visu_parsing_pipes(t_lemin *l, t_visu *v)
 		else if (l->f[i][0] && l->f[i][0] != '#' && ft_strstr(l->f[i], "-"))
 			i++;
 		else
+		{
+			l->start = i;
 			return (1);
+		}
 	}
+	l->start = i;
 	return (0);
 }
