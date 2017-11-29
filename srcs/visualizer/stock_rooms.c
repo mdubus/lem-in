@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 15:33:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/23 15:52:12 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/29 18:30:52 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ static void	check_special_rooms(t_lemin *l, t_room_visu **room)
 	{
 		(*room)->special = START;
 		l->flag_start = 0;
+		l->room_start = (*room)->id;
 	}
 	if (l->flag_end == 1)
 	{
 		(*room)->special = END;
 		l->flag_end = 0;
+		l->room_end = (*room)->id;
 	}
 	if (l->flag_lava == 1)
 	{
@@ -54,12 +56,15 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 	(*room)->next = NULL;
 	(*room)->coorx = ft_atoi(tab[1]);
 	(*room)->coory = ft_atoi(tab[2]);
-	(*room)->x = 0;
-	(*room)->y = 0;
+	(*room)->topx = 0;
+	(*room)->topy = 0;
+	(*room)->midx = 0;
+	(*room)->midy = 0;
 	(*room)->width = 0;
 	(*room)->height = 0;
 	(*room)->special = 0;
 	check_special_rooms(l, room);
+	l->nb_rooms++;
 }
 
 static int	visu_check_if_room(char *str, t_lemin *l, t_room_visu **room, t_visu *v)

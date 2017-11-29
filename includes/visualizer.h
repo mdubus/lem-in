@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/24 11:46:02 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/29 18:13:49 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <SDL_video.h>
 # include <stdbool.h>
 # include <SDL_ttf.h>
-#include <SDL_image.h>
+# include <SDL_image.h>
 # include <SDL_keycode.h>
 # include "lem_in.h"
 
@@ -43,10 +43,12 @@
 
 typedef struct	s_room_visu
 {
-	int					coorx;
+	int					coorx;// coordonnees dans le lemin. A traduire en px
 	int					coory;
-	int					x;
-	int					y;
+	int					topx;// Coordonnees haut gauche en px
+	int					topy;
+	int					midx;// Coordonnees milieu en px
+	int					midy;
 	int					width;
 	int					height;
 	int					special;
@@ -61,7 +63,7 @@ typedef struct	s_visu
 	SDL_Surface			*surf;
 	SDL_Surface			*background;
 	SDL_Surface			*ant;
-	TTF_Font			*police;
+	TTF_Font			*typo;
 	SDL_Event			event;
 	SDL_Color			white;
 	SDL_Color			purple;
@@ -95,19 +97,19 @@ void	init_struct(t_visu *v);
 void	init_SDL(t_visu *v);
 void	init_window_and_surface(t_visu *v);
 void	free_rooms(t_visu *v);
-
-
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
-
 void event_loop(t_visu *v, t_lemin *l);
 int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v);
 int	visu_parsing_pipes(t_lemin *l, t_visu *v);
-
 void	move_ant(t_visu *v);
 void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
+void	stock_turns(t_lemin *l, t_visu *v);
+void	free_turns(t_visu *v);
+void	free_all_and_quit(t_lemin *l, t_visu *v);
 
 
-
+void	print_turns(t_lemin *l, t_visu *v);
+void	print_rooms(t_visu *v);
 
 #endif

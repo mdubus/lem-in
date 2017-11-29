@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/24 15:37:23 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/29 16:52:11 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void init_struct(t_visu *v)
 {
 	v->window = NULL;
 	v->surf = NULL;
-	v->police = NULL;
+	v->typo = NULL;
 	v->white = init_color(255, 255, 255, 255);
 	v->purple = init_color(215, 149, 242, 255);
 	v->pink = init_color(237, 101, 162, 255);
@@ -59,6 +59,11 @@ void	init_SDL(t_visu *v)
 		SDL_Quit();
 		exit(1);
 	}
+	if(TTF_Init() == -1)
+	{
+		ft_putstr("TFF_Init : ");
+		ft_putendl(SDL_GetError());
+	}
 	v->background = IMG_Load("srcs/visualizer/img/background.png");
 	if (!v->background)
 		ft_putendl("impossible de load l'image");
@@ -74,11 +79,17 @@ void	init_window_and_surface(t_visu *v)
 					SDL_WINDOW_SHOWN)) == NULL)
 	{
 		ft_putstr("Unable to initialize window : ");
-		SDL_GetError();
+		ft_putendl(SDL_GetError());
 	}
 	if ((v->surf = SDL_GetWindowSurface(v->window)) == NULL)
 	{
 		ft_putstr("Unable to initialize surface : ");
-		SDL_GetError();
+		ft_putendl(SDL_GetError());
+	}
+	v->typo = TTF_OpenFont("srcs/visualizer/typo.ttf", 40);
+	if (!v->typo)
+	{
+		ft_putstr("Unable to initialize font : ");
+		ft_putendl(SDL_GetError());
 	}
 }

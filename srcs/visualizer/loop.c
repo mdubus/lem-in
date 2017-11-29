@@ -6,12 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/23 18:37:40 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/11/29 18:10:15 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-
 
 
 void event_loop(t_visu *v, t_lemin *l)
@@ -50,14 +49,5 @@ void event_loop(t_visu *v, t_lemin *l)
 		SDL_Delay(5);
 	}
 	if (v->loop == false)
-	{
-		free(l->string_file);
-		ft_free_double_tab((void**)l->f);
-		free_rooms(v);
-		SDL_DestroyWindow(v->window);
-		SDL_FreeSurface(v->background);
-		SDL_FreeSurface(v->ant);
-		IMG_Quit();
-		SDL_Quit();
-	}
+		free_all_and_quit(l, v);
 }
