@@ -18,11 +18,11 @@ void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y)
 
 	coor.x = x;
 	coor.y = y;
-	if (SDL_BlitSurface(surface, NULL, v->surf, &coor) < 0)
-	{
-		ft_putstr("Error put_on_screen_sdl : ");
-		SDL_GetError();
-	}
+if (SDL_BlitSurface(surface, NULL, v->surf, &coor) < 0)
+{
+	ft_putstr("Error put_on_screen_sdl : ");
+	SDL_GetError();
+}
 }
 
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface)
@@ -85,6 +85,43 @@ static void	check_start_end(t_lemin *l)
 			"\033[091mErreur : Start et end identiques\033[0m]]");
 }
 
+static void	draw_rect(t_visu *v, SDL_Rect *rect)
+{
+	SDL_Surface	*surface;
+
+	surface = SDL_CreateRGBSurface(0, rect->w, rect->h, 32, 0, 0, 0, 0);
+	SDL_FillRect(surface, NULL, SDL_MapRGB(v->surf->format, 109, 90, 73));
+	SDL_BlitSurface(surface, NULL, v->surf, rect);
+	SDL_UpdateWindowSurface(v->window);
+}
+
+static void	draw_room(t_visu *v, int x, int y)
+{
+	SDL_Rect	rect;
+
+	rect.x = x;
+	rect.y = y;
+	rect.w = v->ant->w + 10;
+	rect.h = 5;
+	draw_rect(v, &rect);
+
+	rect.w = 5;
+	rect.h = v->ant->h + 10;
+	draw_rect(v, &rect);
+
+	rect.y = y + v->ant->h + 10;
+	rect.w = v->ant->w + 10;
+	rect.h = 5;
+	draw_rect(v, &rect);
+
+	rect.x = x + v->ant->w + 10;
+	rect.y = y;
+	rect.w = 5;
+	rect.h = v->ant->h + 10 + 5;
+	draw_rect(v, &rect);
+}
+
+
 int	main(void)
 {
 	t_visu		v;
@@ -115,12 +152,15 @@ int	main(void)
 
 
 	put_all_on_screen_sdl(&v, v.background);
-	put_on_screen_sdl(&v, v.ant, v.x, 400);
+	put_on_screen_sdl(&v, v.ant, 210, 160);
 
-	SDL_Surface	*temp;
+	draw_room(&v, 200, 150);
+
+
+//	SDL_Surface	*temp;
 	
-	temp = TTF_RenderText_Blended(v.typo, "start", v.white);
-	put_on_screen_sdl(&v, temp, 200, 200);
+//	temp = TTF_RenderText_Blended(v.typo, "start", v.white);
+//	put_on_screen_sdl(&v, temp, 200, 200);
 
 
 	SDL_UpdateWindowSurface(v.window);

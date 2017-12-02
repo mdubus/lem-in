@@ -21,8 +21,8 @@ void init_struct(t_visu *v)
 	v->purple = init_color(215, 149, 242, 255);
 	v->pink = init_color(237, 101, 162, 255);
 	v->loop = true;
-	v->width_w = 1600;
-	v->height_w = 1000;
+	v->width_w = WIDTH_W;
+	v->height_w = HEIGHT_W;
 	v->x = 450;
 	v->y = 400;
 	v->background = NULL;

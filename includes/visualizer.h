@@ -40,6 +40,9 @@
 # define END 2
 # define SNORLAX 3
 # define LAVA 4
+# define WIDTH_W	1300
+# define HEIGHT_W	800
+
 
 typedef struct	s_room_visu
 {
@@ -89,6 +92,15 @@ typedef struct	s_turn
 	int					*turn;
 	struct s_turn		*next;
 }						t_turn;
+
+typedef struct	s_rect
+{
+	int			x;
+	int			y;
+	int			width;
+	int			height;
+	int			thick;
+}				t_rect;
 
 
 SDL_Color	init_color(int r, int g, int b, int a);
