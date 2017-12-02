@@ -46,14 +46,8 @@
 
 typedef struct	s_room_visu
 {
-	int					coorx;// coordonnees dans le lemin. A traduire en px
-	int					coory;
-	int					topx;// Coordonnees haut gauche en px
-	int					topy;
-	int					midx;// Coordonnees milieu en px
-	int					midy;
-	int					width;
-	int					height;
+	int					x;// Coordonnees milieu en px
+	int					y;
 	int					special;
 	int					id;
 	char				*name;
@@ -76,8 +70,8 @@ typedef struct	s_visu
 	struct s_turn		*turn;
 	char				*string_file;
 	char				**file;
-	int					width_w;
-	int					height_w;
+	int					width_room;
+	int					height_room;
 	int					x; // enlever
 	int					y; // enlever
 	int					temps_actuel;
@@ -119,6 +113,7 @@ void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
 void	stock_turns(t_lemin *l, t_visu *v);
 void	free_turns(t_visu *v);
 void	free_all_and_quit(t_lemin *l, t_visu *v);
+void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

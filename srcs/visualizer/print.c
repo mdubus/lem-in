@@ -41,7 +41,7 @@ void	print_rooms(t_visu *v)
 	while (room)
 	{
 		printf("%d : %s\n", room->id, room->name);
-		printf("x = %d, y = %d\n", room->coorx, room->coory);
+		printf("x = %d, y = %d\n", room->x, room->y);
 		printf("special = %d\n\n", room->special);
 		room = room->next;
 	}

@@ -31,8 +31,8 @@ void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface)
 
 	coor.x = 0;
 	coor.y = 0;
-	coor.w = v->width_w;
-	coor.h = v->height_w;
+	coor.w = WIDTH_W;
+	coor.h = HEIGHT_W;
 	if (SDL_BlitSurface(surface, &coor, v->surf, NULL) < 0)
 	{
 		ft_putstr("Error put_all_on_screen_sdl : ");
@@ -85,43 +85,6 @@ static void	check_start_end(t_lemin *l)
 			"\033[091mErreur : Start et end identiques\033[0m]]");
 }
 
-static void	draw_rect(t_visu *v, SDL_Rect *rect)
-{
-	SDL_Surface	*surface;
-
-	surface = SDL_CreateRGBSurface(0, rect->w, rect->h, 32, 0, 0, 0, 0);
-	SDL_FillRect(surface, NULL, SDL_MapRGB(v->surf->format, 109, 90, 73));
-	SDL_BlitSurface(surface, NULL, v->surf, rect);
-	SDL_UpdateWindowSurface(v->window);
-}
-
-static void	draw_room(t_visu *v, int x, int y)
-{
-	SDL_Rect	rect;
-
-	rect.x = x;
-	rect.y = y;
-	rect.w = v->ant->w + 10;
-	rect.h = 5;
-	draw_rect(v, &rect);
-
-	rect.w = 5;
-	rect.h = v->ant->h + 10;
-	draw_rect(v, &rect);
-
-	rect.y = y + v->ant->h + 10;
-	rect.w = v->ant->w + 10;
-	rect.h = 5;
-	draw_rect(v, &rect);
-
-	rect.x = x + v->ant->w + 10;
-	rect.y = y;
-	rect.w = 5;
-	rect.h = v->ant->h + 10 + 5;
-	draw_rect(v, &rect);
-}
-
-
 int	main(void)
 {
 	t_visu		v;
@@ -152,9 +115,14 @@ int	main(void)
 
 
 	put_all_on_screen_sdl(&v, v.background);
-	put_on_screen_sdl(&v, v.ant, 210, 160);
+	put_on_screen_sdl(&v, v.ant, v.begin->x + 10, v.begin->y + 10);
 
-	draw_room(&v, 200, 150);
+	room = v.begin;
+	while (room)
+	{
+		draw_room(&l, &v, room);
+		room = room->next;
+	}
 
 
 //	SDL_Surface	*temp;

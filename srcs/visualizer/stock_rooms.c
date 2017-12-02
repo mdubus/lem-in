@@ -54,14 +54,8 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 	(*room)->id = l->id;
 	l->id++;
 	(*room)->next = NULL;
-	(*room)->coorx = ft_atoi(tab[1]);
-	(*room)->coory = ft_atoi(tab[2]);
-	(*room)->topx = 0;
-	(*room)->topy = 0;
-	(*room)->midx = 0;
-	(*room)->midy = 0;
-	(*room)->width = 0;
-	(*room)->height = 0;
+	(*room)->x = ft_atoi(tab[1]);
+	(*room)->y = ft_atoi(tab[2]);
 	(*room)->special = 0;
 	check_special_rooms(l, room);
 	l->nb_rooms++;

@@ -49,7 +49,7 @@ SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
 				init.c
 
 SRC_VISU	=	main.c useful.c init.c loop.c stock_rooms.c free.c\
-				visu_parsing_pipes.c stock_turns.c print.c
+				visu_parsing_pipes.c stock_turns.c print.c draw_rooms.c
 
 OBJS_ALGO	=	$(addprefix $(OBJDIR_ALGO)/, $(SRC_ALGO:.c=.o))\
 				$(addprefix $(OBJDIR_PARSING)/, $(SRC_PARSING:.c=.o))

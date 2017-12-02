@@ -21,8 +21,6 @@ void init_struct(t_visu *v)
 	v->purple = init_color(215, 149, 242, 255);
 	v->pink = init_color(237, 101, 162, 255);
 	v->loop = true;
-	v->width_w = WIDTH_W;
-	v->height_w = HEIGHT_W;
 	v->x = 450;
 	v->y = 400;
 	v->background = NULL;
@@ -70,12 +68,14 @@ void	init_SDL(t_visu *v)
 	v->ant = IMG_Load("srcs/visualizer/img/ant2.png");
 	if (!v->ant)
 		ft_putendl("Impossible de load l'image");
+	v->width_room = v->ant->w + 10;
+	v->height_room = v->ant->h + 10;
 }
 
 void	init_window_and_surface(t_visu *v)
 {
 	if ((v->window = SDL_CreateWindow("Lem-in", SDL_WINDOWPOS_CENTERED,
-					SDL_WINDOWPOS_CENTERED, v->width_w, v->height_w,
+					SDL_WINDOWPOS_CENTERED, WIDTH_W, HEIGHT_W,
 					SDL_WINDOW_SHOWN)) == NULL)
 	{
 		ft_putstr("Unable to initialize window : ");
