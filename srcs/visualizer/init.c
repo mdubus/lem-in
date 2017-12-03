@@ -62,9 +62,6 @@ void	init_SDL(t_visu *v)
 		ft_putstr("TFF_Init : ");
 		ft_putendl(SDL_GetError());
 	}
-	v->background = IMG_Load("srcs/visualizer/img/background.png");
-	if (!v->background)
-		ft_putendl("impossible de load l'image");
 	v->ant = IMG_Load("srcs/visualizer/img/ant2.png");
 	if (!v->ant)
 		ft_putendl("Impossible de load l'image");
@@ -91,5 +88,20 @@ void	init_window_and_surface(t_visu *v)
 	{
 		ft_putstr("Unable to initialize font : ");
 		ft_putendl(SDL_GetError());
+	}
+}
+
+void	init_background(t_lemin *l, t_visu *v)
+{
+	t_room_visu	*room;
+
+	v->background = IMG_Load("srcs/visualizer/img/background.png");
+	if (!v->background)
+		ft_putendl("impossible de load l'image");
+	room = v->begin;
+	while (room)
+	{
+		draw_room(l, v, room);
+		room = room->next;
 	}
 }

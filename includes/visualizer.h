@@ -114,6 +114,7 @@ void	stock_turns(t_lemin *l, t_visu *v);
 void	free_turns(t_visu *v);
 void	free_all_and_quit(t_lemin *l, t_visu *v);
 void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
+void	init_background(t_lemin *l, t_visu *v);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

@@ -29,7 +29,7 @@ static void	draw_rect(t_lemin *l, t_visu *v, SDL_Rect *rect)
 		ft_putendl("Error on draw_rect");
 		free_all_and_quit(l, v);
 	}
-	if (SDL_BlitSurface(surface, NULL, v->surf, rect) < 0)
+	if (SDL_BlitSurface(surface, NULL, v->background, rect) < 0)
 	{
 		SDL_FreeSurface(surface);
 		ft_putendl("Error on draw_rect");
@@ -40,6 +40,7 @@ static void	draw_rect(t_lemin *l, t_visu *v, SDL_Rect *rect)
 static void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
 {
 	SDL_Surface	*temp;
+	SDL_Rect	coor;
 	int			w;
 	int			h;
 	int			textx;
@@ -57,7 +58,13 @@ static void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
 	texty = room->y + v->height_room + 5;
 	textx = room->x + ((v->width_room - w) / 2);
 	temp = TTF_RenderText_Blended(v->typo, room->name, v->white);
-	put_on_screen_sdl(v, temp, textx, texty);
+	coor.x = textx;
+	coor.y = texty;
+if (SDL_BlitSurface(temp, NULL, v->background, &coor) < 0)
+{
+	ft_putstr("Error put_on_screen_sdl : ");
+	SDL_GetError();
+}
 	SDL_FreeSurface(temp);
 }
 

@@ -43,6 +43,7 @@ void	free_in_pipes(t_lemin *l, char *str, t_visu *v)
 {
 	free(l->string_file);
 	ft_free_double_tab((void**)l->f);
+	ft_free_double_tab((void**)l->pipes);
 	free_rooms(v);
 	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
 }
@@ -51,6 +52,7 @@ void	free_all_and_quit(t_lemin *l, t_visu *v)
 {
 	free(l->string_file);
 	ft_free_double_tab((void**)l->f);
+	ft_free_double_tab((void**)l->pipes);
 	free_rooms(v);
 	free_turns(v);
 	SDL_DestroyWindow(v->window);

@@ -149,6 +149,8 @@ void	check_for_hyphen(char **tab, t_lemin *l);
 void	check_if_name_already_exists(char **tab, t_lemin *l);
 void	which_command(t_lemin *l, int i);
 void	check_coordonates(char **tab, t_lemin *l);
+void	parsing_init_tab_pipes(t_lemin *l);
+void	stock_pipes(char *str, t_lemin *l);
 
 /*
 ***************************** Resolve *****************************************

@@ -112,25 +112,12 @@ int	main(void)
 
 	init_SDL(&v);
 	init_window_and_surface(&v);
+	init_background(&l, &v);
+
 
 
 	put_all_on_screen_sdl(&v, v.background);
 	put_on_screen_sdl(&v, v.ant, v.begin->x + 10, v.begin->y + 10);
-
-	room = v.begin;
-	while (room)
-	{
-		draw_room(&l, &v, room);
-		room = room->next;
-	}
-
-
-//	SDL_Surface	*temp;
-	
-//	temp = TTF_RenderText_Blended(v.typo, "start", v.white);
-//	put_on_screen_sdl(&v, temp, 200, 200);
-
-
 	SDL_UpdateWindowSurface(v.window);
 
 

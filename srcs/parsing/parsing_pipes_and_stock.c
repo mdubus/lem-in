@@ -41,7 +41,7 @@ static bool	**ft_create_tab_bool(unsigned long x, unsigned long y)
 	return (tab);
 }
 
-static void	parsing_init_tab_pipes(t_lemin *l)
+void	parsing_init_tab_pipes(t_lemin *l)
 {
 	l->pipes = ft_create_tab_bool((unsigned long)l->nb_rooms,
 			(unsigned long)l->nb_rooms);
@@ -83,7 +83,7 @@ static void	check_if_rooms_exists(t_lemin *l, char **tab)
 	}
 }
 
-static void	stock_pipes(char *str, t_lemin *l)
+void	stock_pipes(char *str, t_lemin *l)
 {
 	char	**tab;
 
