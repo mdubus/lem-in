@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/29 18:13:49 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/04 17:51:14 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ typedef struct	s_room_visu
 typedef struct	s_visu
 {
 	SDL_Window			*window;
-	SDL_Surface			*surf;
-	SDL_Surface			*background;
-	SDL_Surface			*ant;
+	SDL_Renderer		*screen;
+	SDL_Texture			*background;
+	SDL_Texture			*ant;
 	TTF_Font			*typo;
 	SDL_Event			event;
 	SDL_Color			white;
@@ -79,6 +79,13 @@ typedef struct	s_visu
 	int					ant_speed;
 	bool				loop;
 	bool				flag_move;
+	bool	init_sdl;
+	bool	init_img;
+	bool	init_ttf;
+	bool	init_window;
+	bool	init_screen;
+	bool	init_typo;
+	bool	init_background;
 }						t_visu;
 
 typedef struct	s_turn
@@ -100,7 +107,7 @@ typedef struct	s_rect
 SDL_Color	init_color(int r, int g, int b, int a);
 
 void	init_struct(t_visu *v);
-void	init_SDL(t_visu *v);
+void	init_SDL(t_lemin *l, t_visu *v);
 void	init_window_and_surface(t_visu *v);
 void	free_rooms(t_visu *v);
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
@@ -115,6 +122,10 @@ void	free_turns(t_visu *v);
 void	free_all_and_quit(t_lemin *l, t_visu *v);
 void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
 void	init_background(t_lemin *l, t_visu *v);
+void	free_room_visu(t_lemin *l, char *str, t_visu *v);
+void	free_parsing_visu(t_lemin *l, t_visu *v);
+void	init_window(t_lemin *l, t_visu *v);
+void	init_typo(t_lemin *l, t_visu *v);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

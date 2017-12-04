@@ -6,12 +6,12 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/29 16:52:11 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/04 14:26:46 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
-
+/*
 static void	draw_rect(t_lemin *l, t_visu *v, SDL_Rect *rect)
 {
 	SDL_Surface	*surface;
@@ -90,4 +90,4 @@ void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room)
 	rect.h = v->height_room + 5;
 	draw_rect(l, v, &rect);
 	draw_room_name(l, v, room);
-}
+}*/

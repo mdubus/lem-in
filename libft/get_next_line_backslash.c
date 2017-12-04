@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 10:53:54 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/04 12:21:50 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/04 15:19:52 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	mew_lst(t_dlist **mew, int fd)
 	(*mew)->next = NULL;
 }
 
-static void	multi_fd_gnl(t_dlist **mew, t_dlist **mew2, int fd)
+static void	multi_fd_gnl(t_dlist **mew, t_dlist **mew2, int fd, t_dlist *list)
 {
 	static t_dlist	*begin;
 
@@ -45,6 +45,7 @@ static void	multi_fd_gnl(t_dlist **mew, t_dlist **mew2, int fd)
 	{
 		mew_lst(mew, fd);
 		begin = *mew;
+		list = begin;
 	}
 }
 
@@ -76,7 +77,7 @@ static int	backslash_in_buffer(char *buffer, int length, t_dlist **mew,
 	return (0);
 }
 
-static int	backslash_in_rest(int fd, char **line, t_dlist **mew)
+static int	backslash_in_rest(int fd, char **line, t_dlist **mew, t_dlist *list)
 {
 	size_t		n;
 	char		*temp;
@@ -85,7 +86,7 @@ static int	backslash_in_rest(int fd, char **line, t_dlist **mew)
 	temp = NULL;
 	mew2 = NULL;
 	*line = NULL;
-	multi_fd_gnl(mew, &mew2, fd);
+	multi_fd_gnl(mew, &mew2, fd, list);
 	if ((*mew)->reste && ft_strchr((*mew)->reste, '\n'))
 	{
 		n = (size_t)ft_strclen((*mew)->reste, '\n');
@@ -100,7 +101,7 @@ static int	backslash_in_rest(int fd, char **line, t_dlist **mew)
 	return (0);
 }
 
-int			get_next_line_backslash(const int fd, char **line)
+int			get_next_line_backslash(const int fd, char **line, t_dlist *list)
 {
 	t_gnl			gnl;
 
@@ -108,7 +109,7 @@ int			get_next_line_backslash(const int fd, char **line)
 	gnl.ret = -1;
 	if (fd < 0 || BUFF_SIZE < 1 || !line)
 		return (-1);
-	if ((backslash_in_rest(fd, line, &gnl.mew)) == 1)
+	if ((backslash_in_rest(fd, line, &gnl.mew, list)) == 1)
 		return (1);
 	gnl.buffer = ft_strnew(BUFF_SIZE);
 	while ((gnl.length = (int)read(fd, gnl.buffer, BUFF_SIZE)) > 0)

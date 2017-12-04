@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:31:32 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/29 18:04:21 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/04 18:00:02 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	free_turns(t_visu *v)
 	temp = NULL;
 	while (v->turn_begin)
 	{
+		free(v->turn_begin->turn);
 		temp = v->turn_begin;
 		v->turn_begin = v->turn_begin->next;
-		ft_memdel((void **)&temp->turn);
 		free(temp);
 	}
 }
@@ -48,20 +48,39 @@ void	free_in_pipes(t_lemin *l, char *str, t_visu *v)
 	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
 }
 
-void	free_all_and_quit(t_lemin *l, t_visu *v)
+void	free_room_visu(t_lemin *l, char *str, t_visu *v)
 {
 	free(l->string_file);
 	ft_free_double_tab((void**)l->f);
-	ft_free_double_tab((void**)l->pipes);
 	free_rooms(v);
+	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
+}
+
+void	free_parsing_visu(t_lemin *l, t_visu *v)
+{
+	free(l->string_file);
+	ft_free_double_tab((void**)l->f);
+	free_rooms(v);
+	ft_free_double_tab((void**)l->pipes);
 	free_turns(v);
-	SDL_DestroyWindow(v->window);
-	SDL_FreeSurface(v->background);
-	SDL_FreeSurface(v->ant);
-	TTF_CloseFont(v->typo);
-	TTF_Quit();
-	IMG_Quit();
-	SDL_Quit();
+}
+
+void	free_all_and_quit(t_lemin *l, t_visu *v)
+{
+	free_parsing_visu(l, v);
+	if (v->init_window == 1)
+		SDL_DestroyWindow(v->window);
+	if (v->init_screen == 1)
+		SDL_DestroyRenderer(v->screen);
+//	SDL_FreeSurface(v->background);
+//	SDL_FreeSurface(v->ant);
+//	TTF_CloseFont(v->typo);
+	if (v->init_ttf == 1)
+		TTF_Quit();
+	if (v->init_img == 1)
+		IMG_Quit();
+	if (v->init_sdl == 1)
+		atexit(SDL_Quit);
 //	sleep(60);
 	exit(1);
 }

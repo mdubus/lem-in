@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 12:19:13 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/29 17:23:02 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/04 16:18:20 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static void	stock_turn(t_lemin *l, t_visu *v, char *str)
 			v->turn->turn[ant] = room_visu->id;
 		}
 		i++;
+		free(room);
 	}
 	ft_free_double_tab((void **)tab);
-	free(room);
 }
 
 void	stock_turns(t_lemin *l, t_visu *v)
