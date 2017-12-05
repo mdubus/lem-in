@@ -43,6 +43,8 @@ void init_struct(t_visu *v)
 	v->init_typo = 0;
 	v->init_background = 0;
 	v->init_ant = 0;
+	v->surf = NULL;
+	v->texture = NULL;
 }
 
 void	init_SDL(t_lemin *l, t_visu *v)
@@ -113,4 +115,50 @@ void	init_typo(t_lemin *l, t_visu *v)
 	}
 	else
 		v->init_typo = 1;
+}
+
+void	init_background(t_lemin *l, t_visu *v)
+{
+	SDL_Surface		*background;
+
+	background = IMG_Load("srcs/visualizer/img/background.png");
+	if (!background)
+	{
+		ft_putstr("Unable to initialize background : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	if ((v->background = SDL_CreateTextureFromSurface(v->screen, background)) == NULL)
+	{
+		ft_putstr("Unable to create background texture : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	else
+		v->init_background = 1;
+	v->surf = background;
+}
+
+void	init_ant(t_lemin *l, t_visu *v)
+{
+	SDL_Surface		*ant;
+
+	ant = IMG_Load("srcs/visualizer/img/ant2.png");
+	if (!ant)
+	{
+		ft_putstr("Unable to initialize ant : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	v->width_room = ant->w;
+	v->height_room = ant->h;
+	if ((v->ant = SDL_CreateTextureFromSurface(v->screen, ant)) == NULL)
+	{
+		ft_putstr("Unable to create ant texture : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	else
+		v->init_ant = 1;
+	SDL_FreeSurface(ant);
 }

@@ -60,6 +60,9 @@ typedef struct	s_visu
 	SDL_Renderer		*screen;
 	SDL_Texture			*background;
 	SDL_Texture			*ant;
+	SDL_Texture			*texture;
+	SDL_Surface			*surf;
+	SDL_Rect			coor;
 	TTF_Font			*typo;
 	SDL_Event			event;
 	SDL_Color			white;
@@ -121,12 +124,13 @@ void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
 void	stock_turns(t_lemin *l, t_visu *v);
 void	free_turns(t_visu *v);
 void	free_all_and_quit(t_lemin *l, t_visu *v);
-void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
 void	init_background(t_lemin *l, t_visu *v);
 void	free_room_visu(t_lemin *l, char *str, t_visu *v);
 void	free_parsing_visu(t_lemin *l, t_visu *v);
 void	init_window(t_lemin *l, t_visu *v);
 void	init_typo(t_lemin *l, t_visu *v);
+void	init_ant(t_lemin *l, t_visu *v);
+SDL_Rect	init_coor(int x, int y, int w, int h);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

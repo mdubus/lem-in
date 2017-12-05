@@ -73,7 +73,10 @@ void	free_all_and_quit(t_lemin *l, t_visu *v)
 	if (v->init_screen == 1)
 		SDL_DestroyRenderer(v->screen);
 	if (v->init_background == 1)
+	{
 		SDL_DestroyTexture(v->background);
+		SDL_FreeSurface(v->surf);
+	}
 	if (v->init_ant == 1)
 		SDL_DestroyTexture(v->ant);
 //	SDL_FreeSurface(v->background);

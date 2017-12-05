@@ -26,64 +26,88 @@ static void	check_start_end(t_lemin *l)
 				"\033[091mErreur : Start et end identiques\033[0m]]");
 }
 
-void	init_background(t_lemin *l, t_visu *v)
+SDL_Rect	init_coor(int x, int y, int w, int h)
 {
-	SDL_Surface		*background;
+	SDL_Rect	rect;
 
-	background = IMG_Load("srcs/visualizer/img/background.png");
-	if (!background)
-	{
-		ft_putstr("Unable to initialize background : ");
-		ft_putendl(SDL_GetError());
-		free_all_and_quit(l, v);
-	}
-	if ((v->background = SDL_CreateTextureFromSurface(v->screen, background)) == NULL)
-	{
-		ft_putstr("Unable to create background texture : ");
-		ft_putendl(SDL_GetError());
-		free_all_and_quit(l, v);
-	}
-	else
-		v->init_background = 1;
-	SDL_FreeSurface(background);
+	rect.x = x;
+	rect.y = y;
+	rect.w = w;
+	rect.h = h;
+	return (rect);
 }
 
-static void	init_ant(t_lemin *l, t_visu *v)
+static void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
 {
-	SDL_Surface		*ant;
+	SDL_Surface	*temp;
+	SDL_Rect	coor;
+	int			w;
+	int			h;
+	int			textx;
+	int			texty;
 
-	ant = IMG_Load("srcs/visualizer/img/ant2.png");
-	if (!ant)
+	w = 0;
+	h = 0;
+	texty = 0;
+	textx = 0;
+	if (TTF_SizeText(v->typo, room->name, &w, &h) == -1)
 	{
-		ft_putstr("Unable to initialize ant : ");
-		ft_putendl(SDL_GetError());
+		ft_putendl("Error on draw_room");
 		free_all_and_quit(l, v);
 	}
-	v->width_room = ant->w;
-	v->height_room = ant->h;
-	if ((v->ant = SDL_CreateTextureFromSurface(v->screen, ant)) == NULL)
-	{
-		ft_putstr("Unable to create ant texture : ");
-		ft_putendl(SDL_GetError());
-		free_all_and_quit(l, v);
-	}
-	else
-		v->init_ant = 1;
-	SDL_FreeSurface(ant);
+	texty = room->y + v->height_room + 5;
+	textx = room->x + ((v->width_room - w) / 2);
+	temp = TTF_RenderText_Blended(v->typo, room->name, v->white);
+	coor = init_coor(textx, texty, w, h);
+
+	v->texture = SDL_CreateTextureFromSurface(v->screen, temp);
+	SDL_RenderCopy(v->screen, v->texture, NULL, &coor);
+
+	SDL_FreeSurface(temp);
+	SDL_DestroyTexture(v->texture);
 }
 
-static void	draw_anthill(t_visu *v)
+static void	draw_room(t_visu *v, t_room_visu *room, SDL_Rect *pos)
+{
+	if (room->special == 0 || room->special == START || room->special == END)
+	{
+		*pos = init_coor(room->x, room->y, v->width_room, v->height_room);
+		SDL_RenderFillRect(v->screen, pos);
+	}
+	if (room->special == START)
+	{
+		SDL_SetRenderDrawColor(v->screen, 255, 0, 0, 255);
+		SDL_RenderDrawRect(v->screen, pos);
+		SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
+	}
+	else if (room->special == END)
+	{
+		SDL_SetRenderDrawColor(v->screen, 0, 255, 0, 255);
+		SDL_RenderDrawRect(v->screen, pos);
+		SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
+	}
+}
+
+static void	draw_anthill(t_lemin *l, t_visu *v)
 {
 	SDL_Rect	pos;
+	t_room_visu	*room;
 
-	pos.x = 150;
-	pos.y = 100;
-	pos.w = v->width_room;
-	pos.h = v->height_room;
+	room = v->begin;
 	SDL_RenderCopy(v->screen, v->background, NULL, NULL);
+	SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
+	while (room)
+	{
+		draw_room(v, room, &pos);
+		draw_room_name(l, v, room);
+		room = room->next;
+	}
+	pos = init_coor(100, 50, v->width_room, v->height_room);
 	SDL_RenderCopy(v->screen, v->ant, NULL, &pos);
+
 	SDL_RenderPresent(v->screen);
 }
+
 
 int	main(void)
 {
@@ -113,7 +137,7 @@ int	main(void)
 	init_background(&l, &v);
 	init_ant(&l, &v);
 
-	draw_anthill(&v);
+	draw_anthill(&l, &v);
 
 
 
