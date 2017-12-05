@@ -42,6 +42,7 @@ void init_struct(t_visu *v)
 	v->init_screen = 0;
 	v->init_typo = 0;
 	v->init_background = 0;
+	v->init_ant = 0;
 }
 
 void	init_SDL(t_lemin *l, t_visu *v)

@@ -86,6 +86,7 @@ typedef struct	s_visu
 	bool	init_screen;
 	bool	init_typo;
 	bool	init_background;
+	bool	init_ant;
 }						t_visu;
 
 typedef struct	s_turn

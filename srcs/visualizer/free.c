@@ -72,6 +72,10 @@ void	free_all_and_quit(t_lemin *l, t_visu *v)
 		SDL_DestroyWindow(v->window);
 	if (v->init_screen == 1)
 		SDL_DestroyRenderer(v->screen);
+	if (v->init_background == 1)
+		SDL_DestroyTexture(v->background);
+	if (v->init_ant == 1)
+		SDL_DestroyTexture(v->ant);
 //	SDL_FreeSurface(v->background);
 //	SDL_FreeSurface(v->ant);
 //	TTF_CloseFont(v->typo);
