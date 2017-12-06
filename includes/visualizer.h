@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/04 17:51:14 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 12:08:18 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ typedef struct	s_visu
 	SDL_Texture			*background;
 	SDL_Texture			*ant;
 	SDL_Texture			*texture;
+	SDL_Texture			*snorlax;
+	SDL_Texture			*lava;
 	SDL_Surface			*surf;
+	SDL_Texture			*all;
 	SDL_Rect			coor;
 	TTF_Font			*typo;
 	SDL_Event			event;
@@ -75,6 +78,8 @@ typedef struct	s_visu
 	char				**file;
 	int					width_room;
 	int					height_room;
+	int					startx;
+	int					starty;
 	int					x; // enlever
 	int					y; // enlever
 	int					temps_actuel;
@@ -90,6 +95,8 @@ typedef struct	s_visu
 	bool	init_typo;
 	bool	init_background;
 	bool	init_ant;
+	bool	init_snorlax;
+	bool	init_lava;
 }						t_visu;
 
 typedef struct	s_turn
@@ -131,6 +138,8 @@ void	init_window(t_lemin *l, t_visu *v);
 void	init_typo(t_lemin *l, t_visu *v);
 void	init_ant(t_lemin *l, t_visu *v);
 SDL_Rect	init_coor(int x, int y, int w, int h);
+void	init_snorlax(t_lemin *l, t_visu *v);
+void	init_lava(t_lemin *l, t_visu *v);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

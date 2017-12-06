@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/04 18:00:23 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 13:50:37 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,39 @@ static void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
 	SDL_DestroyTexture(v->texture);
 }
 
-static void	draw_room(t_visu *v, t_room_visu *room, SDL_Rect *pos)
+static void	draw_room(t_visu *v, t_room_visu *room)
 {
-	if (room->special == 0 || room->special == START || room->special == END)
+	if (room->special == SNORLAX)
 	{
-		*pos = init_coor(room->x, room->y, v->width_room, v->height_room);
-		SDL_RenderFillRect(v->screen, pos);
+		v->coor = init_coor(room->x, room->y, v->width_room, v->height_room);
+		SDL_RenderCopy(v->screen, v->snorlax, NULL, &v->coor);
 	}
-	if (room->special == START)
+	else if (room->special == LAVA)
 	{
-		SDL_SetRenderDrawColor(v->screen, 255, 0, 0, 255);
-		SDL_RenderDrawRect(v->screen, pos);
+		v->coor = init_coor(room->x, room->y, v->width_room, v->height_room);
+		SDL_RenderCopy(v->screen, v->lava, NULL, &v->coor);
+	}
+	else
+	{
+		v->coor = init_coor(room->x, room->y, v->width_room, v->height_room);
+		SDL_RenderFillRect(v->screen, &v->coor);
+	}
+	if (room->special == START || room->special == END)
+	{
+		v->coor = init_coor(room->x, room->y, v->width_room, v->height_room);
+		SDL_SetRenderDrawColor(v->screen, 164, 152, 141, 255);
+		SDL_RenderDrawRect(v->screen, &v->coor);
 		SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
 	}
-	else if (room->special == END)
+	if (room->special ==  START)
 	{
-		SDL_SetRenderDrawColor(v->screen, 0, 255, 0, 255);
-		SDL_RenderDrawRect(v->screen, pos);
-		SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
+		v->startx = room->x;
+		v->starty = room->y;
 	}
 }
 
 static void	draw_anthill(t_lemin *l, t_visu *v)
 {
-	SDL_Rect	pos;
 	t_room_visu	*room;
 
 	room = v->begin;
@@ -98,14 +107,12 @@ static void	draw_anthill(t_lemin *l, t_visu *v)
 	SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
 	while (room)
 	{
-		draw_room(v, room, &pos);
+		draw_room(v, room);
 		draw_room_name(l, v, room);
 		room = room->next;
 	}
-	pos = init_coor(100, 50, v->width_room, v->height_room);
-	SDL_RenderCopy(v->screen, v->ant, NULL, &pos);
-
-	SDL_RenderPresent(v->screen);
+	v->coor = init_coor(v->startx, v->starty, v->width_room, v->height_room);
+	SDL_RenderCopy(v->screen, v->ant, NULL, &v->coor);
 }
 
 
@@ -136,8 +143,20 @@ int	main(void)
 	init_typo(&l, &v);
 	init_background(&l, &v);
 	init_ant(&l, &v);
+	init_snorlax(&l, &v);
+	init_lava(&l, &v);
 
+	// Put all on the v.all texture
+	v.all = SDL_CreateTexture(v.screen, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WIDTH_W, HEIGHT_W);
+	SDL_SetRenderTarget(v.screen, v.all);
+	
 	draw_anthill(&l, &v);
+
+	// stop stocking all on the texture
+	SDL_SetRenderTarget(v.screen, NULL);
+
+	SDL_RenderCopy(v.screen, v.all, NULL, NULL);
+	SDL_RenderPresent(v.screen);
 
 
 

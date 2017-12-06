@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/04 17:57:39 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 11:53:43 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,4 +161,48 @@ void	init_ant(t_lemin *l, t_visu *v)
 	else
 		v->init_ant = 1;
 	SDL_FreeSurface(ant);
+}
+
+void	init_snorlax(t_lemin *l, t_visu *v)
+{
+	SDL_Surface		*snor;
+
+	snor = IMG_Load("srcs/visualizer/img/snorlax.png");
+	if (!snor)
+	{
+		ft_putstr("Unable to initialize snorlax : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	if ((v->snorlax = SDL_CreateTextureFromSurface(v->screen, snor)) == NULL)
+	{
+		ft_putstr("Unable to create snorlax texture : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	else
+		v->init_snorlax = 1;
+	SDL_FreeSurface(snor);
+}
+
+void	init_lava(t_lemin *l, t_visu *v)
+{
+	SDL_Surface		*lava;
+
+	lava = IMG_Load("srcs/visualizer/img/lava.png");
+	if (!lava)
+	{
+		ft_putstr("Unable to initialize lava : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	if ((v->lava = SDL_CreateTextureFromSurface(v->screen, lava)) == NULL)
+	{
+		ft_putstr("Unable to create lava texture : ");
+		ft_putendl(SDL_GetError());
+		free_all_and_quit(l, v);
+	}
+	else
+		v->init_lava = 1;
+	SDL_FreeSurface(lava);
 }
