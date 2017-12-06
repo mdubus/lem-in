@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 21:18:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 17:32:32 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 15:11:53 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ int			parsing_pipes_and_stock(t_lemin *l)
 	parsing_init_tab_pipes(l);
 	while (l->f[i] != NULL)
 	{
-		if (ft_strstr(l->f[i], "##start") != 0 && ft_strlen(l->f[i]) == 7)
+		if (ft_strcmp(l->f[i], "##start") == 0)
 			free_pipes(l, "\033[091mErreur : Salle de depart invalide\033[0m");
-		else if (ft_strstr(l->f[i], "##end") != 0 && ft_strlen(l->f[i]) == 5)
+		else if (ft_strcmp(l->f[i], "##end") == 0)
 			free_pipes(l, "\033[091mErreur : Salle de fin invalide\033[0m");
 		else if (l->f[i][0] && l->f[i][0] == '#' &&
 				(!l->f[i][1] || (l->f[i][1] && l->f[i][1] != '#')))

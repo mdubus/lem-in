@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 12:19:13 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/04 16:18:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 17:21:27 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static void	create_turn(t_lemin *l, t_visu *v)
 		if (!v->turn)
 			free_in_pipes(l, "Error with malloc", v);
 		v->turn_begin = v->turn;
+		v->turn->prev = NULL;
 	}
 	else
 	{
 		v->turn->next = (t_turn*)malloc(sizeof(t_turn));
 		if (!v->turn->next)
 			free_in_pipes(l, "Error with malloc", v);
+		v->turn->next->prev = v->turn;
 		v->turn = v->turn->next;
 	}
 	v->turn->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 11:53:43 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 16:35:05 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void init_struct(t_visu *v)
 	v->purple = init_color(215, 149, 242, 255);
 	v->pink = init_color(237, 101, 162, 255);
 	v->loop = true;
-	v->x = 450;
-	v->y = 400;
 	v->background = NULL;
 	v->ant = NULL;
 	v->width_room = 0;
 	v->height_room = 0;
-	v->flag_move = 0;
+	v->flag_move_right = 0;
+	v->flag_move_left = 0;
 	v->temps_actuel = 0;
 	v->temps_precedent = 0;
 	v->ant_speed = 4;
@@ -43,6 +42,7 @@ void init_struct(t_visu *v)
 	v->init_typo = 0;
 	v->init_background = 0;
 	v->init_ant = 0;
+	v->init_all = 0;
 	v->surf = NULL;
 	v->texture = NULL;
 }

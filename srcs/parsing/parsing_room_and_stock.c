@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/23 14:55:13 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 15:10:26 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 void	which_command(t_lemin *l, int i)
 {
 	l->commands++;
-	if (ft_strstr(l->f[i], "##start") != 0 && ft_strlen(l->f[i]) == 7)
+	if (ft_strcmp(l->f[i], "##start") == 0)
 		l->flag_start = 1;
-	else if (ft_strstr(l->f[i], "##end") != 0 && ft_strlen(l->f[i]) == 5)
+	else if (ft_strcmp(l->f[i], "##end") == 0)
 		l->flag_end = 1;
-	else if (ft_strstr(l->f[i], "##lava") != 0 && ft_strlen(l->f[i]) == 6)
+	else if (ft_strcmp(l->f[i], "##lava") == 0)
 	{
 		if (l->flag_snorlax == 1)
 			l->flag_snorlax = 0;
 		l->flag_lava = 1;
 	}
-	else if (ft_strstr(l->f[i], "##snorlax") != 0 && ft_strlen(l->f[i]) == 9)
+	else if (ft_strcmp(l->f[i], "##snorlax") == 0)
 	{
 		if (l->flag_lava == 1)
 			l->flag_lava = 0;

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 12:08:18 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/06 17:25:49 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,16 @@ typedef struct	s_visu
 	int					height_room;
 	int					startx;
 	int					starty;
-	int					x; // enlever
-	int					y; // enlever
+	int					beginx;
+	int					beginy;
+	int					endx;
+	int					endy;
 	int					temps_actuel;
 	int					temps_precedent;
 	int					ant_speed;
 	bool				loop;
-	bool				flag_move;
+	bool				flag_move_right;
+	bool				flag_move_left;
 	bool	init_sdl;
 	bool	init_img;
 	bool	init_ttf;
@@ -97,12 +100,14 @@ typedef struct	s_visu
 	bool	init_ant;
 	bool	init_snorlax;
 	bool	init_lava;
+	bool	init_all;
 }						t_visu;
 
 typedef struct	s_turn
 {
 	int					*turn;
 	struct s_turn		*next;
+	struct s_turn		*prev;
 }						t_turn;
 
 typedef struct	s_rect
@@ -123,10 +128,11 @@ void	init_window_and_surface(t_visu *v);
 void	free_rooms(t_visu *v);
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
-void event_loop(t_visu *v, t_lemin *l);
+void	 event_loop(t_visu *v, t_lemin *l);
 int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v);
 int	visu_parsing_pipes(t_lemin *l, t_visu *v);
-void	move_ant(t_visu *v);
+void	move_ant_left(t_lemin *l, t_visu *v);
+void	move_ant_right(t_lemin *l, t_visu *v);
 void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
 void	stock_turns(t_lemin *l, t_visu *v);
 void	free_turns(t_visu *v);
@@ -140,6 +146,9 @@ void	init_ant(t_lemin *l, t_visu *v);
 SDL_Rect	init_coor(int x, int y, int w, int h);
 void	init_snorlax(t_lemin *l, t_visu *v);
 void	init_lava(t_lemin *l, t_visu *v);
+void	draw_pipes(t_lemin *l, t_visu *v);
+void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
+void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

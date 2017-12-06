@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/12/04 17:59:07 by mdubus           ###   ########.fr        #
+#    Updated: 2017/12/06 16:38:35 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
 				init.c
 
 SRC_VISU	=	main.c useful.c init.c loop.c stock_rooms.c free.c\
-				visu_parsing_pipes.c stock_turns.c print.c
+				visu_parsing_pipes.c stock_turns.c print.c draw_pipes.c\
+				draw_room.c
 
 OBJS_ALGO	=	$(addprefix $(OBJDIR_ALGO)/, $(SRC_ALGO:.c=.o))\
 				$(addprefix $(OBJDIR_PARSING)/, $(SRC_PARSING:.c=.o))
