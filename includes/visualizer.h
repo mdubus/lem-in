@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 17:25:49 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/07 18:17:55 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct	s_visu
 	SDL_Window			*window;
 	SDL_Renderer		*screen;
 	SDL_Texture			*background;
-	SDL_Texture			*ant;
+	SDL_Texture			*ant_img;
 	SDL_Texture			*texture;
 	SDL_Texture			*snorlax;
 	SDL_Texture			*lava;
@@ -72,8 +72,12 @@ typedef struct	s_visu
 	SDL_Color			purple;
 	SDL_Color			pink;
 	struct s_room_visu	*begin;
+	struct s_room_visu	*first;
+	struct s_room_visu	*next;
 	struct s_turn		*turn_begin;
 	struct s_turn		*turn;
+	struct s_ant		*ant;
+	struct s_ant		*ant_begin;
 	char				*string_file;
 	char				**file;
 	int					width_room;
@@ -87,6 +91,12 @@ typedef struct	s_visu
 	int					temps_actuel;
 	int					temps_precedent;
 	int					ant_speed;
+	int					nb_ant_start;
+	int					nb_ant_end;
+	int					textx;
+	int					texty;
+	int					textw;
+	int					texth;
 	bool				loop;
 	bool				flag_move_right;
 	bool				flag_move_left;
@@ -101,6 +111,7 @@ typedef struct	s_visu
 	bool	init_snorlax;
 	bool	init_lava;
 	bool	init_all;
+	bool	loop_moving;
 }						t_visu;
 
 typedef struct	s_turn
@@ -118,6 +129,16 @@ typedef struct	s_rect
 	int			height;
 	int			thick;
 }				t_rect;
+
+typedef struct	s_ant
+{
+	int				prevx;
+	int				prevy;
+	int				nextx;
+	int				nexty;
+	int				id;
+	struct s_ant	*next;
+}					t_ant;
 
 
 SDL_Color	init_color(int r, int g, int b, int a);

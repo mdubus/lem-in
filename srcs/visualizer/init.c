@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 16:35:05 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/07 15:27:51 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void init_struct(t_visu *v)
 	v->pink = init_color(237, 101, 162, 255);
 	v->loop = true;
 	v->background = NULL;
-	v->ant = NULL;
+	v->ant_img = NULL;
 	v->width_room = 0;
 	v->height_room = 0;
 	v->flag_move_right = 0;
@@ -45,6 +45,15 @@ void init_struct(t_visu *v)
 	v->init_all = 0;
 	v->surf = NULL;
 	v->texture = NULL;
+	v->nb_ant_start = 0;
+	v->nb_ant_end = 0;
+	v->textx = 0;
+	v->texty = 0;
+	v->textw = 0;
+	v->texth = 0;
+	v->first = NULL;
+	v->next = NULL;
+	v->loop_moving = 0;
 }
 
 void	init_SDL(t_lemin *l, t_visu *v)
@@ -152,7 +161,7 @@ void	init_ant(t_lemin *l, t_visu *v)
 	}
 	v->width_room = ant->w;
 	v->height_room = ant->h;
-	if ((v->ant = SDL_CreateTextureFromSurface(v->screen, ant)) == NULL)
+	if ((v->ant_img = SDL_CreateTextureFromSurface(v->screen, ant)) == NULL)
 	{
 		ft_putstr("Unable to create ant texture : ");
 		ft_putendl(SDL_GetError());

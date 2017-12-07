@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 17:26:43 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/07 18:40:28 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(void)
 	init_struct(&v);
 	get_file(&l);
 	parsing_ants_number(&l);
+	v.nb_ant_start = l.nb_ants;
 	if (visu_parsing_room_and_stock(&l, &room, &v) == 2)
 		free_room_visu(&l,
 				"\033[091mErreur : La map est mal formatee\033[0m", &v);
@@ -70,6 +71,7 @@ int	main(void)
 	stock_turns(&l, &v);
 	ft_putendl(l.string_file);
 
+	print_turns(&l, &v);
 
 	init_SDL(&l, &v);
 	init_window(&l, &v);
@@ -81,12 +83,26 @@ int	main(void)
 
 
 	SDL_RenderCopy(v.screen, v.all, NULL, NULL);
-	
-	v.coor = init_coor(v.startx, v.starty, v.width_room, v.height_room);
-	SDL_RenderCopy(v.screen, v.ant, NULL, &v.coor);
 
+	if (v.nb_ant_start > 0)
+	{
+		v.coor = init_coor(v.startx, v.starty, v.width_room, v.height_room);
+		SDL_RenderCopy(v.screen, v.ant_img, NULL, &v.coor);
+	}
+	if (v.nb_ant_end > 0)
+	{
+		v.coor = init_coor(v.startx, v.starty, v.width_room, v.height_room);
+		SDL_RenderCopy(v.screen, v.ant_img, NULL, &v.coor);
+	}
 	SDL_RenderPresent(v.screen);
 
+	room = v.begin;
+
+	while (room)
+	{
+		printf("%d : %s\n", room->id, room->name);
+		room = room->next;
+	}
 
 
 

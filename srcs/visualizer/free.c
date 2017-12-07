@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:31:32 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 15:16:57 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/07 14:25:27 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	free_all_and_quit(t_lemin *l, t_visu *v)
 		SDL_FreeSurface(v->surf);
 	}
 	if (v->init_ant == 1)
-		SDL_DestroyTexture(v->ant);
+		SDL_DestroyTexture(v->ant_img);
 	if (v->init_snorlax == 1)
 		SDL_DestroyTexture(v->snorlax);
 	if (v->init_lava == 1)
