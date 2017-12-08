@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/07 15:27:51 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 14:23:27 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void init_struct(t_visu *v)
 	v->flag_move_left = 0;
 	v->temps_actuel = 0;
 	v->temps_precedent = 0;
-	v->ant_speed = 4;
+	v->ant_speed = 2;
 	v->string_file = NULL;
 	v->file = NULL;
 	v->begin = NULL;
@@ -54,6 +54,11 @@ void init_struct(t_visu *v)
 	v->first = NULL;
 	v->next = NULL;
 	v->loop_moving = 0;
+	v->begin_roomx = 0;
+	v->begin_roomy = 0;
+	v->end_roomx = 0;
+	v->end_roomy = 0;
+	v->ant_end = 0;;
 }
 
 void	init_SDL(t_lemin *l, t_visu *v)

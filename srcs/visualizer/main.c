@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/07 18:40:28 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 11:42:36 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	main(void)
 		printf("%d : %s\n", room->id, room->name);
 		room = room->next;
 	}
-
 
 
 	//	SDL_RenderClear(render);

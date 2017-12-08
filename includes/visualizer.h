@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/07 18:17:55 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 14:22:19 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ typedef struct	s_visu
 	int					height_room;
 	int					startx;
 	int					starty;
-	int					beginx;
-	int					beginy;
 	int					endx;
 	int					endy;
+	int					begin_roomx;
+	int					begin_roomy;
+	int					end_roomx;
+	int					end_roomy;
 	int					temps_actuel;
 	int					temps_precedent;
 	int					ant_speed;
@@ -97,6 +99,7 @@ typedef struct	s_visu
 	int					texty;
 	int					textw;
 	int					texth;
+	int					ant_end;
 	bool				loop;
 	bool				flag_move_right;
 	bool				flag_move_left;

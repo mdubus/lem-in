@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 15:42:34 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/07 13:35:41 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 14:19:31 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@ static void	print_nb_ants(t_lemin *l, t_visu *v, t_room_visu *room, SDL_Surface 
 
 	nb_ant = ft_strjoin(room->name, " (");
 	if (room->special == START)
+	{
 		nb_ant = ft_strjoin_proper(nb_ant, 1, ft_itoa(v->nb_ant_start), 0);
+		v->begin_roomx = room->x;
+		v->begin_roomy = room->y;
+	}
 	else if (room->special == END)
+	{
 		nb_ant = ft_strjoin_proper(nb_ant, 1, ft_itoa(v->nb_ant_end), 0);
+		v->end_roomx = room->x;
+		v->end_roomy = room->y;
+	}
 	nb_ant = ft_strjoin_proper(nb_ant, 1, ")", 0);
 	if (TTF_SizeText(v->typo, nb_ant, &v->textw, &v->texth) == -1)
 	{
