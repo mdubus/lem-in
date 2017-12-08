@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 14:22:19 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 15:08:57 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,10 @@ typedef struct	s_visu
 	int					begin_roomy;
 	int					end_roomx;
 	int					end_roomy;
-	int					temps_actuel;
-	int					temps_precedent;
+	int					end_room_id;
 	int					ant_speed;
 	int					nb_ant_start;
 	int					nb_ant_end;
-	int					textx;
-	int					texty;
-	int					textw;
-	int					texth;
 	int					ant_end;
 	bool				loop;
 	bool				flag_move_right;

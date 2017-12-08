@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:38:29 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/24 11:46:10 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 14:57:21 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	check_if_rooms_exists(t_lemin *l, char **tab, t_visu *v)
 	room = v->begin;
 	if (l->flag_room1 == -1 || l->flag_room2 == -1)
 	{
-	ft_putendl("TOTO");
 		ft_free_double_tab((void**)tab);
 		free_in_pipes(l,
 				"\033[091mErreur : Tubes lies a des salles inconnues\033[0m", v);
@@ -49,7 +48,7 @@ void	stock_pipes_visu(char *str, t_lemin *l, t_visu *v)
 
 	tab = NULL;
 	tab = ft_strsplit(str, '-');
-	if (tab == NULL || tab[0] == NULL || tab[1] == NULL)
+	if (!tab || tab == NULL || tab[0] == NULL || tab[1] == NULL)
 	{
 		free_in_pipes(l,
 				"\033[091mErreur lors d'une allocation memoire\033[0m", v);

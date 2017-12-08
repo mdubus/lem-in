@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 15:42:34 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 14:19:31 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 15:07:20 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,17 @@ static void	print_nb_ants(t_lemin *l, t_visu *v, t_room_visu *room, SDL_Surface 
 
 	nb_ant = ft_strjoin(room->name, " (");
 	if (room->special == START)
-	{
 		nb_ant = ft_strjoin_proper(nb_ant, 1, ft_itoa(v->nb_ant_start), 0);
-		v->begin_roomx = room->x;
-		v->begin_roomy = room->y;
-	}
 	else if (room->special == END)
-	{
 		nb_ant = ft_strjoin_proper(nb_ant, 1, ft_itoa(v->nb_ant_end), 0);
-		v->end_roomx = room->x;
-		v->end_roomy = room->y;
-	}
 	nb_ant = ft_strjoin_proper(nb_ant, 1, ")", 0);
-	if (TTF_SizeText(v->typo, nb_ant, &v->textw, &v->texth) == -1)
+	if (TTF_SizeText(v->typo, nb_ant, &v->coor.w, &v->coor.h) == -1)
 	{
 		ft_putendl("Error on draw_room");
 		free_all_and_quit(l, v);
 	}
-	v->texty = room->y + v->height_room + 5;
-	v->textx = room->x + ((v->width_room - v->textw) / 2);
+	v->coor.y = room->y + v->height_room + 5;
+	v->coor.x = room->x + ((v->width_room - v->coor.w) / 2);
 	*temp = TTF_RenderText_Blended(v->typo, nb_ant, v->white);
 	free(nb_ant);
 }
@@ -50,17 +42,16 @@ void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
 		print_nb_ants(l, v, room, &temp);
 	else
 	{
-		if (TTF_SizeText(v->typo, room->name, &v->textw, &v->texth) == -1)
+		if (TTF_SizeText(v->typo, room->name, &v->coor.w, &v->coor.h) == -1)
 		{
 			ft_putendl("Error on draw_room");
 			free_all_and_quit(l, v);
 		}
-		v->texty = room->y + v->height_room + 5;
-		v->textx = room->x + ((v->width_room - v->textw) / 2);
+		v->coor.y = room->y + v->height_room + 5;
+		v->coor.x = room->x + ((v->width_room - v->coor.w) / 2);
 		temp = TTF_RenderText_Blended(v->typo, room->name, v->white);
 	}
 
-	v->coor = init_coor(v->textx, v->texty, v->textw, v->texth);
 	v->texture = SDL_CreateTextureFromSurface(v->screen, temp);
 	SDL_RenderCopy(v->screen, v->texture, NULL, &v->coor);
 	SDL_FreeSurface(temp);

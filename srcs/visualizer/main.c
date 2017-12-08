@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:00:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 11:42:36 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 18:24:17 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,33 @@ static void	draw_anthill(t_lemin *l, t_visu *v)
 	SDL_SetRenderTarget(v->screen, NULL);
 }
 
+static void	stock_ants(t_lemin *l, t_visu *v)
+{
+	int	i;
+
+	i = 0;
+	while (i < l->nb_ants)
+	{
+		if (!v->ant_begin)
+		{
+			v->ant = (t_ant*)malloc(sizeof(t_ant));
+			v->ant_begin = v->ant;
+		}
+		else
+		{
+			v->ant->next = (t_ant*)malloc(sizeof(t_ant));
+			v->ant = v->ant->next;
+		}
+		v->ant->id = i + 1;
+		v->ant->prevx = -1;
+		v->ant->prevy = -1;
+		v->ant->nextx = -1;
+		v->ant->nexty = -1;
+		v->ant->next = NULL;
+		i++;
+	}
+}
+
 int	main(void)
 {
 	t_visu		v;
@@ -73,11 +100,22 @@ int	main(void)
 
 	print_turns(&l, &v);
 
+	room = v.begin;
+
+	while (room)
+	{
+		printf("%d : %s\n", room->id, room->name);
+		room = room->next;
+	}
+
 	init_SDL(&l, &v);
 	init_window(&l, &v);
 	init_typo(&l, &v);
 	init_background(&l, &v);
 	init_ant(&l, &v);
+
+	stock_ants(&l, &v);
+
 
 	draw_anthill(&l, &v);
 
@@ -94,25 +132,13 @@ int	main(void)
 		v.coor = init_coor(v.startx, v.starty, v.width_room, v.height_room);
 		SDL_RenderCopy(v.screen, v.ant_img, NULL, &v.coor);
 	}
+
+
 	SDL_RenderPresent(v.screen);
 
-	room = v.begin;
 
-	while (room)
-	{
-		printf("%d : %s\n", room->id, room->name);
-		room = room->next;
-	}
-
-
-	//	SDL_RenderClear(render);
-	//	SDL_RenderCopy(render, texture, NULL, NULL);
-	//	SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
-	//	SDL_RenderDrawLine(render, 100, 100, 150, 200);
-
-	v.turn = v.turn_begin;
 
 	event_loop(&v, &l);
 	free_all_and_quit(&l, &v);
-
+	// Penser a free la liste des fourmis
 }

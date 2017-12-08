@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 14:23:27 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 15:07:34 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,45 @@
 void init_struct(t_visu *v)
 {
 	v->window = NULL;
+	v->screen = NULL;
+	v->background = NULL;
+	v->ant_img = NULL;
+	v->texture = NULL;
+	v->snorlax = NULL;
+	v->lava = NULL;
+	v->surf = NULL;
+	v->all = NULL;
 	v->typo = NULL;
 	v->white = init_color(255, 255, 255, 255);
 	v->purple = init_color(215, 149, 242, 255);
 	v->pink = init_color(237, 101, 162, 255);
-	v->loop = true;
-	v->background = NULL;
-	v->ant_img = NULL;
-	v->width_room = 0;
-	v->height_room = 0;
-	v->flag_move_right = 0;
-	v->flag_move_left = 0;
-	v->temps_actuel = 0;
-	v->temps_precedent = 0;
-	v->ant_speed = 2;
-	v->string_file = NULL;
-	v->file = NULL;
 	v->begin = NULL;
+	v->first = NULL;
+	v->next = NULL;
 	v->turn_begin = NULL;
 	v->turn = NULL;
+	v->ant = NULL;
+	v->ant_begin = NULL;
+	v->string_file = NULL;
+	v->file = NULL;
+	v->width_room = 0;
+	v->height_room = 0;
+	v->startx = 0;
+	v->starty = 0;
+	v->endx = 0;
+	v->endy = 0;
+	v->begin_roomx = 0;
+	v->begin_roomy = 0;
+	v->end_roomx = 0;
+	v->end_roomy = 0;
+	v->end_room_id = 0;
+	v->ant_speed = 2;
+	v->nb_ant_start = 0;
+	v->nb_ant_end = 0;
+	v->ant_end = 0;
+	v->loop = true;
+	v->flag_move_right = 0;
+	v->flag_move_left = 0;
 	v->init_sdl = 0;
 	v->init_img = 0;
 	v->init_ttf = 0;
@@ -42,23 +62,10 @@ void init_struct(t_visu *v)
 	v->init_typo = 0;
 	v->init_background = 0;
 	v->init_ant = 0;
+	v->init_snorlax = 0;
+	v->init_lava = 0;
 	v->init_all = 0;
-	v->surf = NULL;
-	v->texture = NULL;
-	v->nb_ant_start = 0;
-	v->nb_ant_end = 0;
-	v->textx = 0;
-	v->texty = 0;
-	v->textw = 0;
-	v->texth = 0;
-	v->first = NULL;
-	v->next = NULL;
 	v->loop_moving = 0;
-	v->begin_roomx = 0;
-	v->begin_roomy = 0;
-	v->end_roomx = 0;
-	v->end_roomy = 0;
-	v->ant_end = 0;;
 }
 
 void	init_SDL(t_lemin *l, t_visu *v)

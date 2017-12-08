@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 18:11:45 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/29 18:14:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/08 14:58:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_turns(t_lemin *l, t_visu *v)
 		i = 0;
 		ft_putchar('\n');
 	}
+	v->turn = v->turn_begin;
 }
 
 void	print_rooms(t_visu *v)
