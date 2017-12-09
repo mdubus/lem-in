@@ -6,95 +6,76 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 15:42:34 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 15:07:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:24:36 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
 
-static void	print_nb_ants(t_lemin *l, t_visu *v, t_room_visu *room, SDL_Surface **temp)
-{
-	char		*nb_ant;
-
-	nb_ant = ft_strjoin(room->name, " (");
-	if (room->special == START)
-		nb_ant = ft_strjoin_proper(nb_ant, 1, ft_itoa(v->nb_ant_start), 0);
-	else if (room->special == END)
-		nb_ant = ft_strjoin_proper(nb_ant, 1, ft_itoa(v->nb_ant_end), 0);
-	nb_ant = ft_strjoin_proper(nb_ant, 1, ")", 0);
-	if (TTF_SizeText(v->typo, nb_ant, &v->coor.w, &v->coor.h) == -1)
-	{
-		ft_putendl("Error on draw_room");
-		free_all_and_quit(l, v);
-	}
-	v->coor.y = room->y + v->height_room + 5;
-	v->coor.x = room->x + ((v->width_room - v->coor.w) / 2);
-	*temp = TTF_RenderText_Blended(v->typo, nb_ant, v->white);
-	free(nb_ant);
-}
-
-
-void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
+void		draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room)
 {
 	SDL_Surface	*temp;
 
-	if (room->special == START || room->special == END)
-		print_nb_ants(l, v, room, &temp);
-	else
+	temp = NULL;
+	if (room->special != START && room->special != END)
 	{
 		if (TTF_SizeText(v->typo, room->name, &v->coor.w, &v->coor.h) == -1)
-		{
-			ft_putendl("Error on draw_room");
-			free_all_and_quit(l, v);
-		}
+			free_all_msg(l, v, "Error on draw_room_name : ");
 		v->coor.y = room->y + v->height_room + 5;
 		v->coor.x = room->x + ((v->width_room - v->coor.w) / 2);
-		temp = TTF_RenderText_Blended(v->typo, room->name, v->white);
+		if ((temp = TTF_RenderText_Blended(v->typo, room->name,
+						v->white)) == NULL)
+			free_all_msg(l, v, "Error on draw_room_name : ");
+		if ((v->texture = SDL_CreateTextureFromSurface(v->screen,
+						temp)) == NULL)
+			free_all_msg(l, v, "Error on draw_room_name : ");
+		if ((SDL_RenderCopy(v->screen, v->texture, NULL, &v->coor)) < 0)
+			free_all_msg(l, v, "Error on draw_room_name : ");
+		SDL_FreeSurface(temp);
+		SDL_DestroyTexture(v->texture);
 	}
-
-	v->texture = SDL_CreateTextureFromSurface(v->screen, temp);
-	SDL_RenderCopy(v->screen, v->texture, NULL, &v->coor);
-	SDL_FreeSurface(temp);
-	SDL_DestroyTexture(v->texture);
 }
 
-static void	draw_fat_border_rectangle(t_visu *v, t_room_visu *room,
+static void	draw_fat_border_rectangle(t_lemin *l, t_visu *v, t_room_visu *room,
 		int thickness)
 {
 	int	i;
 
 	i = 0;
+	if ((SDL_SetRenderDrawColor(v->screen, 164, 152, 141, 255)) < 0)
+		free_all_msg(l, v, "Error on draw_room : ");
 	while (i < thickness)
 	{
 		v->coor = init_coor(room->x - i, room->y - i, v->width_room + (i * 2),
 				v->height_room + (i * 2));
-		SDL_RenderDrawRect(v->screen, &v->coor);
+		if ((SDL_RenderDrawRect(v->screen, &v->coor)) < 0)
+			free_all_msg(l, v, "Error on draw_fat_border_rectangle : ");
 		i++;
 	}
+	if ((SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255)) < 0)
+		free_all_msg(l, v, "Error on draw_room : ");
 }
 
-void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room)
+void		draw_room(t_lemin *l, t_visu *v, t_room_visu *room)
 {
 	v->coor = init_coor(room->x, room->y, v->width_room, v->height_room);
 	if (room->special == SNORLAX)
 	{
 		init_snorlax(l, v);
-		SDL_RenderCopy(v->screen, v->snorlax, NULL, &v->coor);
+		if ((SDL_RenderCopy(v->screen, v->snorlax, NULL, &v->coor)) < 0)
+			free_all_msg(l, v, "Error on draw_room : ");
 	}
 	else if (room->special == LAVA)
 	{
 		init_lava(l, v);
-		SDL_RenderCopy(v->screen, v->lava, NULL, &v->coor);
+		if ((SDL_RenderCopy(v->screen, v->lava, NULL, &v->coor)) < 0)
+			free_all_msg(l, v, "Error on draw_room : ");
 	}
 	else
 		SDL_RenderFillRect(v->screen, &v->coor);
 	if (room->special == START || room->special == END)
-	{
-		SDL_SetRenderDrawColor(v->screen, 164, 152, 141, 255);
-		draw_fat_border_rectangle(v, room, 3);
-		SDL_SetRenderDrawColor(v->screen, 109, 90, 73, 255);
-	}
-	if (room->special ==  START)
+		draw_fat_border_rectangle(l, v, room, 3);
+	if (room->special == START)
 	{
 		v->startx = room->x;
 		v->starty = room->y;

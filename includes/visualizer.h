@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 15:08:57 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:28:32 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define SNORLAX 3
 # define LAVA 4
 # define WIDTH_W	1300
-# define HEIGHT_W	800
+# define HEIGHT_W	1000
 
 
 typedef struct	s_room_visu
@@ -109,6 +109,7 @@ typedef struct	s_visu
 	bool	init_snorlax;
 	bool	init_lava;
 	bool	init_all;
+	bool	ants_stocked;
 	bool	loop_moving;
 }						t_visu;
 
@@ -142,14 +143,13 @@ typedef struct	s_ant
 SDL_Color	init_color(int r, int g, int b, int a);
 
 void	init_struct(t_visu *v);
-void	init_SDL(t_lemin *l, t_visu *v);
+void	init_sdl(t_lemin *l, t_visu *v);
 void	init_window_and_surface(t_visu *v);
 void	free_rooms(t_visu *v);
 void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
 void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
 void	 event_loop(t_visu *v, t_lemin *l);
 int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v);
-int	visu_parsing_pipes(t_lemin *l, t_visu *v);
 void	move_ant_left(t_lemin *l, t_visu *v);
 void	move_ant_right(t_lemin *l, t_visu *v);
 void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
@@ -168,6 +168,13 @@ void	init_lava(t_lemin *l, t_visu *v);
 void	draw_pipes(t_lemin *l, t_visu *v);
 void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
 void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room);
+void	draw_start_end_name(t_lemin *l, t_visu *v);
+void	draw_arrows(t_lemin *l, t_visu *v);
+void	free_ants(t_visu *v);
+void	free_all_msg(t_lemin *l, t_visu *v, char *str);
+void	draw_anthill(t_lemin *l, t_visu *v);
+void	stock_ants(t_lemin *l, t_visu *v);
+void	parsing_visu(t_lemin *l, t_visu *v, t_room_visu *room);
 
 
 void	print_turns(t_lemin *l, t_visu *v);

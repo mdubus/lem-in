@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 21:18:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 15:11:53 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:45:53 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,29 @@ void	parsing_init_tab_pipes(t_lemin *l)
 
 static void	check_if_rooms_exists(t_lemin *l, char **tab)
 {
-	l->flag_room1 = -1;
-	l->flag_room2 = -1;
+	l->froom1 = -1;
+	l->froom2 = -1;
 	l->room = l->begin;
 	while (l->room)
 	{
 		if (ft_strcmp(l->room->name, tab[0]) == 0)
-			l->flag_room1 = l->room->id;
+			l->froom1 = l->room->id;
 		if (ft_strcmp(l->room->name, tab[1]) == 0)
-			l->flag_room2 = l->room->id;
+			l->froom2 = l->room->id;
 		l->room = l->room->next;
 	}
 	l->room = l->begin;
-	if (l->flag_room1 == -1 || l->flag_room2 == -1)
+	if (l->froom1 == -1 || l->froom2 == -1)
 	{
 		ft_free_double_tab((void**)tab);
 		free_pipes(l,
 			"\033[091mErreur : Tubes lies a des salles inconnues\033[0m");
 	}
-	if (l->flag_room1 != l->room_lava && l->flag_room2 != l->room_lava &&
-		l->flag_room1 != l->room_snorlax && l->flag_room2 != l->room_snorlax)
+	if (l->froom1 != l->room_lava && l->froom2 != l->room_lava &&
+		l->froom1 != l->room_snorlax && l->froom2 != l->room_snorlax)
 	{
-		l->pipes[l->flag_room2][l->flag_room1] = 1;
-		l->pipes[l->flag_room1][l->flag_room2] = 1;
+		l->pipes[l->froom2][l->froom1] = 1;
+		l->pipes[l->froom1][l->froom2] = 1;
 	}
 }
 

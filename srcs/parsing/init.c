@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 11:31:45 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 15:16:18 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:46:39 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	init_struct_lemin2(t_lemin *l)
 	l->flag_snorlax = 0;
 	l->room_lava = -1;
 	l->room_snorlax = -1;
-	l->flag_room1 = -1;
-	l->flag_room2 = -1;
+	l->froom1 = -1;
+	l->froom2 = -1;
 	l->nb_path_final = 0;
 	l->ant_finish = 0;
 }

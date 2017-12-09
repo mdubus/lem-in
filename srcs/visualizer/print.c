@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 18:11:45 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 14:58:47 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 16:35:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	print_rooms(t_visu *v)
 	room = v->begin;
 	while (room)
 	{
-		printf("%d : %s\n", room->id, room->name);
-		printf("x = %d, y = %d\n", room->x, room->y);
-		printf("special = %d\n\n", room->special);
+		ft_printf("%d : %s\n", room->id, room->name);
+		ft_printf("x = %d, y = %d\n", room->x, room->y);
+		ft_printf("special = %d\n\n", room->special);
 		room = room->next;
 	}
-	printf("*************************\n");
+	ft_printf("*************************\n");
 }

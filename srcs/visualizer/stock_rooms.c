@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 15:33:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 17:22:41 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:38:01 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 	}
 }
 
-static int	visu_check_if_room(char *str, t_lemin *l, t_room_visu **room, t_visu *v)
+static int	visu_check_if_room(char *str, t_lemin *l, t_room_visu **room,
+		t_visu *v)
 {
 	char	**tab;
 
@@ -91,7 +92,7 @@ static int	visu_check_if_room(char *str, t_lemin *l, t_room_visu **room, t_visu 
 	return (0);
 }
 
-int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v)
+int		visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v)
 {
 	int	i;
 
@@ -118,5 +119,3 @@ int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v)
 	l->start = i;
 	return (0);
 }
-
-

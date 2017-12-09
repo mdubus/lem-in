@@ -1,48 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu_parsing_pipes.c                               :+:      :+:    :+:   */
+/*   parsing_visu.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 18:38:29 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 14:57:21 by mdubus           ###   ########.fr       */
+/*   Created: 2017/12/09 17:26:47 by mdubus            #+#    #+#             */
+/*   Updated: 2017/12/09 17:36:48 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
+
+static void	check_start_end(t_lemin *l)
+{
+	if (l->room_end == -1)
+		free_check_if_room(l, "\033[091mErreur : Aucune salle de fin\033[0m]]");
+	if (l->room_start == -1)
+		free_check_if_room(l,
+				"\033[091mErreur : Aucune salle de depart\033[0m]]");
+	if (l->nb_rooms == 0)
+		free_check_if_room(l, "\033[091mErreur : Aucune room\033[0m]]");
+	if (l->room_start == l->room_end)
+		free_check_if_room(l,
+				"\033[091mErreur : Start et end identiques\033[0m]]");
+}
 
 static void	check_if_rooms_exists(t_lemin *l, char **tab, t_visu *v)
 {
 	t_room_visu	*room;
 
 	room = v->begin;
-	l->flag_room1 = -1;
-	l->flag_room2 = -1;
+	l->froom1 = -1;
+	l->froom2 = -1;
 	while (room)
 	{
 		if (ft_strcmp(room->name, tab[0]) == 0)
-			l->flag_room1 = room->id;
+			l->froom1 = room->id;
 		if (ft_strcmp(room->name, tab[1]) == 0)
-			l->flag_room2 = room->id;
+			l->froom2 = room->id;
 		room = room->next;
 	}
 	room = v->begin;
-	if (l->flag_room1 == -1 || l->flag_room2 == -1)
+	if (l->froom1 == -1 || l->froom2 == -1)
 	{
 		ft_free_double_tab((void**)tab);
 		free_in_pipes(l,
 				"\033[091mErreur : Tubes lies a des salles inconnues\033[0m", v);
 	}
-	if (l->flag_room1 != l->room_lava && l->flag_room2 != l->room_lava &&
-			l->flag_room1 != l->room_snorlax && l->flag_room2 != l->room_snorlax)
+	if (l->froom1 != l->room_lava && l->froom2 != l->room_lava &&
+			l->froom1 != l->room_snorlax && l->froom2 != l->room_snorlax)
 	{
-		l->pipes[l->flag_room2][l->flag_room1] = 1;
-		l->pipes[l->flag_room1][l->flag_room2] = 1;
+		l->pipes[l->froom2][l->froom1] = 1;
+		l->pipes[l->froom1][l->froom2] = 1;
 	}
 }
 
-void	stock_pipes_visu(char *str, t_lemin *l, t_visu *v)
+static void	stock_pipes_visu(char *str, t_lemin *l, t_visu *v)
 {
 	char	**tab;
 
@@ -71,7 +85,7 @@ void	stock_pipes_visu(char *str, t_lemin *l, t_visu *v)
 	l->nb_pipes++;
 }
 
-int	visu_parsing_pipes(t_lemin *l, t_visu *v)
+static int	visu_parsing_pipes(t_lemin *l, t_visu *v)
 {
 	int	i;
 
@@ -102,4 +116,22 @@ int	visu_parsing_pipes(t_lemin *l, t_visu *v)
 	}
 	l->start = i;
 	return (0);
+}
+
+void		parsing_visu(t_lemin *l, t_visu *v, t_room_visu *room)
+{
+	init_struct_lemin(l);
+	init_struct(v);
+	get_file(l);
+	parsing_ants_number(l);
+	v->nb_ant_start = l->nb_ants;
+	if (visu_parsing_room_and_stock(l, &room, v) == 2)
+		free_room_visu(l,
+				"\033[091mErreur : La map est mal formatee\033[0m", v);
+	if (l->nb_rooms > 15)
+		free_room_visu(l,
+				"\033[091mErreur : Trop de rooms\033[0m]]", v);
+	visu_parsing_pipes(l, v);
+	check_start_end(l);
+	stock_turns(l, v);
 }

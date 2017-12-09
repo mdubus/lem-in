@@ -6,39 +6,12 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:31:32 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/07 14:25:27 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:24:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
 
-void	free_rooms(t_visu *v)
-{
-	t_room_visu	*temp;
-
-	temp = NULL;
-	while (v->begin)
-	{
-		temp = v->begin;
-		v->begin = v->begin->next;
-		free(temp->name);
-		free(temp);
-	}
-}
-
-void	free_turns(t_visu *v)
-{
-	t_turn	*temp;
-
-	temp = NULL;
-	while (v->turn_begin)
-	{
-		free(v->turn_begin->turn);
-		temp = v->turn_begin;
-		v->turn_begin = v->turn_begin->next;
-		free(temp);
-	}
-}
 void	free_in_pipes(t_lemin *l, char *str, t_visu *v)
 {
 	free(l->string_file);
@@ -65,6 +38,13 @@ void	free_parsing_visu(t_lemin *l, t_visu *v)
 	free_turns(v);
 }
 
+void	free_all_msg(t_lemin *l, t_visu *v, char *str)
+{
+	ft_putstr(str);
+	ft_putendl(SDL_GetError());
+	free_all_and_quit(l, v);
+}
+
 void	free_all_and_quit(t_lemin *l, t_visu *v)
 {
 	free_parsing_visu(l, v);
@@ -85,15 +65,14 @@ void	free_all_and_quit(t_lemin *l, t_visu *v)
 		SDL_DestroyTexture(v->lava);
 	if (v->init_all == 1)
 		SDL_DestroyTexture(v->all);
-//	SDL_FreeSurface(v->background);
-//	SDL_FreeSurface(v->ant);
-//	TTF_CloseFont(v->typo);
+	if (v->ants_stocked == 1)
+		free_ants(v);
 	if (v->init_ttf == 1)
 		TTF_Quit();
 	if (v->init_img == 1)
 		IMG_Quit();
 	if (v->init_sdl == 1)
-		atexit(SDL_Quit);
+		SDL_Quit();
 //	sleep(60);
 	exit(1);
 }

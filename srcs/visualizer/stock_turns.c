@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 12:19:13 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 17:21:27 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:43:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ static void	stock_turn(t_lemin *l, t_visu *v, char *str)
 	ant = 0;
 	room = NULL;
 	create_turn(l, v);
-	tab = ft_strsplit(str, ' ');
-	if (!tab)
+	if ((tab = ft_strsplit(str, ' ')) == NULL)
 		free_stock_turn(l, "Error with malloc", v);
 	if (ft_strchr(tab[i], '-') == 0)
 		free_stock_turn(l, "Error with malloc", v);
@@ -82,16 +81,14 @@ static void	stock_turn(t_lemin *l, t_visu *v, char *str)
 		while (room_visu && (ft_strstr(room_visu->name, room) == 0))
 			room_visu = room_visu->next;
 		if (ft_strstr(room_visu->name, room) != 0)
-		{
 			v->turn->turn[ant] = room_visu->id;
-		}
 		i++;
 		free(room);
 	}
 	ft_free_double_tab((void **)tab);
 }
 
-void	stock_turns(t_lemin *l, t_visu *v)
+void		stock_turns(t_lemin *l, t_visu *v)
 {
 	int	i;
 
@@ -106,4 +103,5 @@ void	stock_turns(t_lemin *l, t_visu *v)
 	}
 	else
 		free_in_pipes(l, "Error", v);
+	v->turn = v->turn_begin;
 }

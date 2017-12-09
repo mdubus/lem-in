@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/08 18:32:30 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/09 17:15:22 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static void	put_new_coor_ant(t_visu *v, int i)
 	v->ant = v->ant_begin;
 	j = i;
 	if (v->turn->turn[i] == v->end_room_id)
+	{
 		v->ant_end++;
-	while (j > 0 && v->ant->next)
+	}
+	while (j > 1 && v->ant->next)
 	{
 		v->ant = v->ant->next;
 		j--;
@@ -33,7 +35,29 @@ static void	put_new_coor_ant(t_visu *v, int i)
 	v->ant->nexty = room->y;
 }
 
-static void	move(t_visu *v)
+static void	draw_ant_nb(t_lemin *l, t_visu *v, int flag)
+{
+	if (v->nb_ant_start > 0)
+	{
+		v->coor = init_coor(v->begin_roomx, v->begin_roomy, v->width_room, v->height_room);
+		if ((SDL_RenderCopy(v->screen, v->ant_img, NULL, &v->coor)) < 0)
+			free_all_msg(l, v, "Error in draw_ant_nb : ");
+	}
+	if (v->nb_ant_end > 0)
+	{
+		v->coor = init_coor(v->end_roomx, v->end_roomy, v->width_room, v->height_room);
+		if ((SDL_RenderCopy(v->screen, v->ant_img, NULL, &v->coor)) < 0)
+			free_all_msg(l, v, "Error in draw_ant_nb : ");
+	}
+	if (!v->ant && flag == 1)
+	{
+		v->nb_ant_end += v->ant_end;
+		v->ant_end = 0;
+	}
+	draw_start_end_name(l, v);
+}
+
+static void	move(t_lemin *l, t_visu *v)
 {
 	bool	flag;
 
@@ -42,11 +66,13 @@ static void	move(t_visu *v)
 	{
 		flag = 1;
 		v->ant = v->ant_begin;
-		SDL_RenderClear(v->screen);
-		SDL_RenderCopy(v->screen, v->all, NULL, NULL);
+		if ((SDL_RenderClear(v->screen)) < 0)
+			free_all_msg(l, v, "Error in move : ");
+		if ((SDL_RenderCopy(v->screen, v->all, NULL, NULL)) < 0)
+			free_all_msg(l, v, "Error in move : ");
 		while (v->ant)
 		{
-			v->coor = init_coor(v->ant->prevx, v->ant->prevy, v->width_room, v->height_room);
+			//	v->coor = init_coor(v->ant->prevx, v->ant->prevy, v->width_room, v->height_room);
 			if (v->ant->prevx > v->ant->nextx)
 			{
 				v->ant->prevx -= v->ant_speed;
@@ -78,33 +104,23 @@ static void	move(t_visu *v)
 			if (v->ant->prevx != -1 && v->ant->prevy != -1 && v->ant->nextx != -1 && v->ant->nexty != -1)
 			{
 				v->coor = init_coor(v->ant->prevx, v->ant->prevy, v->width_room, v->height_room);
-				SDL_RenderCopy(v->screen, v->ant_img, NULL, &v->coor);
+				if ((SDL_RenderCopy(v->screen, v->ant_img, NULL, &v->coor)) < 0)
+					free_all_msg(l, v, "Error in move : ");
 			}
 			v->ant = v->ant->next;
-
 		}
-			if (v->nb_ant_start > 0)
-			{
-				v->coor = init_coor(v->startx, v->starty, v->width_room, v->height_room);
-				SDL_RenderCopy(v->screen, v->ant_img, NULL, &v->coor);
-			}
-			if (v->nb_ant_end > 0)
-			{
-				v->coor = init_coor(v->startx, v->starty, v->width_room, v->height_room);
-				SDL_RenderCopy(v->screen, v->ant_img, NULL, &v->coor);
-			}
-			v->nb_ant_end -= v->ant_end;
+		draw_ant_nb(l, v, flag);
 		SDL_RenderPresent(v->screen);
 		SDL_Delay(5);
 	}
-
 }
 
-void	move_ant(t_lemin *l, t_visu *v)
+void	move_ant(t_lemin *l, t_visu *v, int key)
 {
 	int	i;
 
 	i = 0;
+	(void)key;
 	while (i <= l->nb_ants)
 	{
 		if (v->turn->turn[i] != -1)
@@ -114,19 +130,16 @@ void	move_ant(t_lemin *l, t_visu *v)
 	v->ant = v->ant_begin;
 	while (v->ant)
 	{
-		printf("nextx = %d, prevx = %d\n\n", v->ant->nextx, v->ant->prevx);
 		if ((v->ant->nextx != -1 && v->ant->prevx == -1) || (v->ant->nexty != -1 && v->ant->prevy == -1))
 		{
 			v->nb_ant_start--;
-			printf("ants start = %d\n", v->nb_ant_start);
 			v->ant->prevx = v->begin_roomx;
 			v->ant->prevy = v->begin_roomy;
 		}
 		v->ant = v->ant->next;
 	}
-	move(v);
-	if (v->turn->next)
-		v->turn = v->turn->next;
+	move(l, v);
+	v->turn = v->turn->next;
 }
 
 void event_loop(t_visu *v, t_lemin *l)
@@ -141,10 +154,10 @@ void event_loop(t_visu *v, t_lemin *l)
 			{
 				if (v->event.key.keysym.sym == CLOSE)
 					v->loop = false;
-				else if (v->event.key.keysym.sym == RIGHT)
-					move_ant(l, v);
-				else if (v->event.key.keysym.sym == LEFT)
-					move_ant(l, v);
+				else if (v->event.key.keysym.sym == RIGHT && v->turn)
+					move_ant(l, v, RIGHT);
+				else if (v->event.key.keysym.sym == LEFT && v->turn)
+					move_ant(l, v, LEFT);
 				else if (v->event.key.keysym.sym == PLUS)
 					v->ant_speed += 1;
 				else if (v->event.key.keysym.sym == MINUS)
@@ -157,8 +170,6 @@ void event_loop(t_visu *v, t_lemin *l)
 		}
 		if (v->loop == false)
 			break ;
-		//	if (v->flag_move_right == 1 || v->flag_move_left == 1)
-		//		move_ant(l, v);
 		SDL_Delay(5);
 	}
 	if (v->loop == false)
