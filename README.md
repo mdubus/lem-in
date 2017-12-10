@@ -47,6 +47,16 @@ L7-5 L9-2 L8-5 L10-3
 L9-5 L10-5
 ```
 
+## Bonus
+
+You can add 2 special rooms : 
+- One containing a Snorlax. Ants can't go this way, it's blocked !
+`##snorlax`
+
+- An other containing lava. Ants can'y go this way, it burns ! 
+`##lava`
+
+
 ## Prerequisites
 
 `brew install SDL2`
