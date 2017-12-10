@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 11:31:45 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:46:39 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:00:22 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	init_struct_lemin2(t_lemin *l)

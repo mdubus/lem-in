@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 17:26:47 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:36:48 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 14:59:05 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ static void	check_if_rooms_exists(t_lemin *l, char **tab, t_visu *v)
 			l->froom2 = room->id;
 		room = room->next;
 	}
-	room = v->begin;
 	if (l->froom1 == -1 || l->froom2 == -1)
 	{
 		ft_free_double_tab((void**)tab);
 		free_in_pipes(l,
-				"\033[091mErreur : Tubes lies a des salles inconnues\033[0m", v);
+				"\033[091mErreur: Tubes lies a des salles inconnues\033[0m", v);
 	}
 	if (l->froom1 != l->room_lava && l->froom2 != l->room_lava &&
 			l->froom1 != l->room_snorlax && l->froom2 != l->room_snorlax)
@@ -65,7 +64,7 @@ static void	stock_pipes_visu(char *str, t_lemin *l, t_visu *v)
 	if (!tab || tab == NULL || tab[0] == NULL || tab[1] == NULL)
 	{
 		free_in_pipes(l,
-				"\033[091mErreur lors d'une allocation memoire\033[0m", v);
+				"\033[091mErreur : dans les pipes\033[0m", v);
 	}
 	if (ft_strcmp(tab[0], tab[1]) == 0)
 	{
@@ -97,11 +96,9 @@ static int	visu_parsing_pipes(t_lemin *l, t_visu *v)
 			free_in_pipes(l, "\033[091mErreur : start invalide\033[0m", v);
 		else if (ft_strstr(l->f[i], "##end") != 0 && ft_strlen(l->f[i]) == 5)
 			free_in_pipes(l, "\033[091mErreur : end invalide\033[0m", v);
-		else if (l->f[i][0] && l->f[i][0] == '#' &&
-				(!l->f[i][1] || (l->f[i][1] && l->f[i][1] != '#')))
-			i++;
-		else if (l->f[i][0] && l->f[i][0] == '#' &&
-				l->f[i][1] && l->f[i][1] == '#')
+		else if ((l->f[i][0] && l->f[i][0] == '#' && (!l->f[i][1] || (l->f[i][1]
+				&& l->f[i][1] != '#'))) || (l->f[i][0] && l->f[i][0] == '#' &&
+				l->f[i][1] && l->f[i][1] == '#'))
 			i++;
 		else if (ft_nb_occur_char_in_str(l->f[i], " ") == 2 &&
 				l->f[i][0] && l->f[i][0] != '#')
@@ -109,13 +106,9 @@ static int	visu_parsing_pipes(t_lemin *l, t_visu *v)
 		else if (l->f[i][0] && l->f[i][0] != '#' && ft_strstr(l->f[i], "-"))
 			stock_pipes_visu(l->f[i++], l, v);
 		else
-		{
-			l->start = i;
-			return (1);
-		}
+			return (i);
 	}
-	l->start = i;
-	return (0);
+	return (i);
 }
 
 void		parsing_visu(t_lemin *l, t_visu *v, t_room_visu *room)
@@ -130,8 +123,8 @@ void		parsing_visu(t_lemin *l, t_visu *v, t_room_visu *room)
 				"\033[091mErreur : La map est mal formatee\033[0m", v);
 	if (l->nb_rooms > 15)
 		free_room_visu(l,
-				"\033[091mErreur : Trop de rooms\033[0m]]", v);
-	visu_parsing_pipes(l, v);
+				"\033[091mErreur : Trop de rooms\033[0m", v);
+	l->start = visu_parsing_pipes(l, v);
 	check_start_end(l);
 	stock_turns(l, v);
 }

@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 14:03:09 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 14:05:12 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:00:40 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 void	check_for_hyphen(char **tab, t_lemin *l)

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:58:19 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/04 15:21:42 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:05:59 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char		*ft_read_all_file(int fd)
 		else
 			ft_memdel((void**)&temp);
 	}
-//	free(list->reste);
 	free(list);
 	return (temp);
 }

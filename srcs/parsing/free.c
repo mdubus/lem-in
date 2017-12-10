@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 14:33:37 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 18:35:47 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 12:59:56 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ void	free_check_if_room(t_lemin *l, char *str)
 	free_lst_name(l);
 	error_lem_in(ft_putendl_fd, str, STDERR_FILENO, l);
 }
-

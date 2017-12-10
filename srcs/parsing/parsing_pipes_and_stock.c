@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 21:18:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:45:53 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:14:29 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	**ft_create_tab_bool(unsigned long x, unsigned long y)
 	return (tab);
 }
 
-void	parsing_init_tab_pipes(t_lemin *l)
+void		parsing_init_tab_pipes(t_lemin *l)
 {
 	l->pipes = ft_create_tab_bool((unsigned long)l->nb_rooms,
 			(unsigned long)l->nb_rooms);
@@ -83,7 +83,7 @@ static void	check_if_rooms_exists(t_lemin *l, char **tab)
 	}
 }
 
-void	stock_pipes(char *str, t_lemin *l)
+void		stock_pipes(char *str, t_lemin *l)
 {
 	char	**tab;
 

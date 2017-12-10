@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 14:20:41 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/29 18:24:54 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:00:33 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	case_start_end_identical(t_lemin *l)

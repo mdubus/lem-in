@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 10:58:47 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 19:07:10 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:00:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	make_tab_equivalence(t_lemin *l)

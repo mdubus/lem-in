@@ -6,14 +6,13 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/12/09 17:29:06 by mdubus           ###   ########.fr        #
+#    Updated: 2017/12/10 15:40:47 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	clang
 NAME		=	lem-in
-#FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror
 VISU		=	visu
 LIBDIR		=	libft
 LIBLINK		=	-L $(LIBDIR) -lft
@@ -49,7 +48,7 @@ SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
 				init.c
 
 SRC_VISU	=	main.c useful.c init.c loop.c stock_rooms.c free.c\
-				stock_turns.c print.c draw_pipes.c\
+				stock_turns.c draw_pipes.c move_ants.c move.c\
 				draw_room.c init_img.c draw_anthill.c free_linked_lists.c\
 				stock_ants.c draw_start_end_name.c parsing_visu.c
 

@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 16:28:24 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:16:54 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 12:29:51 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	draw_menu(t_lemin *l, t_visu *v)
 	char		*str;
 
 	str = ft_strdup("+ - : change ant speed   |");
-	str = ft_strjoin_proper(str, 1, "   left : previous turn   |", 0);
-	str = ft_strjoin_proper(str, 1, "   right : next turn", 0);
+	str = ft_strjoin_proper(str, 1, "   right : next turn   |", 0);
+	str = ft_strjoin_proper(str, 1, "   r : reinit anthill", 0);
 	if (TTF_SizeText(v->typo, str, &v->coor.w, &v->coor.h) == -1)
 		free_all_msg(l, v, "Error on draw_menu : ");
 	v->coor.y = HEIGHT_W - v->coor.h - 10;

@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 17:43:06 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 18:30:14 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:00:17 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	get_string_file(t_lemin *l)

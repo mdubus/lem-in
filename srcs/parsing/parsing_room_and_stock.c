@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:33 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/06 15:10:26 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:00:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 void	which_command(t_lemin *l, int i)

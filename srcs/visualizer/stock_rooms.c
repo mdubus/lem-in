@@ -6,13 +6,13 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 15:33:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:38:01 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 12:56:29 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
 
-static void	check_special_rooms(t_lemin *l, t_room_visu **room)
+static void	check_special_rooms(t_lemin *l, t_visu *v, t_room_visu **room)
 {
 	if (l->flag_start == 1)
 	{
@@ -25,6 +25,9 @@ static void	check_special_rooms(t_lemin *l, t_room_visu **room)
 		(*room)->special = END;
 		l->flag_end = 0;
 		l->room_end = (*room)->id;
+		v->end_roomx = (*room)->x;
+		v->end_roomy = (*room)->y;
+		v->end_room_id = (*room)->id;
 	}
 	if (l->flag_lava == 1)
 	{
@@ -51,24 +54,17 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 		*room = (*room)->next;
 	}
 	(*room)->name = ft_strdup(tab[0]);
-	(*room)->id = l->id;
-	l->id++;
+	(*room)->id = l->id++;
 	(*room)->next = NULL;
 	(*room)->x = ft_atoi(tab[1]);
 	(*room)->y = ft_atoi(tab[2]);
 	(*room)->special = 0;
-	check_special_rooms(l, room);
+	check_special_rooms(l, v, room);
 	l->nb_rooms++;
 	if ((*room)->special == START)
 	{
 		v->begin_roomx = (*room)->x;
 		v->begin_roomy = (*room)->y;
-	}
-	if ((*room)->special == END)
-	{
-		v->end_roomx = (*room)->x;
-		v->end_roomy = (*room)->y;
-		v->end_room_id = (*room)->id;
 	}
 }
 
@@ -92,7 +88,8 @@ static int	visu_check_if_room(char *str, t_lemin *l, t_room_visu **room,
 	return (0);
 }
 
-int		visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v)
+int			visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room,
+		t_visu *v)
 {
 	int	i;
 

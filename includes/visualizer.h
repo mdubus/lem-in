@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:28:32 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 15:35:21 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,10 @@
 # include "lem_in.h"
 
 # define CLOSE 27
-# define LEFT 1073741904
+# define R 114
 # define RIGHT 1073741903
 # define PLUS 1073741911
 # define MINUS 1073741910
-
-
-# define FPS 60
-# define SKIP_TICKS 1000 / FPS
-
 # define START 1
 # define END 2
 # define SNORLAX 3
@@ -43,10 +38,9 @@
 # define WIDTH_W	1300
 # define HEIGHT_W	1000
 
-
-typedef struct	s_room_visu
+typedef struct			s_room_visu
 {
-	int					x;// Coordonnees milieu en px
+	int					x;
 	int					y;
 	int					special;
 	int					id;
@@ -54,7 +48,7 @@ typedef struct	s_room_visu
 	struct s_room_visu	*next;
 }						t_room_visu;
 
-typedef struct	s_visu
+typedef struct			s_visu
 {
 	SDL_Window			*window;
 	SDL_Renderer		*screen;
@@ -69,8 +63,7 @@ typedef struct	s_visu
 	TTF_Font			*typo;
 	SDL_Event			event;
 	SDL_Color			white;
-	SDL_Color			purple;
-	SDL_Color			pink;
+	char				padding1[4];
 	struct s_room_visu	*begin;
 	struct s_room_visu	*first;
 	struct s_room_visu	*next;
@@ -98,86 +91,80 @@ typedef struct	s_visu
 	bool				loop;
 	bool				flag_move_right;
 	bool				flag_move_left;
-	bool	init_sdl;
-	bool	init_img;
-	bool	init_ttf;
-	bool	init_window;
-	bool	init_screen;
-	bool	init_typo;
-	bool	init_background;
-	bool	init_ant;
-	bool	init_snorlax;
-	bool	init_lava;
-	bool	init_all;
-	bool	ants_stocked;
-	bool	loop_moving;
+	bool				init_sdl;
+	bool				init_img;
+	bool				init_ttf;
+	bool				init_window;
+	bool				init_screen;
+	bool				init_typo;
+	bool				init_background;
+	bool				init_ant;
+	bool				init_snorlax;
+	bool				init_lava;
+	bool				init_all;
+	bool				ants_stocked;
+	bool				loop_moving;
+	char				padding2[4];
 }						t_visu;
 
-typedef struct	s_turn
+typedef struct			s_turn
 {
 	int					*turn;
 	struct s_turn		*next;
 	struct s_turn		*prev;
 }						t_turn;
 
-typedef struct	s_rect
+typedef struct			s_rect
 {
-	int			x;
-	int			y;
-	int			width;
-	int			height;
-	int			thick;
-}				t_rect;
+	int					x;
+	int					y;
+	int					width;
+	int					height;
+	int					thick;
+}						t_rect;
 
-typedef struct	s_ant
+typedef struct			s_ant
 {
-	int				prevx;
-	int				prevy;
-	int				nextx;
-	int				nexty;
-	int				id;
-	struct s_ant	*next;
-}					t_ant;
+	int					prevx;
+	int					prevy;
+	int					nextx;
+	int					nexty;
+	int					id;
+	char				padding[4];
+	struct s_ant		*next;
+}						t_ant;
 
-
-SDL_Color	init_color(int r, int g, int b, int a);
-
-void	init_struct(t_visu *v);
-void	init_sdl(t_lemin *l, t_visu *v);
-void	init_window_and_surface(t_visu *v);
-void	free_rooms(t_visu *v);
-void	put_on_screen_sdl(t_visu *v, SDL_Surface *surface, int x, int y);
-void	put_all_on_screen_sdl(t_visu *v, SDL_Surface *surface);
-void	 event_loop(t_visu *v, t_lemin *l);
-int	visu_parsing_room_and_stock(t_lemin *l, t_room_visu **room, t_visu *v);
-void	move_ant_left(t_lemin *l, t_visu *v);
-void	move_ant_right(t_lemin *l, t_visu *v);
-void	free_in_pipes(t_lemin *l, char *str, t_visu *v);
-void	stock_turns(t_lemin *l, t_visu *v);
-void	free_turns(t_visu *v);
-void	free_all_and_quit(t_lemin *l, t_visu *v);
-void	init_background(t_lemin *l, t_visu *v);
-void	free_room_visu(t_lemin *l, char *str, t_visu *v);
-void	free_parsing_visu(t_lemin *l, t_visu *v);
-void	init_window(t_lemin *l, t_visu *v);
-void	init_typo(t_lemin *l, t_visu *v);
-void	init_ant(t_lemin *l, t_visu *v);
-SDL_Rect	init_coor(int x, int y, int w, int h);
-void	init_snorlax(t_lemin *l, t_visu *v);
-void	init_lava(t_lemin *l, t_visu *v);
-void	draw_pipes(t_lemin *l, t_visu *v);
-void	draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
-void	draw_room_name(t_lemin *l, t_visu *v, t_room_visu *room);
-void	draw_start_end_name(t_lemin *l, t_visu *v);
-void	draw_arrows(t_lemin *l, t_visu *v);
-void	free_ants(t_visu *v);
-void	free_all_msg(t_lemin *l, t_visu *v, char *str);
-void	draw_anthill(t_lemin *l, t_visu *v);
-void	stock_ants(t_lemin *l, t_visu *v);
-void	parsing_visu(t_lemin *l, t_visu *v, t_room_visu *room);
-
-
-void	print_turns(t_lemin *l, t_visu *v);
-void	print_rooms(t_visu *v);
+SDL_Color				init_color(int r, int g, int b, int a);
+void					init_struct(t_visu *v);
+void					init_sdl(t_lemin *l, t_visu *v);
+void					free_rooms(t_visu *v);
+void					put_on_screen_sdl(t_visu *v, SDL_Surface *surface,
+						int x, int y);
+void					event_loop(t_visu *v, t_lemin *l);
+int						visu_parsing_room_and_stock(t_lemin *l,
+						t_room_visu **room, t_visu *v);
+void					free_in_pipes(t_lemin *l, char *str, t_visu *v);
+void					stock_turns(t_lemin *l, t_visu *v);
+void					free_turns(t_visu *v);
+void					free_all_and_quit(t_lemin *l, t_visu *v);
+void					init_background(t_lemin *l, t_visu *v);
+void					free_room_visu(t_lemin *l, char *str, t_visu *v);
+void					init_window(t_lemin *l, t_visu *v);
+void					init_ant(t_lemin *l, t_visu *v);
+SDL_Rect				init_coor(int x, int y, int w, int h);
+void					init_snorlax(t_lemin *l, t_visu *v);
+void					init_lava(t_lemin *l, t_visu *v);
+void					draw_pipes(t_lemin *l, t_visu *v);
+void					draw_room(t_lemin *l, t_visu *v, t_room_visu *room);
+void					draw_room_name(t_lemin *l, t_visu *v,
+						t_room_visu *room);
+void					draw_start_end_name(t_lemin *l, t_visu *v);
+void					free_ants(t_visu *v);
+void					free_all_msg(t_lemin *l, t_visu *v, char *str);
+void					draw_anthill(t_lemin *l, t_visu *v);
+void					stock_ants(t_lemin *l, t_visu *v);
+void					parsing_visu(t_lemin *l, t_visu *v, t_room_visu *room);
+void					move_ant(t_lemin *l, t_visu *v);
+void					move(t_lemin *l, t_visu *v);
 
 #endif

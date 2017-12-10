@@ -6,11 +6,24 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 11:02:00 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/18 17:19:13 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:04:08 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
+
+static void	error_in_bfs(t_lemin *l)
+{
+	free(l->sum);
+	ft_memdel((void**)&l->string_file);
+	ft_free_double_tab((void**)l->f);
+	ft_free_double_tab((void**)l->eq);
+	ft_free_double_tab((void**)l->pipes);
+	free_lst_name(l);
+	error_lem_in(ft_putendl_fd,
+			"\033[091mErreur lors d'une allocation\033[0m",
+			STDERR_FILENO, l);
+}
 
 static void	cut_paths(t_lemin *l, int room, int *level)
 {

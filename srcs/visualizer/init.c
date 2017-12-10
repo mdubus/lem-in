@@ -6,38 +6,23 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 11:19:22 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/09 17:25:43 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/10 13:19:26 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/visualizer.h"
 
-void	init_struct(t_visu *v)
+static void	init_struct3(t_visu *v)
 {
-	v->window = NULL;
-	v->screen = NULL;
-	v->background = NULL;
-	v->ant_img = NULL;
-	v->texture = NULL;
-	v->snorlax = NULL;
-	v->lava = NULL;
-	v->surf = NULL;
-	v->all = NULL;
-	v->typo = NULL;
-	v->white = init_color(255, 255, 255, 255);
-	v->purple = init_color(215, 149, 242, 255);
-	v->pink = init_color(237, 101, 162, 255);
-	v->begin = NULL;
-	v->first = NULL;
-	v->next = NULL;
-	v->turn_begin = NULL;
-	v->turn = NULL;
-	v->ant = NULL;
-	v->ant_begin = NULL;
-	v->string_file = NULL;
-	v->file = NULL;
-	v->width_room = 0;
-	v->height_room = 0;
+	v->init_snorlax = 0;
+	v->init_lava = 0;
+	v->init_all = 0;
+	v->loop_moving = 0;
+	v->ants_stocked = 0;
+}
+
+static void	init_struct2(t_visu *v)
+{
 	v->startx = 0;
 	v->starty = 0;
 	v->endx = 0;
@@ -62,14 +47,37 @@ void	init_struct(t_visu *v)
 	v->init_typo = 0;
 	v->init_background = 0;
 	v->init_ant = 0;
-	v->init_snorlax = 0;
-	v->init_lava = 0;
-	v->init_all = 0;
-	v->loop_moving = 0;
-	v->ants_stocked = 0;
+	init_struct3(v);
 }
 
-void	init_sdl(t_lemin *l, t_visu *v)
+void		init_struct(t_visu *v)
+{
+	v->window = NULL;
+	v->screen = NULL;
+	v->background = NULL;
+	v->ant_img = NULL;
+	v->texture = NULL;
+	v->snorlax = NULL;
+	v->lava = NULL;
+	v->surf = NULL;
+	v->all = NULL;
+	v->typo = NULL;
+	v->white = init_color(255, 255, 255, 255);
+	v->begin = NULL;
+	v->first = NULL;
+	v->next = NULL;
+	v->turn_begin = NULL;
+	v->turn = NULL;
+	v->ant = NULL;
+	v->ant_begin = NULL;
+	v->string_file = NULL;
+	v->file = NULL;
+	v->width_room = 0;
+	v->height_room = 0;
+	init_struct2(v);
+}
+
+void		init_sdl(t_lemin *l, t_visu *v)
 {
 	int	flags;
 	int	inited;
@@ -92,11 +100,11 @@ void	init_sdl(t_lemin *l, t_visu *v)
 		v->init_ttf = 1;
 }
 
-void	init_window(t_lemin *l, t_visu *v)
+void		init_window(t_lemin *l, t_visu *v)
 {
-	if ((v->window = SDL_CreateWindow("Lem-in", SDL_WINDOWPOS_CENTERED,
-					SDL_WINDOWPOS_CENTERED, WIDTH_W, HEIGHT_W,
-					SDL_WINDOW_SHOWN)) == NULL)
+	if ((v->window = SDL_CreateWindow("Lem-in | @mdubus",
+					SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH_W,
+					HEIGHT_W, SDL_WINDOW_SHOWN)) == NULL)
 		free_all_msg(l, v, "Unable to initialize window : ");
 	else
 		v->init_window = 1;
@@ -104,10 +112,6 @@ void	init_window(t_lemin *l, t_visu *v)
 		free_all_msg(l, v, "Unable to create render : ");
 	else
 		v->init_screen = 1;
-}
-
-void	init_typo(t_lemin *l, t_visu *v)
-{
 	v->typo = TTF_OpenFont("srcs/visualizer/typo.ttf", 40);
 	if (!v->typo)
 		free_all_msg(l, v, "Unable to initialize font : ");
