@@ -14,7 +14,7 @@ To reduce the calculation time, I eliminated some paths (useless, dead-end, ...)
 
 ## Understanding the maps
 
-10          // ants number
+`10          // ants number
 
 1 250 150   // Room name (1) ants it's X-Y coordonates
 
@@ -50,7 +50,7 @@ To reduce the calculation time, I eliminated some paths (useless, dead-end, ...)
 
 3-6
 
-5-6
+5-6`
 
 
 ## Understanding the output
