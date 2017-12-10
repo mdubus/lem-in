@@ -5,8 +5,11 @@ Lem-in is an algorithm project, where ants have to go the fastest as posible fro
 ## Algorithm
 
 This is an home-made algorithm. 
+
 I check all possible paths and compare them to select the best paths. 
+
 This can take a lot of time on big maps. 
+
 To reduce the calculation time, I eliminated some paths (useless, dead-end, ...). 
 
 ## Understanding the maps
