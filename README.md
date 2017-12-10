@@ -32,7 +32,8 @@ To reduce the calculation time, I eliminated some paths (useless, dead-end, ...)
 3-4
 3-5
 3-6
-5-6```
+5-6
+```
 
 
 ## Understanding the output
