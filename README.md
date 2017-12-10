@@ -55,7 +55,7 @@ You can add 2 special rooms :
 
 `##snorlax`
 
-- An other containing lava. Ants can'y go this way, it burns ! 
+- An other containing lava. Ants can't go this way, it burns ! 
 
 `##lava`
 
@@ -63,6 +63,7 @@ You can run a visualizer to see you ants moving.
 Here are the commands : 
 - right key : see next turn
 - r : reinitialize the anthill
+- + / - : change your ants speed
 - esc : escape the visualizer
 
 Here is an example of what can be obtained with this algorithm and visualizer :
