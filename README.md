@@ -14,16 +14,16 @@ To reduce the calculation time, I eliminated some paths (useless, dead-end, ...)
 
 ## Understanding the maps
 ```
-10          # ants number
-1 250 150   # Room name (1) ants it's X-Y coordonates
+10          // ants number
+1 250 150   // Room name (1) ants it's X-Y coordonates
 2 550 150
 3 550 450
-##start     # Next room will be start room
+##start     // Next room will be start room
 4 250 450
-##end       # Next room will be end room
+##end       // Next room will be end room
 5 850 450
 6 850 150
-1-2         # Relations between rooms. Room 1 and 2 are linked
+1-2         // Relations between rooms. Room 1 and 2 are linked
 1-3
 1-4
 2-4
