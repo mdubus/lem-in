@@ -52,9 +52,11 @@ L9-5 L10-5
 
 You can add 2 special rooms : 
 - One containing a Snorlax. Ants can't go this way, it's blocked !
+
 `##snorlax`
 
 - An other containing lava. Ants can'y go this way, it burns ! 
+
 `##lava`
 
 You can run a visualizer to see you ants moving. 
