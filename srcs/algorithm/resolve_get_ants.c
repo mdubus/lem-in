@@ -6,76 +6,60 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 15:48:28 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 15:53:15 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/11 16:31:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
-static void	print_ants(t_lemin *l)
+static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 {
-	int		i;
-	t_room	*path;
-
-	i = 0;
-	path = NULL;
-	while (l->result[i] != NULL)
+	if (path->next->id == l->room_start && *ant_nb <= l->nb_ants)
 	{
-		path = l->result[i];
-		while (path && path->id != l->room_start && l->ant_finish < l->nb_ants)
-		{
-			if (path->ant > 0)
-			{
-				if (path->id == l->room_end)
-					l->ant_finish++;
-				ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
-			}
-			path = path->next;
-		}
-		i++;
+		path->ant = *ant_nb;
+		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
+		(*ant_nb)++;
 	}
-	ft_putchar('\n');
-}
-
-static void	get_next_ant(t_lemin *l, t_room **path, int *ant)
-{
-	if ((*path)->next && (*path)->next->id == l->room_start &&
-			*ant <= l->nb_ants)
+	else if (path->next->ant > 0 && path->id != l->room_end &&
+			path->next->id != l->room_start)
 	{
-		(*path)->ant = *ant;
-		(*ant)++;
+		path->ant = path->next->ant;
+		path->next->ant = -1;
+		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
 	}
-	else if ((*path)->next && (*path)->next->ant > 0 &&
-			(*path)->next->id != l->room_start)
+	else if (path->next->ant > 0 && path->id == l->room_end &&
+			l->ant_finish < l->nb_ants)
 	{
-		(*path)->ant = (*path)->next->ant;
-		(*path)->next->ant = 0;
+		path->ant = path->next->ant;
+		path->next->ant = -1;
+		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
+		l->ant_finish++;
 	}
-	*path = (*path)->next;
 }
 
 void		get_ants(t_lemin *l)
 {
-	int		ant;
+	int		ant_nb;
 	int		i;
 	t_room	*path;
 
-	ant = 1;
-	i = 0;
+	ant_nb = 1;
 	path = NULL;
-	while (l->ant_finish < l->nb_ants)
+	l->ant_finish = 0;
+	while (l->ant_finish < l->nb_ants) // A chaque tour
 	{
-		while (l->result[i] != NULL)
+		i = 0;
+		while (l->result[i]) // Pour chaque chemin possible
 		{
 			path = l->result[i];
-			while (path && path->id != l->room_start)
+			while (path->next)	// On parcours chaque room
 			{
-				get_next_ant(l, &path, &ant);
+				ants_vacuum(l, path, &ant_nb);
+				path = path->next;
 			}
 			i++;
 		}
-		i = 0;
-		print_ants(l);
+		ft_putchar('\n');
 	}
 }
