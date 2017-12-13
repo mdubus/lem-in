@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/10 17:43:22 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/13 18:01:21 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct		s_lemin
 	int				room_end;
 	int				room_lava;
 	int				room_snorlax;
+	int				prev_length;
+	int				padding;
 	int				froom1;
 	int				froom2;
 	char			debug;

@@ -6,15 +6,20 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 15:48:28 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/11 16:33:36 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/13 18:14:50 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
+// Ajout de l->prev_length pour check la longueur du chemin precedent
+
 static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 {
+	int	rest;
+
+	rest = l->nb_ants - *ant_nb + 1;
 	if (path->next->id == l->room_start && *ant_nb <= l->nb_ants)
 	{
 		path->ant = *ant_nb;
@@ -36,6 +41,7 @@ static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
 		l->ant_finish++;
 	}
+	l->prev_length = path->length;
 }
 
 void		get_ants(t_lemin *l)
