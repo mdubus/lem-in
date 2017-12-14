@@ -6,14 +6,32 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 15:48:28 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/13 18:14:50 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/14 18:19:08 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
-// Ajout de l->prev_length pour check la longueur du chemin precedent
+static void	push_ant_front(t_lemin *l, int rest, t_room *path, int *ant_nb)
+{
+	if (rest <= l->nb_path_final)
+	{
+		if (path->length <= l->prev_length)
+		{
+			path->ant = *ant_nb;
+			ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
+			(*ant_nb)++;
+		}
+	}
+	else
+	{
+		path->ant = *ant_nb;
+		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
+		(*ant_nb)++;
+	}
+	if (path->id == l->room_end)
+		l->ant_finish++;
+}
 
 static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 {
@@ -21,11 +39,7 @@ static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 
 	rest = l->nb_ants - *ant_nb + 1;
 	if (path->next->id == l->room_start && *ant_nb <= l->nb_ants)
-	{
-		path->ant = *ant_nb;
-		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
-		(*ant_nb)++;
-	}
+		push_ant_front(l, rest, path, ant_nb);
 	else if (path->next->ant > 0 && path->id != l->room_end &&
 			path->next->id != l->room_start)
 	{
@@ -41,7 +55,6 @@ static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 		ft_printf("L%d-%s ", path->ant, l->eq[path->id]);
 		l->ant_finish++;
 	}
-	l->prev_length = path->length;
 }
 
 void		get_ants(t_lemin *l)
@@ -53,13 +66,14 @@ void		get_ants(t_lemin *l)
 	ant_nb = 1;
 	path = NULL;
 	l->ant_finish = 0;
-	while (l->ant_finish < l->nb_ants) // A chaque tour
+	l->prev_length = l->result[0]->length;
+	while (l->ant_finish < l->nb_ants)
 	{
 		i = 0;
-		while (l->result[i]) // Pour chaque chemin possible
+		while (l->result[i])
 		{
 			path = l->result[i];
-			while (path->next)	// On parcours chaque room
+			while (path->next)
 			{
 				ants_vacuum(l, path, &ant_nb);
 				path = path->next;

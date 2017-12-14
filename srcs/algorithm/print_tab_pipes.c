@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 15:33:57 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 15:34:39 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/14 16:12:29 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	print_head(int x)

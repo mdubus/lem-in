@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 15:06:32 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 15:13:36 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/14 16:12:34 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	get_coups_min(t_lemin *l, t_path **next)

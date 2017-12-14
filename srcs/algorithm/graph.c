@@ -6,11 +6,10 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:29:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/17 14:02:07 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/14 16:12:07 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma GCC diagnostic error "-Weverything"
 #include "../../includes/lem_in.h"
 
 static void	print_links(t_lemin *l, bool **pipes)
