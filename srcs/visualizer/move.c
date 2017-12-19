@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:20:02 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:20:03 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 19:17:47 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,20 @@ static void	draw_ant_nb(t_lemin *l, t_visu *v, int flag)
 	draw_start_end_name(l, v);
 }
 
+# include <stdio.h> // a retirer
+
 static void	put_prev_coor1(t_visu *v, bool *flag)
 {
 	if (v->ant->prevx > v->ant->nextx)
 	{
-		v->ant->prevx -= v->ant_speed;
+		v->ant->prevx += v->ant->modx;
 		if (v->ant->prevx < v->ant->nextx)
 			v->ant->prevx = v->ant->nextx;
 		*flag = 0;
 	}
 	else if (v->ant->prevx < v->ant->nextx)
 	{
-		v->ant->prevx += v->ant_speed;
+		v->ant->prevx += v->ant->modx;
 		if (v->ant->prevx > v->ant->nextx)
 			v->ant->prevx = v->ant->nextx;
 		*flag = 0;
@@ -58,14 +60,14 @@ static void	put_prev_coor2(t_visu *v, bool *flag)
 {
 	if (v->ant->prevy > v->ant->nexty)
 	{
-		v->ant->prevy -= v->ant_speed;
+		v->ant->prevy += v->ant->mody;
 		if (v->ant->prevy < v->ant->nexty)
 			v->ant->prevy = v->ant->nexty;
 		*flag = 0;
 	}
 	else if (v->ant->prevy < v->ant->nexty)
 	{
-		v->ant->prevy += v->ant_speed;
+		v->ant->prevy += v->ant->mody;
 		if (v->ant->prevy > v->ant->nexty)
 			v->ant->prevy = v->ant->nexty;
 		*flag = 0;
@@ -74,8 +76,10 @@ static void	put_prev_coor2(t_visu *v, bool *flag)
 
 static void	draw_ant(t_lemin *l, t_visu *v, bool *flag)
 {
+	
 	put_prev_coor1(v, flag);
 	put_prev_coor2(v, flag);
+//			printf("modx = %f, mody = %f\n", v->ant->modx, v->ant->mody);
 	if (v->ant->prevx != -1 && v->ant->prevy != -1 &&
 			v->ant->nextx != -1 && v->ant->nexty != -1)
 	{
@@ -101,7 +105,9 @@ void		move(t_lemin *l, t_visu *v)
 		if ((SDL_RenderCopy(v->screen, v->all, NULL, NULL)) < 0)
 			free_all_msg(l, v, "Error in move : ");
 		while (v->ant)
+		{
 			draw_ant(l, v, &flag);
+		}
 		draw_ant_nb(l, v, flag);
 		SDL_RenderPresent(v->screen);
 		SDL_Delay(5);

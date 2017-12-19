@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 10:53:37 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 18:13:46 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,14 @@ typedef struct			s_rect
 
 typedef struct			s_ant
 {
-	int					prevx;
-	int					prevy;
-	int					nextx;
-	int					nexty;
+	double				prevx;
+	double				prevy;
+	double				nextx;
+	double				nexty;
+	double				beginx;
+	double				beginy;
+	double				modx;
+	double				mody;
 	int					id;
 	char				padding[4];
 	struct s_ant		*next;

@@ -6,14 +6,16 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:14:18 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:14:19 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 18:57:35 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../../includes/lem_in.h"
 
 static void	push_ant_front(t_lemin *l, int rest, t_room *path, int *ant_nb)
 {
+//	dprintf(STDERR_FILENO, "RESTE = %d\n", rest);
 	if (rest <= l->nb_path_final)
 	{
 		if (path->length <= l->prev_length)
@@ -37,7 +39,7 @@ static void	ants_vacuum(t_lemin *l, t_room *path, int *ant_nb)
 {
 	int	rest;
 
-	rest = l->nb_ants - *ant_nb + 1;
+	rest = l->nb_ants - l->ant_finish;
 	if (path->next->id == l->room_start && *ant_nb <= l->nb_ants)
 		push_ant_front(l, rest, path, ant_nb);
 	else if (path->next->ant > 0 && path->id != l->room_end &&

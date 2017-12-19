@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:20:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:20:26 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 18:45:24 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ static void	stock_coordonates(t_lemin *l, char **tab, t_room_visu **room)
 			(*room)->y > HEIGHT_W || (*room)->y < 0 || (*room)->y > 2147483648)
 	{
 		ft_free_double_tab((void**)tab);
-		free_check_if_room(l,
-			"\033[091mErreur : Coordonnees invalides\033[0m");
+		free(l->string_file);
+		free_lst_name(l);
+		ft_putendl_fd("\033[091mErreur : Coordonnees invalides\033[0m",
+				STDERR_FILENO);
+		exit(1);
 	}
 }
 

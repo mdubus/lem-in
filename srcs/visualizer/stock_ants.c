@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:20:19 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:20:20 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 18:10:41 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	stock_ants(t_lemin *l, t_visu *v)
 		v->ant->prevy = -1;
 		v->ant->nextx = -1;
 		v->ant->nexty = -1;
+		v->ant->modx = -1;
+		v->ant->mody = -1;
 		v->ant->next = NULL;
 		i++;
 	}
