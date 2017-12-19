@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:19:44 by mdubus            #+#    #+#              #
-#    Updated: 2017/11/10 18:48:46 by mdubus           ###   ########.fr        #
+#    Updated: 2017/12/19 11:12:04 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC		= gcc
 
 NAME	=	libft.a
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 INCLUDES	=	-I ./includes
 
@@ -51,7 +51,7 @@ SRC =	ft_absolute.c ft_absolute_double.c ft_atoi.c ft_atoi_base.c\
 		ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtoupper.c\
 		ft_strtrim.c ft_swap_adress.c ft_tolower.c ft_toupper.c\
 		get_next_line_backslash.c ft_nb_occur_char_in_str.c\
-		ft_print_error_fd_exit.c ft_strjoin_proper.c\
+		ft_print_error_fd_exit.c ft_strjoin_proper.c ft_latoi.c\
 		ft_strnstartcpy.c ft_read_all_file.c ft_check_if_num.c\
 		ft_strdup_plus_char.c ft_strsplit_strict.c ft_create_tab.c\
 		ft_free_double_tab.c ft_print_tab_int.c ft_print_tab_bool.c
@@ -60,10 +60,12 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(OBJ)
-	@$(CC) $(FLAGS) -c $(SRC) $(INCLUDES)
+$(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
+
+%.o : %.c
+	$(CC) $(FLAGS) -c $< $(INCLUDES)
 
 clean:
 	@rm -rf $(OBJ)

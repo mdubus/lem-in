@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 18:42:44 by mdubus            #+#    #+#             */
-/*   Updated: 2017/11/22 15:17:34 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 10:32:55 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 int	ft_check_if_num(char *str)
 {
 	int	i;
-	int	isnum;
 
 	i = 0;
-	isnum = 0;
 	while (str[i] != '\0')
 	{
 		if (ft_isdigit(str[i++]) == 0)
-			isnum = 1;
+			return (1);
 	}
-	return (isnum);
+	return (0);
 }

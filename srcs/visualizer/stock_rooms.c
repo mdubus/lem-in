@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_rooms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 15:33:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/10 12:56:29 by mdubus           ###   ########.fr       */
+/*   Created: 2017/12/19 11:20:25 by mdubus            #+#    #+#             */
+/*   Updated: 2017/12/19 11:20:26 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,19 @@ static void	check_special_rooms(t_lemin *l, t_visu *v, t_room_visu **room)
 	}
 }
 
+static void	stock_coordonates(t_lemin *l, char **tab, t_room_visu **room)
+{
+	(*room)->x = ft_latoi(tab[1]);
+	(*room)->y = ft_latoi(tab[2]);
+	if ((*room)->x > WIDTH_W || (*room)->x < 0 || (*room)->x > 2147483648 ||
+			(*room)->y > HEIGHT_W || (*room)->y < 0 || (*room)->y > 2147483648)
+	{
+		ft_free_double_tab((void**)tab);
+		free_check_if_room(l,
+			"\033[091mErreur : Coordonnees invalides\033[0m");
+	}
+}
+
 static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 {
 	if (!v->begin)
@@ -52,12 +65,11 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 	{
 		(*room)->next = (t_room_visu*)malloc(sizeof(t_room_visu));
 		*room = (*room)->next;
-	}
+}
 	(*room)->name = ft_strdup(tab[0]);
 	(*room)->id = l->id++;
 	(*room)->next = NULL;
-	(*room)->x = ft_atoi(tab[1]);
-	(*room)->y = ft_atoi(tab[2]);
+	stock_coordonates(l, tab, room);
 	(*room)->special = 0;
 	check_special_rooms(l, v, room);
 	l->nb_rooms++;

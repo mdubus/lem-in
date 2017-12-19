@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_pipes_and_stock.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/03 21:18:53 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/14 17:30:45 by mdubus           ###   ########.fr       */
+/*   Created: 2017/12/19 11:17:22 by mdubus            #+#    #+#             */
+/*   Updated: 2017/12/19 11:17:23 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		stock_pipes(char *str, t_lemin *l)
 	if (tab == NULL || tab[0] == NULL || tab[1] == NULL)
 	{
 		free_pipes(l,
-				"\033[091mErreur lors d'une allocation memoire\033[0m");
+				"\033[091mErreur : Pipes mal formates\033[0m");
 	}
 	if (ft_strcmp(tab[0], tab[1]) == 0)
 	{

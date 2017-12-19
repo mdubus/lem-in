@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 15:01:51 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/13 17:59:10 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 10:53:37 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 
 typedef struct			s_room_visu
 {
-	int					x;
-	int					y;
+	long				x;
+	long				y;
 	int					special;
 	int					id;
 	char				*name;

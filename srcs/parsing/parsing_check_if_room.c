@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check_if_room.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 19:03:01 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/10 13:00:11 by mdubus           ###   ########.fr       */
+/*   Created: 2017/12/19 11:15:27 by mdubus            #+#    #+#             */
+/*   Updated: 2017/12/19 11:15:28 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,15 @@ static void	stock_room_name(t_lemin *l, char **tab)
 	if (!l->begin)
 	{
 		l->room = (t_room*)malloc(sizeof(t_room));
+		if (!l->room)
+			free_check_if_room(l, "\033[091mMalloc error\033[0m");
 		l->begin = l->room;
 	}
 	else
 	{
 		l->room->next = (t_room*)malloc(sizeof(t_room));
+		if (!l->room->next)
+			free_check_if_room(l, "\033[091mMalloc erroror\033[0m");
 		l->room = l->room->next;
 	}
 	l->room->name = ft_strdup(tab[0]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_ants_number.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 17:34:49 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/10 13:00:29 by mdubus           ###   ########.fr       */
+/*   Created: 2017/12/19 11:15:11 by mdubus            #+#    #+#             */
+/*   Updated: 2017/12/19 11:15:12 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		parsing_ants_number(t_lemin *l)
 		ft_free_double_tab((void**)l->f);
 		ft_memdel((void**)&l->string_file);
 		error_lem_in(ft_putendl_fd,
-		"\033[091mErreur : Il y a trop de fourmis dans la fourmilliere\
+		"\033[091mErreur : Il y a trop de fourmis dans la fourmiliere\
 		\033[0m", STDERR_FILENO, l);
 	}
 	else

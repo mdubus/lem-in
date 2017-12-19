@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 13:36:56 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/10 13:05:42 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/19 10:48:25 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int						ft_isupper(int c);
 */
 
 int						ft_atoi(const char *str);
+long					ft_latoi(const char *str);
 int						ft_atoi_base(const char *str, int base);
 char					*ft_itoa(int n);
 char					*ft_itoa_base(int nb, unsigned int base);

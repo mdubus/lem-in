@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_latoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 14:15:39 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 10:45:58 by mdubus           ###   ########.fr       */
+/*   Created: 2017/12/19 10:46:23 by mdubus            #+#    #+#             */
+/*   Updated: 2017/12/19 10:53:51 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+# include "includes/libft.h"
 
 static int	check_pos(const char *str, int j)
 {
@@ -28,7 +28,7 @@ static int	check_beginning(const char *str, int j)
 	return (j);
 }
 
-static int	do_atoi(const char *str, int i, int j)
+static long	do_atoi(const char *str, long i, int j)
 {
 	while (str[j] >= '0' && str[j] <= '9')
 	{
@@ -38,11 +38,11 @@ static int	do_atoi(const char *str, int i, int j)
 	return (i);
 }
 
-int			ft_atoi(const char *str)
+long		ft_latoi(const char *str)
 {
-	int i;
-	int j;
-	int sign;
+	long	i;
+	int		j;
+	int		sign;
 
 	i = 0;
 	j = 0;
