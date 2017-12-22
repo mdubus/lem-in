@@ -15,7 +15,6 @@
 
 static void	push_ant_front(t_lemin *l, int rest, t_room *path, int *ant_nb)
 {
-//	dprintf(STDERR_FILENO, "RESTE = %d\n", rest);
 	if (rest <= l->nb_path_final)
 	{
 		if (path->length <= l->prev_length)

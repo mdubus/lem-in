@@ -16,47 +16,81 @@ static void	put_new_coor_ant(t_visu *v, int i)
 {
 	t_room_visu	*room;
 	int			j;
-	double	diffx;
-	double	diffy;
 
 	v->ant = v->ant_begin;
 	j = i;
 	if (v->turn->turn[i] == v->end_room_id)
-	{
 		v->ant_end++;
-	}
-	while (j > 1 && v->ant->next)
-	{
+	while (j-- > 1 && v->ant->next)
 		v->ant = v->ant->next;
-		j--;
-	}
 	room = v->begin;
 	while (room && room->id != v->turn->turn[i])
 		room = room->next;
 	v->ant->nextx = room->x;
 	v->ant->nexty = room->y;
-	diffx = v->ant->nextx - v->ant->prevx;
-	diffy = v->ant->nexty - v->ant->prevy;
-	if (diffx > 0)
-	{
-		v->ant->modx = v->ant_speed;
-		v->ant->mody = (diffy * v->ant_speed) / diffx;
-	}
-	else
-	{
-		v->ant->mody = v->ant_speed;
-		v->ant->modx = (diffx * v->ant_speed) / diffy;
-	}
-
+	v->ant->beginx = v->ant->prevx;
+	v->ant->beginy = v->ant->prevy;
+	v->ant->modx = 0;
+	v->ant->mody = 0;
 }
 
-#include <stdio.h>
+static void	ants_from_start(t_visu *v)
+{
+	if ((v->ant->nextx != -1 && v->ant->prevx == -1) ||
+			(v->ant->nexty != -1 && v->ant->prevy == -1))
+	{
+		v->nb_ant_start--;
+		v->ant->prevx = v->begin_roomx;
+		v->ant->prevy = v->begin_roomy;
+		v->ant->beginx = v->begin_roomx;
+		v->ant->beginy = v->begin_roomy;
+	}
+}
+
+// 2 rooms de lave : une pas prise en compte
+
+static void	calc_mod(t_visu *v, bool xy, bool negpos)
+{
+	double	temp;
+
+	temp = 0.0;
+	if (xy == X)
+	{
+		v->ant->modx = (negpos == POS) ? v->ant_speed : -v->ant_speed;
+		if (v->diffy != 0)
+		{
+			temp = (v->diffy * v->ant_speed) / v->diffx;
+			v->ant->mody = (negpos == POS) ? temp : -temp;
+		}
+	}
+	else if (xy == Y)
+	{
+		v->ant->mody = (negpos == POS) ? v->ant_speed : -v->ant_speed;
+		if (v->diffx != 0)
+		{
+			temp = (v->diffx * v->ant_speed) / v->diffy;
+			v->ant->modx = (negpos == POS) ? temp : -temp;
+		}
+	}
+}
+
+static void	ant_is_moving(t_visu *v)
+{
+	v->diffx = v->ant->nextx - v->ant->beginx;
+	v->diffy = v->ant->nexty - v->ant->beginy;
+	if (v->diffx > 0)
+		calc_mod(v, X, POS);
+	else if (v->diffx < 0)
+		calc_mod(v, X, NEG);
+	else if (v->diffy > 0)
+		calc_mod(v, Y, POS);
+	else if (v->diffy < 0)
+		calc_mod(v, Y, NEG);
+}
 
 void		move_ant(t_lemin *l, t_visu *v)
 {
 	int		i;
-	double	diffx;
-	double	diffy;
 
 	i = 0;
 	while (i <= l->nb_ants)
@@ -68,42 +102,9 @@ void		move_ant(t_lemin *l, t_visu *v)
 	v->ant = v->ant_begin;
 	while (v->ant)
 	{
-		if ((v->ant->nextx != -1 && v->ant->prevx == -1) ||
-				(v->ant->nexty != -1 && v->ant->prevy == -1))
-		{
-			v->nb_ant_start--;
-			v->ant->prevx = v->begin_roomx;
-			v->ant->prevy = v->begin_roomy;
-			v->ant->beginx = v->begin_roomx;
-			v->ant->beginy = v->begin_roomy;
-
-			diffx = v->ant->nextx - v->ant->beginx;
-			printf("DIFX = %f\n", diffx);
-			diffy = v->ant->nexty - v->ant->beginy;
-			printf("DIFY = %f\n", diffy);
-			if (diffx > 0)
-			{
-				v->ant->modx = v->ant_speed;
-				v->ant->mody = (diffy * v->ant_speed) / diffx;
-			}
-			else if (diffx < 0)
-			{
-				v->ant->modx = -v->ant_speed;
-				v->ant->mody = (diffy * v->ant_speed) / diffx;
-			}
-			else if (diffy > 0)
-			{
-				v->ant->mody = v->ant_speed;
-				v->ant->modx = (diffx * v->ant_speed) / diffy;
-			}
-			else if (diffy < 0)
-			{
-				v->ant->mody = -v->ant_speed;
-				v->ant->modx = (diffx * v->ant_speed) / diffy;
-			}
-			dprintf(STDERR_FILENO, "mody = %f\n", v->ant->mody);
-			dprintf(STDERR_FILENO, "modx = %f\n", v->ant->modx);
-		}
+		ants_from_start(v);
+		if (v->ant->nextx != v->ant->prevx || v->ant->nexty != v->ant->prevy)
+			ant_is_moving(v);
 		v->ant = v->ant->next;
 	}
 	move(l, v);

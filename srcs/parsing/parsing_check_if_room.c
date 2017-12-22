@@ -55,12 +55,12 @@ static void	check_special_rooms(t_lemin *l)
 	}
 	if (l->flag_lava == 1)
 	{
-		l->room_lava = l->room->id;
+		l->room->special = LAVA;
 		l->flag_lava = 0;
 	}
 	if (l->flag_snorlax == 1)
 	{
-		l->room_snorlax = l->room->id;
+		l->room->special = SNORLAX;
 		l->flag_snorlax = 0;
 	}
 }
@@ -85,6 +85,7 @@ static void	stock_room_name(t_lemin *l, char **tab)
 	l->room->id = l->id;
 	l->id++;
 	l->room->next = NULL;
+	l->room->special = -1;
 	check_special_rooms(l);
 	l->nb_rooms++;
 }

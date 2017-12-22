@@ -47,8 +47,7 @@ static void	check_if_rooms_exists(t_lemin *l, char **tab, t_visu *v)
 		free_in_pipes(l,
 				"\033[091mErreur: Tubes lies a des salles inconnues\033[0m", v);
 	}
-	if (l->froom1 != l->room_lava && l->froom2 != l->room_lava &&
-			l->froom1 != l->room_snorlax && l->froom2 != l->room_snorlax)
+	if (l->froom1 != -1 && l->froom2 != -1)
 	{
 		l->pipes[l->froom2][l->froom1] = 1;
 		l->pipes[l->froom1][l->froom2] = 1;

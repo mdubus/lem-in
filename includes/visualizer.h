@@ -33,10 +33,12 @@
 # define MINUS 1073741910
 # define START 1
 # define END 2
-# define SNORLAX 3
-# define LAVA 4
 # define WIDTH_W	1300
 # define HEIGHT_W	1000
+# define X 0
+# define Y 1
+# define POS 0
+# define NEG 1
 
 typedef struct			s_room_visu
 {
@@ -71,6 +73,8 @@ typedef struct			s_visu
 	struct s_turn		*turn;
 	struct s_ant		*ant;
 	struct s_ant		*ant_begin;
+	double				diffx;
+	double				diffy;
 	char				*string_file;
 	char				**file;
 	int					width_room;

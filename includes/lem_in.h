@@ -17,10 +17,14 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+# define LAVA 4
+# define SNORLAX 3
+
 typedef struct		s_room
 {
 	int				id;
 	int				ant;
+	int				special;
 	int				length;
 	int				padding;
 	char			*name;
@@ -78,8 +82,6 @@ typedef struct		s_lemin
 	int				ant_finish;
 	int				room_start;
 	int				room_end;
-	int				room_lava;
-	int				room_snorlax;
 	int				prev_length;
 	int				padding;
 	int				froom1;

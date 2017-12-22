@@ -73,7 +73,7 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 	(*room)->id = l->id++;
 	(*room)->next = NULL;
 	stock_coordonates(l, tab, room);
-	(*room)->special = 0;
+	(*room)->special = -1;
 	check_special_rooms(l, v, room);
 	l->nb_rooms++;
 	if ((*room)->special == START)

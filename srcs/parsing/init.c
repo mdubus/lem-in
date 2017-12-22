@@ -31,8 +31,6 @@ static void	init_struct_lemin2(t_lemin *l)
 	l->flag_start_to_end = 0;
 	l->flag_lava = 0;
 	l->flag_snorlax = 0;
-	l->room_lava = -1;
-	l->room_snorlax = -1;
 	l->froom1 = -1;
 	l->froom2 = -1;
 	l->nb_path_final = 0;

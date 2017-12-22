@@ -19,6 +19,8 @@ static void	init_struct3(t_visu *v)
 	v->init_all = 0;
 	v->loop_moving = 0;
 	v->ants_stocked = 0;
+	v->diffx = 0.0;
+	v->diffy = 0.0;
 }
 
 static void	init_struct2(t_visu *v)
