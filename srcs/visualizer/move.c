@@ -36,8 +36,6 @@ static void	draw_ant_nb(t_lemin *l, t_visu *v, int flag)
 	draw_start_end_name(l, v);
 }
 
-# include <stdio.h> // a retirer
-
 static void	put_prev_coor1(t_visu *v, bool *flag)
 {
 	if (v->ant->prevx > v->ant->nextx)
@@ -105,11 +103,8 @@ void		move(t_lemin *l, t_visu *v)
 		if ((SDL_RenderCopy(v->screen, v->all, NULL, NULL)) < 0)
 			free_all_msg(l, v, "Error in move : ");
 		while (v->ant)
-		{
 			draw_ant(l, v, &flag);
-		}
 		draw_ant_nb(l, v, flag);
 		SDL_RenderPresent(v->screen);
-		SDL_Delay(5);
 	}
 }

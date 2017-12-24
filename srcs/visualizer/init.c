@@ -34,7 +34,7 @@ static void	init_struct2(t_visu *v)
 	v->end_roomx = 0;
 	v->end_roomy = 0;
 	v->end_room_id = 0;
-	v->ant_speed = 2;
+	v->ant_speed = 1;
 	v->nb_ant_start = 0;
 	v->nb_ant_end = 0;
 	v->ant_end = 0;

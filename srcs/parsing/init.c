@@ -35,7 +35,6 @@ static void	init_struct_lemin2(t_lemin *l)
 	l->froom2 = -1;
 	l->nb_path_final = 0;
 	l->ant_finish = 0;
-	l->prev_length = 0;
 }
 
 void		init_struct_lemin(t_lemin *l)

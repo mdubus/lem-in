@@ -49,9 +49,9 @@ static void	key_pressed(t_lemin *l, t_visu *v)
 		move_ant(l, v);
 	else if (v->event.key.keysym.sym == R)
 		reinit_anthill(l, v);
-	else if (v->event.key.keysym.sym == PLUS)
+	else if (v->event.key.keysym.sym == PLUS || v->event.key.keysym.sym == 61)
 		v->ant_speed += 1;
-	else if (v->event.key.keysym.sym == MINUS)
+	else if (v->event.key.keysym.sym == MINUS || v->event.key.keysym.sym == 45)
 	{
 		v->ant_speed -= 1;
 		if (v->ant_speed <= 0)

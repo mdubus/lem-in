@@ -16,19 +16,19 @@
 # include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <stdbool.h>
+#pragma GCC diagnostic error "-Weverything"
 
-# define LAVA 4
 # define SNORLAX 3
+# define LAVA 4
 
 typedef struct		s_room
 {
+	struct s_room	*next;
 	int				id;
 	int				ant;
 	int				special;
 	int				length;
-	int				padding;
 	char			*name;
-	struct s_room	*next;
 }					t_room;
 
 typedef struct		s_path
@@ -82,7 +82,6 @@ typedef struct		s_lemin
 	int				ant_finish;
 	int				room_start;
 	int				room_end;
-	int				prev_length;
 	int				padding;
 	int				froom1;
 	int				froom2;
@@ -92,7 +91,7 @@ typedef struct		s_lemin
 	bool			flag_start_to_end;
 	bool			flag_lava;
 	bool			flag_snorlax;
-	bool			padding2[5];
+	bool			padding2[1];
 }					t_lemin;
 
 void				export_graph(bool **pipes, t_lemin *l);

@@ -47,8 +47,6 @@ static void	ants_from_start(t_visu *v)
 	}
 }
 
-// 2 rooms de lave : une pas prise en compte
-
 static void	calc_mod(t_visu *v, bool xy, bool negpos)
 {
 	double	temp;

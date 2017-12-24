@@ -8,7 +8,8 @@ room3 700 250
 ##start
 start 500 60
 ##end
-end 500 450
+ear
+nd 500 450
 room1-start
 room1-room2
 room2-start
