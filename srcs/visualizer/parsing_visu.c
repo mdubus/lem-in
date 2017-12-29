@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:20:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:20:15 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/28 13:48:33 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	check_start_end(t_lemin *l)
 				"\033[091mErreur : Start et end identiques\033[0m]]");
 }
 
-static void	check_if_rooms_exists(t_lemin *l, char **tab, t_visu *v)
+static void	check_if_rooms_exists_visu(t_lemin *l, char **tab, t_visu *v)
 {
 	t_room_visu	*room;
 
@@ -78,7 +78,7 @@ static void	stock_pipes_visu(char *str, t_lemin *l, t_visu *v)
 				"\033[091mErreur : Un ou plusieurs tubes sont mal formates\
 				\033[0m", v);
 	}
-	check_if_rooms_exists(l, tab, v);
+	check_if_rooms_exists_visu(l, tab, v);
 	ft_free_double_tab((void**)tab);
 	l->nb_pipes++;
 }

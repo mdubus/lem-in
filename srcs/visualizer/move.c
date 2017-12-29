@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:20:02 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 19:17:47 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/28 13:18:53 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ static void	put_prev_coor2(t_visu *v, bool *flag)
 
 static void	draw_ant(t_lemin *l, t_visu *v, bool *flag)
 {
-	
 	put_prev_coor1(v, flag);
 	put_prev_coor2(v, flag);
-//			printf("modx = %f, mody = %f\n", v->ant->modx, v->ant->mody);
 	if (v->ant->prevx != -1 && v->ant->prevy != -1 &&
 			v->ant->nextx != -1 && v->ant->nexty != -1)
 	{

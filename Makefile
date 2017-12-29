@@ -6,7 +6,7 @@
 #    By: mdubus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 19:12:36 by mdubus            #+#    #+#              #
-#    Updated: 2017/12/14 17:28:29 by mdubus           ###   ########.fr        #
+#    Updated: 2017/12/28 13:15:09 by mdubus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRC_PARSING	=	parsing.c parsing_ants_number.c parsing_start_end_exists.c\
 				parsing_check_if_room.c parsing_room_and_stock.c\
 				parsing_pipes_and_stock.c parsing_check_room_name.c\
 				parsing_check_end_and_start.c get_file.c free.c useful.c\
-				init.c
+				init.c parsing_check_if_room_exists.c
 
 SRC_VISU	=	main.c useful.c init.c loop.c stock_rooms.c free.c\
 				stock_turns.c draw_pipes.c move_ants.c move.c\

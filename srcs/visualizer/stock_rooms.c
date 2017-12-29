@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:20:25 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 18:45:24 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/28 13:21:34 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	stock_room(t_lemin *l, char **tab, t_room_visu **room, t_visu *v)
 	{
 		(*room)->next = (t_room_visu*)malloc(sizeof(t_room_visu));
 		*room = (*room)->next;
-}
+	}
 	(*room)->name = ft_strdup(tab[0]);
 	(*room)->id = l->id++;
 	(*room)->next = NULL;

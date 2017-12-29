@@ -6,7 +6,7 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 18:34:14 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/13 18:01:21 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/28 13:15:41 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <stdbool.h>
-#pragma GCC diagnostic error "-Weverything"
 
 # define SNORLAX 3
 # define LAVA 4
@@ -138,6 +137,7 @@ void				which_command(t_lemin *l, int i);
 void				check_coordonates(char **tab, t_lemin *l);
 void				parsing_init_tab_pipes(t_lemin *l);
 void				stock_pipes(char *str, t_lemin *l);
+void				check_if_rooms_exists(t_lemin *l, char **tab);
 
 /*
 ***************************** Resolve *****************************************

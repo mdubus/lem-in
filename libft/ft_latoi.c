@@ -6,11 +6,11 @@
 /*   By: mdubus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 10:46:23 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 10:53:51 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/28 13:22:45 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "includes/libft.h"
+#include "includes/libft.h"
 
 static int	check_pos(const char *str, int j)
 {
