@@ -103,11 +103,19 @@ This allows two things :
 - When an arror occurs trying to launch a map, it will write the exact error on the stderr instead of "ERROR"
 - Lauching a map, it will give more info about the map and the algorithm (number of ants, rooms, pipes, all possible paths, chosen paths, relations between rooms, ...)
 
+![alt text](https://github.com/mdubus/lem-in/blob/master/IMG/debug-mode.png)
+
+
 ### Visual graph in png
 
 `./graph.sh [map]`
 
 This will generate a png of the anthill, with all rooms and their relations.
+It is usefull to see the compisition of the anthill without writing good coordonates for the visualizer. 
+
+Example of png that can be generated :
+
+![alt text](https://github.com/mdubus/lem-in/blob/master/IMG/graph.png)
 
 ### Script test
 
@@ -115,6 +123,9 @@ This will generate a png of the anthill, with all rooms and their relations.
 
 This will launch a script testing the parsing. 
 This is usefull to test all sort of maps with errors (no ants, no start room, anthill with no solutions, ...).
+
+
+![alt text](https://github.com/mdubus/lem-in/blob/master/IMG/script.png)
 
 
 # Final mark
