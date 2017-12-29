@@ -47,6 +47,18 @@ L7-5 L9-2 L8-5 L10-3
 L9-5 L10-5
 ```
 
+## Overview
+
+Here is an example of what can be achieved with this algorithm and the visualizer : 
+
+![alt text](https://github.com/mdubus/lem-in/blob/master/IMG/gif.gif)
+
+You can also see a short video of 4 different maps by clicking here : 
+
+
+[![Watch the video](https://www.youtube.com/watch?v=d5b5Xp5Ikuw&feature=youtu.be)
+
+
 ## Prerequisites
 
 `brew install SDL2`
