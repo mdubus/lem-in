@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:13:16 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:13:17 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/29 17:31:26 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		print_equivalence_tab(t_lemin *l)
 	int	i;
 
 	i = 0;
-	ft_putstr("\033[94m---------- Relations id |");
+	ft_putstr("\033[94m---------- Relations id | ");
 	ft_putendl("nom de room ----------\n\033[0m");
 	while (i < l->nb_rooms)
 	{

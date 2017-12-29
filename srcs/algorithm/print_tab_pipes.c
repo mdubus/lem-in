@@ -6,7 +6,7 @@
 /*   By: mdubus <mdubus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 11:13:24 by mdubus            #+#    #+#             */
-/*   Updated: 2017/12/19 11:13:25 by mdubus           ###   ########.fr       */
+/*   Updated: 2017/12/29 17:31:35 by mdubus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		ft_print_tab_pipes(t_lemin *l)
 
 	i = 0;
 	j = 0;
-	ft_putstr("\033[94m---------- Relations entre les pipes");
+	ft_putstr("\033[94m---------- Relations entre les rooms");
 	ft_putendl("----------\n\033[0m");
 	print_head(l->nb_rooms);
 	while (i < l->nb_rooms)
