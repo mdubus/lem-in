@@ -84,6 +84,10 @@ You can add 2 special rooms :
 
 `##lava`
 
+
+![alt text](https://github.com/mdubus/lem-in/blob/master/IMG/lava-snorlax.png)
+
+
 ### Visualizer
 
 You can run a visualizer to see you ants moving. 
