@@ -55,8 +55,7 @@ Here is an example of what can be achieved with this algorithm and the visualize
 
 You can also see a short video of 4 different maps by clicking here : 
 
-
-[![Watch the video]](https://www.youtube.com/watch?v=d5b5Xp5Ikuw&feature=youtu.be)
+[![Watch the video](https://i.ytimg.com/vi/d5b5Xp5Ikuw/1.jpg?time=1514567144530)](https://www.youtube.com/watch?v=d5b5Xp5Ikuw&feature=youtu.be)
 
 
 ## Prerequisites
