@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DIRECTORY=maps_ko
-PATH_LEMIN=../
+PATH_LEMIN=../../
 OK='\033[092m[ OK ]\033[0m'
 KO='\033[091m[ KO ]\033[0m'
 
