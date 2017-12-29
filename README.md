@@ -35,7 +35,6 @@ To reduce the calculation time, I eliminated some paths (useless, dead-end, ...)
 5-6
 ```
 
-
 ## Understanding the output
 
 L[ant]-[room]
@@ -47,28 +46,6 @@ L5-5 L7-2 L6-5 L8-3
 L7-5 L9-2 L8-5 L10-3
 L9-5 L10-5
 ```
-
-## Bonus
-
-You can add 2 special rooms : 
-- One containing a Snorlax. Ants can't go this way, it's blocked !
-
-`##snorlax`
-
-- An other containing lava. Ants can't go this way, it burns ! 
-
-`##lava`
-
-You can run a visualizer to see you ants moving. 
-Here are the commands : 
-- right key : see next turn
-- r : reinitialize the anthill
-- + / - : change your ants speed
-- esc : escape the visualizer
-
-Here is an example of what can be obtained with this algorithm and visualizer :
-
-
 
 ## Prerequisites
 
@@ -94,6 +71,52 @@ Visualizer mode :
 
 `./lem-in < [map] | ./visu`
 
+## Bonus
+
+### Special rooms
+
+You can add 2 special rooms : 
+- One containing a Snorlax. Ants can't go this way, it's blocked !
+
+`##snorlax`
+
+- An other containing lava. Ants can't go this way, it burns ! 
+
+`##lava`
+
+### Visualizer
+
+You can run a visualizer to see you ants moving. 
+Here are the commands : 
+- right key : see next turn
+- r : reinitialize the anthill
+- + - : change your ants speed
+- esc : escape the visualizer
+
+Here is an example of what can be obtained with this algorithm and visualizer :
+
+### Debug mode
+
+`./lem-in -d < [map]`
+
+This allows two things : 
+- When an arror occurs trying to launch a map, it will write the exact error on the stderr instead of "ERROR"
+- Lauching a map, it will give more info about the map and the algorithm (number of ants, rooms, pipes, all possible paths, chosen paths, relations between rooms, ...)
+
+### Visual graph in png
+
+`./graph.sh [map]`
+
+This will generate a png of the anthill, with all rooms and their relations.
+
+### Script test
+
+`./script.sh`
+
+This will launch a script testing the parsing. 
+This is usefull to test all sort of maps with errors (no ants, no start room, anthill with no solutions, ...).
+
+
 # Final mark
 
-`/100`
+`125/100 (Full bonus)`
