@@ -108,7 +108,6 @@ Here are the commands :
 - '+' or '-' : change your ants speed
 - esc : escape the visualizer
 
-Here is an example of what can be obtained with this algorithm and visualizer :
 
 ### Debug mode
 
