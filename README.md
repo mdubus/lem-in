@@ -105,7 +105,7 @@ You can run a visualizer to see you ants moving.
 Here are the commands : 
 - right key : see next turn
 - r : reinitialize the anthill
-- + - : change your ants speed
+- '+' or '-' : change your ants speed
 - esc : escape the visualizer
 
 Here is an example of what can be obtained with this algorithm and visualizer :
