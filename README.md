@@ -15,7 +15,7 @@ To reduce the calculation time, I eliminated some paths (useless, dead-end, ...)
 ## Understanding the maps
 ```
 10          // ants number
-1 250 150   // Room name (1) ants it's X-Y coordonates
+1 250 150   // Room name (1) and it's X-Y coordonates
 2 550 150
 3 550 450
 ##start     // Next room will be start room
